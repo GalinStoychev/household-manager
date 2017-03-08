@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HouseholdManager.Data.Models
 {
-    public class Household
+    public class Household: BaseEntity
     {
         private ICollection<User> users;
         private ICollection<Expense> expenses;
@@ -15,10 +15,6 @@ namespace HouseholdManager.Data.Models
             this.users = new HashSet<User>();
             this.expenses= new HashSet<Expense>();
         }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public Guid Id { get; set; }
 
         [Required]
         public string Name { get; set; }

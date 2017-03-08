@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HouseholdManager.Data.Models
 {
-    public class Expense
+    public class Expense: BaseEntity
     {
         private ICollection<Comment> comments;
 
@@ -16,10 +16,6 @@ namespace HouseholdManager.Data.Models
         {
             this.comments = new HashSet<Comment>();
         }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public Guid Id { get; set; }
 
         [Required]
         public string Name { get; set; }

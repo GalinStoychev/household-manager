@@ -4,23 +4,21 @@ using System.Linq.Expressions;
 
 namespace HouseholdManager.Domain.Contracts
 {
-    public interface IRepository<EntityType>
-    where EntityType : class
+    public interface IRepository<DomainType, EntityType>
+    where DomainType : class
     {
-        IEnumerable<EntityType> GetAll();
+        IEnumerable<DomainType> GetAll();
 
-        IEnumerable<T1> GetAll<T1>(Expression<Func<EntityType, bool>> filterExpression, Expression<Func<EntityType, T1>> selectExpression);
+        IEnumerable<DomainType> GetAll<T1>(Expression<Func<EntityType, bool>> filterExpression, Expression<Func<EntityType, T1>> selectExpression);
 
-        IEnumerable<T2> GetAll<T1, T2>(Expression<Func<EntityType, bool>> filterExpression, Expression<Func<EntityType, T1>> sortExpression, Expression<Func<EntityType, T2>> selectExpression);
+        IEnumerable<DomainType> GetAll<T1, T2>(Expression<Func<EntityType, bool>> filterExpression, Expression<Func<EntityType, T1>> sortExpression, Expression<Func<EntityType, T2>> selectExpression);
 
-        EntityType GetById(object id);
+        DomainType GetById(object id);
 
-        void Add(EntityType entity);
+        void Add(DomainType entity);
 
-        void AddRange(IList<EntityType> entities);
+        void Delete(DomainType entity);
 
-        void Delete(EntityType entity);
-
-        void Update(EntityType entity);
+        void Update(DomainType entity);
     }
 }

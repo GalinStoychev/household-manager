@@ -4,9 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HouseholdManager.Data.Models
 {
-    public class ExpenseCategory: BaseEntity
+    public abstract class BaseEntity
     {
-        [Required]
-        public string Name { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public Guid Id { get; set; }
     }
 }
