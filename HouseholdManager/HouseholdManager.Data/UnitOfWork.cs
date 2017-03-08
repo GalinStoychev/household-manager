@@ -1,5 +1,5 @@
 ﻿using HouseholdManager.Data.Contracts;
-using HouseholdManager.Logic.Contracts;
+using HouseholdManager.Domain.Contracts;
 
 namespace HouseholdManager.Data
 {

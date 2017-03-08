@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace HouseholdManager.Logic.Contracts.Repositories
+namespace HouseholdManager.Domain.Contracts
 {
     public interface IRepository<EntityType>
     where EntityType : class

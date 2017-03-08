@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseholdManager.Data", "Ho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseholdManager.Identity", "HouseholdManager.Identity\HouseholdManager.Identity.csproj", "{627AE11A-BE5F-4273-9E7A-B4367483B7F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseholdManager.Domain", "HouseholdManager.Domain\HouseholdManager.Domain.csproj", "{CE463B3F-3D20-4338-9FAF-4E24F8913D4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{627AE11A-BE5F-4273-9E7A-B4367483B7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{627AE11A-BE5F-4273-9E7A-B4367483B7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{627AE11A-BE5F-4273-9E7A-B4367483B7F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE463B3F-3D20-4338-9FAF-4E24F8913D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE463B3F-3D20-4338-9FAF-4E24F8913D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE463B3F-3D20-4338-9FAF-4E24F8913D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE463B3F-3D20-4338-9FAF-4E24F8913D4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +65,6 @@ Global
 		{4840147D-77B9-4E74-BB55-366E0C4D695B} = {17EE8670-358C-4F21-A725-62FAF3CB29D4}
 		{83C1C8AC-9F13-4584-A85A-AD5A3859B0B1} = {889F8AFD-75B6-4B59-A5F6-0DB49D168273}
 		{627AE11A-BE5F-4273-9E7A-B4367483B7F9} = {6AD65DCF-D90D-4E71-821A-D6DB5BF5D07F}
+		{CE463B3F-3D20-4338-9FAF-4E24F8913D4E} = {17EE8670-358C-4F21-A725-62FAF3CB29D4}
 	EndGlobalSection
 EndGlobal

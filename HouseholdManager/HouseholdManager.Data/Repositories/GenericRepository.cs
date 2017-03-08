@@ -1,5 +1,5 @@
 ﻿using HouseholdManager.Data.Contracts;
-using HouseholdManager.Logic.Contracts.Repositories;
+using HouseholdManager.Domain.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

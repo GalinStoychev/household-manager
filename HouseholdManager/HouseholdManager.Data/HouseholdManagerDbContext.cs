@@ -13,6 +13,14 @@ namespace HouseholdManager.Data
         {
         }
 
+        public virtual DbSet<Comment> Comment { get; set; }
+
+        public virtual DbSet<Expense> Expense { get; set; }
+
+        public virtual DbSet<ExpenseCategory> ExpenseCategory { get; set; }
+
+        public virtual DbSet<Household> Household { get; set; }
+
         public static HouseholdManagerDbContext Create()
         {
             return new HouseholdManagerDbContext();
@@ -30,6 +38,12 @@ namespace HouseholdManager.Data
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
+
+            modelBuilder.Entity<Expense>().HasOptional(m => m.PaidBy)
+              .WithMany(m => m.ExpensesPaid).HasForeignKey(m => m.PaidById);
+
+            modelBuilder.Entity<Expense>().HasOptional(m => m.AssignedUser)
+             .WithMany(m => m.ExpensesWillPay).HasForeignKey(m => m.AssignedUserId);
         }
 
         public void SetEntryState(object entity, EntityState entityState)
