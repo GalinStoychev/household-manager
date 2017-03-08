@@ -61,9 +61,14 @@
     <Compile Include="HouseholdManagerDbContext.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\HouseholdManager.Logic\HouseholdManager.Logic.csproj">
+      <Project>{4840147D-77B9-4E74-BB55-366E0C4D695B}</Project>
+      <Name>HouseholdManager.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

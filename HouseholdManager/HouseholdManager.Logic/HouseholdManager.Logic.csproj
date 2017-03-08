@@ -40,11 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IUnitOfWork.cs" />
+    <Compile Include="Contracts\Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\Models\" />
-    <Folder Include="Contracts\Repositories\" />
     <Folder Include="Contracts\Services\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
