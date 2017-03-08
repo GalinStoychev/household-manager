@@ -2,7 +2,7 @@
 using HouseholdManager.Data.Contracts;
 using HouseholdManager.Data.Models;
 using HouseholdManager.Domain.Contracts;
-using HouseholdManager.Domain.Contracts.Models;
+using HouseholdManager.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -108,7 +108,7 @@ namespace HouseholdManager.Data.Repositories
         {
             if (model == null)
             {
-                throw new ArgumentNullException("model can not be null!");
+                throw new ArgumentNullException("model cannot be null!");
             }
 
             var entity = this.DbSet.Local.Where(e => e.Id == model.Id).FirstOrDefault();

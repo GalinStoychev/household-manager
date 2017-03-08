@@ -42,7 +42,16 @@
   <ItemGroup>
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
-    <Compile Include="Contracts\Models\BaseDomain.cs" />
+    <Compile Include="Contracts\Models\IComment.cs" />
+    <Compile Include="Contracts\Models\IExpense.cs" />
+    <Compile Include="Contracts\Models\IHousehold.cs" />
+    <Compile Include="Contracts\Models\IIdentifiable.cs" />
+    <Compile Include="Contracts\Models\IUser.cs" />
+    <Compile Include="Models\BaseDomain.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\Household.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

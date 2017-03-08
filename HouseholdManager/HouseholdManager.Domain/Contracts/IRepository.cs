@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HouseholdManager.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace HouseholdManager.Domain.Contracts
 {
     public interface IRepository<DomainType, EntityType>
-    where DomainType : class
+    where DomainType : BaseDomain
     {
         IEnumerable<DomainType> GetAll();
 

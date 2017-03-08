@@ -28,6 +28,8 @@ namespace HouseholdManager.Data.Models
         [ForeignKey("Household")]
         public Guid HouseholdId { get; set; }
 
+        public virtual Household Household { get; set; }
+
         public decimal Cost { get; set; }
 
         public decimal ExpectedCost { get; set; }
@@ -51,8 +53,6 @@ namespace HouseholdManager.Data.Models
         public DateTime CreateOnDate { get; set; }
 
         public bool IsDeleted { get; set; }
-
-        public virtual Household Household { get; set; }
 
         public virtual ICollection<Comment> Comments
         {

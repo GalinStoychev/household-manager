@@ -2,8 +2,8 @@
 
 namespace HouseholdManager.Domain.Contracts.Models
 {
-    public abstract class BaseDomain
+    public interface IIdentifiable
     {
-        public Guid Id { get; set; }
+        Guid Id { get; set; }
     }
 }
