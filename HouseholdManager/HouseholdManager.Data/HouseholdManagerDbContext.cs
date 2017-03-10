@@ -31,8 +31,8 @@ namespace HouseholdManager.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
@@ -45,6 +45,9 @@ namespace HouseholdManager.Data
 
             modelBuilder.Entity<Expense>().HasOptional(m => m.AssignedUser)
              .WithMany(m => m.ExpensesWillPay).HasForeignKey(m => m.AssignedUserId);
+
+            modelBuilder.Entity<User>().HasMany(m => m.Households)
+                .WithMany(m => m.Users);
         }
 
         public void SetEntryState(object entity, EntityState entityState)

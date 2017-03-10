@@ -16,15 +16,15 @@ namespace HouseholdManager.Data.Migrations
 
         protected override void Seed(HouseholdManagerDbContext context)
         {
-            if (context.ExpenseCategory.Count() == 0)
-            {
-                AddExpenseCategories(context);
-            }
+            //if (context.ExpenseCategory.Count() == 0)
+            //{
+            //    AddExpenseCategories(context);
+            //}
 
-            if (context.Expense.Count() == 0)
-            {
-                AddExpenses(context);
-            }
+            //if (context.Expense.Count() == 0)
+            //{
+            //    AddExpenses(context);
+            //}
 
             //  This method will be called after migrating to the latest version.
 

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -28,6 +30,11 @@ namespace HouseholdManager.Data.Models
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        [ForeignKey("CurrentHousehold")]
+        public Guid CurrentHouseholdId { get; set; }
+
+        public virtual Household CurrentHousehold { get; set; }
 
         public bool IsDeleted { get; set; }
 

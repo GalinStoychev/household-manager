@@ -448,6 +448,7 @@ namespace HouseholdManager.Web.Controllers
             {
                 return Redirect(returnUrl);
             }
+
             return RedirectToAction("Index", "Home");
         }
 
