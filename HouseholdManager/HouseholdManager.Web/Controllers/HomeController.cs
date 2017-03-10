@@ -1,5 +1,7 @@
 ﻿using HouseholdManager.Data;
 using HouseholdManager.Data.Models;
+using HouseholdManager.Data.Repositories;
+using HouseholdManager.Domain.Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

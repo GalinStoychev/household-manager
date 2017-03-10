@@ -5,6 +5,19 @@ namespace HouseholdManager.Domain.Models
 {
     public class User : BaseDomain, IUser, IIdentifiable
     {
+        public User(string firstName, string lastName, string username, string email, string phoneNumber)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Username = username;
+            this.Email = email;
+            this.PhoneNumber = phoneNumber;
+            this.ExpensesWillPay = new List<IExpense>();
+            this.ExpensesPaid = new List<IExpense>();
+            this.Comments = new List<IComment>();
+            this.Households = new List<IHousehold>();
+        }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

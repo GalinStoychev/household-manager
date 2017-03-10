@@ -11,6 +11,7 @@ namespace HouseholdManager.Data
         public HouseholdManagerDbContext()
             : base("HouseholdManagerDb", throwIfV1Schema: false)
         {
+
         }
 
         public virtual DbSet<Comment> Comment { get; set; }

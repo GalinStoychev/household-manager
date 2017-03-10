@@ -1,22 +1,21 @@
 ﻿using AutoMapper;
 using HouseholdManager.Data.Contracts;
 using HouseholdManager.Data.Models;
-using HouseholdManager.Domain.Contracts;
-using HouseholdManager.Domain.Models;
+using HouseholdManager.Domain.Contracts.Models;
+using HouseholdManager.Domain.Contracts.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace HouseholdManager.Data.Repositories
 {
-    public class BaseRepository<EntityType, DomainType> : IRepository<DomainType, EntityType>
+    public abstract class BaseRepositoryEF<EntityType, DomainType> : IRepository<DomainType>
         where EntityType : BaseEntity
-        where DomainType : BaseDomain
+        where DomainType : IIdentifiable
 
     {
-        public BaseRepository(IHouseholdManagerDbContext context)
+        public BaseRepositoryEF(IHouseholdManagerDbContext context)
         {
             this.Context = context;
             this.DbSet = this.Context.Set<EntityType>();
@@ -35,60 +34,19 @@ namespace HouseholdManager.Data.Repositories
 
         public virtual IEnumerable<DomainType> GetAll()
         {
-            var entities = this.DbSet.ToList();
-            var models = this.MapEntitiesToDomains(entities);
+            var e = this.DbSet;
+            var entities = this.DbSet
+                .Include("Comments")
+                .Include("ExpenseCategory")
+                .Include("Household")
+                .Include("AssignedUser")
+                .Include("PaidBy")
+                .ToList();
+            //var models = this.MapEntitiesToDomains(entities);
+            var models = this.EntitiesToDomains(entities);
             return models;
         }
-
-        public IEnumerable<DomainType> GetAll<T1>(Expression<Func<EntityType, bool>> filterExpression, Expression<Func<EntityType, T1>> selectExpression)
-        {
-            IQueryable<EntityType> entities = this.DbSet;
-
-            if (filterExpression != null)
-            {
-                entities = entities.Where(filterExpression);
-            }
-
-            if (selectExpression != null)
-            {
-                entities.Select(selectExpression).ToList();
-            }
-            else
-            {
-                entities.OfType<T1>().ToList();
-            }
-
-            var models = this.MapEntitiesToDomains(entities);
-            return models;
-        }
-
-        public IEnumerable<DomainType> GetAll<T1, T2>(Expression<Func<EntityType, bool>> filterExpression, Expression<Func<EntityType, T1>> sortExpression, Expression<Func<EntityType, T2>> selectExpression)
-        {
-            IQueryable<EntityType> entities = this.DbSet;
-
-            if (filterExpression != null)
-            {
-                entities = entities.Where(filterExpression);
-            }
-
-            if (sortExpression != null)
-            {
-                entities = entities.OrderBy(sortExpression);
-            }
-
-            if (selectExpression != null)
-            {
-                 entities.Select(selectExpression).ToList();
-            }
-            else
-            {
-                 entities.OfType<T2>().ToList();
-            }
-
-            var models = this.MapEntitiesToDomains(entities);
-            return models;
-        }
-
+        
         public void Add(DomainType model)
         {
             this.SetEntityState(model, EntityState.Added);
@@ -102,6 +60,19 @@ namespace HouseholdManager.Data.Repositories
         public void Update(DomainType model)
         {
             this.SetEntityState(model, EntityState.Modified);
+        }
+
+        public abstract DomainType EntityToDomain(EntityType entity);
+
+        private IEnumerable<DomainType> EntitiesToDomains(IEnumerable<EntityType> entities)
+        {
+            var models = new List<DomainType>();
+            foreach (var entity in entities)
+            {
+                models.Add(this.EntityToDomain(entity));
+            }
+
+            return models;
         }
 
         protected virtual void SetEntityState(DomainType model, EntityState entityState)
@@ -129,16 +100,21 @@ namespace HouseholdManager.Data.Repositories
             Mapper.Initialize(config => config.CreateMap<DomainType, EntityType>());
         }
 
-        protected virtual DomainType MapEntityToDomain(EntityType entity)
+        protected virtual void InitializeEntityToDomainMapper()
         {
             Mapper.Initialize(config => config.CreateMap<EntityType, DomainType>());
-            var domain = Mapper.Map<EntityType, DomainType>(entity);
+        }
 
+        protected virtual DomainType MapEntityToDomain(EntityType entity)
+        {
+            var domain = Mapper.Map<EntityType, DomainType>(entity);
             return domain;
         }
 
         private IEnumerable<DomainType> MapEntitiesToDomains(IEnumerable<EntityType> entities)
         {
+            this.InitializeEntityToDomainMapper();
+
             var models = new List<DomainType>();
             foreach (var entity in entities)
             {

@@ -75,7 +75,8 @@
     <Compile Include="Models\Household.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\BaseRepositoryEF.cs" />
+    <Compile Include="Repositories\ExpenseRepositoryEF.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

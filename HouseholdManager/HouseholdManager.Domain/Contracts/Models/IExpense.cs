@@ -5,30 +5,30 @@ namespace HouseholdManager.Domain.Contracts.Models
 {
     public interface IExpense : IIdentifiable
     {
-        string Name { get; set; }
+        string Name { get; }
 
-        string Category { get; set; }
+        string Category { get; }
 
-        IHousehold Household { get; set; }
+        IHousehold Household { get; }
 
         decimal Cost { get; set; }
 
-        decimal ExpectedCost { get; set; }
+        decimal ExpectedCost { get; }
 
-        bool IsPaid { get; set; }
+        bool IsPaid { get; }
 
         IUser AssignedUser { get; set; }
 
-        IUser PaidBy { get; set; }
+        IUser PaidBy { get; }
 
         DateTime DueDate { get; set; }
 
-        DateTime PaidOnDate { get; set; }
+        DateTime PaidOnDate { get; }
 
-        DateTime CreateOnDate { get; set; }
+        DateTime CreatedOnDate { get; }
 
         bool IsDeleted { get; set; }
 
-        ICollection<IComment> Comments { get; set; }
+        ICollection<IComment> Comments { get; }
     }
 }

@@ -50,7 +50,7 @@ namespace HouseholdManager.Data.Models
 
         public DateTime PaidOnDate { get; set; }
 
-        public DateTime CreateOnDate { get; set; }
+        public DateTime CreatedOnDate { get; set; }
 
         public bool IsDeleted { get; set; }
 

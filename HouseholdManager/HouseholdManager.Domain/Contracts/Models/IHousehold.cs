@@ -4,11 +4,11 @@ namespace HouseholdManager.Domain.Contracts.Models
 {
     public interface IHousehold: IIdentifiable
     {
-        string Name { get; set; }
+        string Name { get; }
 
         byte[] Image { get; set; }
 
-        string Address { get; set; }
+        string Address { get; }
 
         bool IsDeleted { get; set; }
 

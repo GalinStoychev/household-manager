@@ -3,13 +3,21 @@ using System.Collections.Generic;
 
 namespace HouseholdManager.Domain.Models
 {
-    public class Household: BaseDomain, IHousehold, IIdentifiable
+    public class Household : BaseDomain, IHousehold, IIdentifiable
     {
-        public string Name { get; set; }
+        public Household(string name, string address)
+        {
+            this.Name = name;
+            this.Address = address;
+            this.Users = new List<IUser>();
+            this.Expenses = new List<IExpense>();
+        }
+
+        public string Name { get; private set; }
 
         public byte[] Image { get; set; }
 
-        public string Address { get; set; }
+        public string Address { get; private set; }
 
         public bool IsDeleted { get; set; }
 
