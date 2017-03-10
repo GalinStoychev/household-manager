@@ -1,11 +1,11 @@
+using HouseholdManager.Data.Models;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using System;
+
 namespace HouseholdManager.Data.Migrations
 {
-    using Models;
-    using System.Collections.Generic;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using System;
-
     internal sealed class Configuration : DbMigrationsConfiguration<HouseholdManagerDbContext>
     {
         public Configuration()

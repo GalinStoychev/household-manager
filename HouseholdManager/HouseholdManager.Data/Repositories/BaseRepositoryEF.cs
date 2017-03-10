@@ -21,7 +21,7 @@ namespace HouseholdManager.Data.Repositories
             this.DbSet = this.Context.Set<EntityType>();
         }
 
-        protected IHouseholdManagerDbContext Context { get; set; }
+        protected IHouseholdManagerDbContext Context { get; }
 
         protected DbSet<EntityType> DbSet { get; set; }
 
@@ -34,16 +34,15 @@ namespace HouseholdManager.Data.Repositories
 
         public virtual IEnumerable<DomainType> GetAll()
         {
-            var e = this.DbSet;
-            var entities = this.DbSet
-                .Include("Comments")
-                .Include("ExpenseCategory")
-                .Include("Household")
-                .Include("AssignedUser")
-                .Include("PaidBy")
-                .ToList();
+            //var entities = this.DbSet
+            //    .Include("Comments")
+            //    .Include("ExpenseCategory")
+            //    .Include("Household")
+            //    .Include("AssignedUser")
+            //    .Include("PaidBy")
+            //    .ToList();
             //var models = this.MapEntitiesToDomains(entities);
-            var models = this.EntitiesToDomains(entities);
+            var models = this.EntitiesToDomains(this.DbSet.ToList());
             return models;
         }
         

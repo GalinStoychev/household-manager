@@ -35,7 +35,7 @@ namespace HouseholdManager.Data.Migrations
                         PaidById = c.String(maxLength: 128),
                         DueDate = c.DateTime(nullable: false),
                         PaidOnDate = c.DateTime(nullable: false),
-                        CreateOnDate = c.DateTime(nullable: false),
+                        CreatedOnDate = c.DateTime(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)

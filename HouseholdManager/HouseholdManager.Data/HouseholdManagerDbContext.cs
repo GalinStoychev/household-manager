@@ -14,13 +14,13 @@ namespace HouseholdManager.Data
 
         }
 
-        public virtual DbSet<Comment> Comment { get; set; }
-
-        public virtual DbSet<Expense> Expense { get; set; }
-
-        public virtual DbSet<ExpenseCategory> ExpenseCategory { get; set; }
-
-        public virtual DbSet<Household> Household { get; set; }
+        public virtual IDbSet<Comment> Comment { get; set; }
+                       
+        public virtual IDbSet<Expense> Expense { get; set; }
+                       
+        public virtual IDbSet<ExpenseCategory> ExpenseCategory { get; set; }
+                       
+        public virtual IDbSet<Household> Household { get; set; }
 
         public static HouseholdManagerDbContext Create()
         {

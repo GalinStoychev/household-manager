@@ -14,6 +14,9 @@ namespace HouseholdManager.Web.Controllers
     {
         public ActionResult Index()
         {
+            var context = new HouseholdManagerDbContext();
+            var repo = new ExpenseRepositoryEF(context);
+            repo.GetAll();
             return View();
         }
 
