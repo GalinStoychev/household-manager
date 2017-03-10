@@ -25,6 +25,7 @@ namespace HouseholdManager.Data.Models
 
         public bool IsDeleted { get; set; }
 
+        [InverseProperty("Households")]
         public virtual ICollection<User> Users
         {
             get { return this.users; }

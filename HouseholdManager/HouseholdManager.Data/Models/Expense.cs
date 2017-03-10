@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HouseholdManager.Data.Models
 {
@@ -50,7 +47,7 @@ namespace HouseholdManager.Data.Models
 
         public DateTime PaidOnDate { get; set; }
 
-        public DateTime CreatedOnDate { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public bool IsDeleted { get; set; }
 

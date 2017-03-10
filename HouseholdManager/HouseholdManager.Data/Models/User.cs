@@ -32,7 +32,7 @@ namespace HouseholdManager.Data.Models
         public string LastName { get; set; }
 
         [ForeignKey("CurrentHousehold")]
-        public Guid CurrentHouseholdId { get; set; }
+        public Guid? CurrentHouseholdId { get; set; }
 
         public virtual Household CurrentHousehold { get; set; }
 

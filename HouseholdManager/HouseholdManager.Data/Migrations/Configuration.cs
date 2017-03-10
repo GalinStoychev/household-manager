@@ -16,15 +16,15 @@ namespace HouseholdManager.Data.Migrations
 
         protected override void Seed(HouseholdManagerDbContext context)
         {
-            //if (context.ExpenseCategory.Count() == 0)
-            //{
-            //    AddExpenseCategories(context);
-            //}
+            if (context.ExpenseCategory.Count() == 0)
+            {
+                AddExpenseCategories(context);
+            }
 
-            //if (context.Expense.Count() == 0)
-            //{
-            //    AddExpenses(context);
-            //}
+            if (context.Expense.Count() == 0)
+            {
+                AddExpenses(context);
+            }
 
             //  This method will be called after migrating to the latest version.
 
@@ -51,7 +51,7 @@ namespace HouseholdManager.Data.Migrations
                 Comments = new List<Comment>() { new Comment() { User = userOne, CreatedOnDate = DateTime.Now, CommentContent = "Buy me" } },
                 Cost = 123M,
                 DueDate = DateTime.Now.AddDays(3),
-                CreatedOnDate = DateTime.Now,
+                CreatedOn = DateTime.Now,
                 ExpectedCost = 100M,
                 Household = new Household() { Name = "u mainatown", Address = "some address", Users = new List<User>() { userOne, userTwo } },
                 IsPaid = true,
@@ -74,7 +74,7 @@ namespace HouseholdManager.Data.Migrations
                 },
                 Cost = 123M,
                 DueDate = DateTime.Now.AddDays(4),
-                CreatedOnDate = DateTime.Now,
+                CreatedOn = DateTime.Now,
                 ExpectedCost = 100M,
                 Household = context.Household.First(x => x.Address == "some address"),
                 IsPaid = true,

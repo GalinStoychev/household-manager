@@ -63,14 +63,6 @@
   <ItemGroup>
     <Compile Include="Contracts\IHouseholdManagerDbContext.cs" />
     <Compile Include="HouseholdManagerDbContext.cs" />
-    <Compile Include="Migrations\201703081629537_One.cs" />
-    <Compile Include="Migrations\201703081629537_One.Designer.cs">
-      <DependentUpon>201703081629537_One.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703101711020_Two.cs" />
-    <Compile Include="Migrations\201703101711020_Two.Designer.cs">
-      <DependentUpon>201703101711020_Two.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -96,14 +88,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703081629537_One.resx">
-      <DependentUpon>201703081629537_One.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703101711020_Two.resx">
-      <DependentUpon>201703101711020_Two.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -14,7 +14,7 @@ namespace HouseholdManager.Data.Repositories
         public override IExpense EntityToDomain(Models.Expense entity)
         {
             var household = new Domain.Models.Household(entity.Household.Name, entity.Household.Address);
-            var model = new Domain.Models.Expense(entity.Name, entity.ExpenseCategory.Name, household, entity.ExpectedCost, entity.DueDate, entity.CreatedOnDate);
+            var model = new Domain.Models.Expense(entity.Name, entity.ExpenseCategory.Name, household, entity.ExpectedCost, entity.DueDate, entity.CreatedOn);
             model.IsDeleted = entity.IsDeleted;
             model.Cost = entity.Cost;
             model.Id = entity.Id;
