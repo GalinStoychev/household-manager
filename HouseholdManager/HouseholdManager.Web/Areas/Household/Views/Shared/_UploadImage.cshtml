@@ -1,16 +1,4 @@
-﻿@*@using (Ajax.BeginForm("Upload", "UploadImage", null,
-                                new AjaxOptions
-                                {
-                                    HttpMethod = "POST"
-                                },
-                        new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.TextBox("file", "", new { type = "file" })
-        <input type="submit" value="Upload" />
-    }*@
-
-@using (Html.BeginForm("Upload", "UploadImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+﻿@using (Html.BeginForm("Upload", "UploadImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.TextBox("file", "", new { type = "file", id = "btn-upload" })

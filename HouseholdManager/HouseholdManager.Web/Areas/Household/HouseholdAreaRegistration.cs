@@ -20,11 +20,11 @@ namespace HouseholdManager.Web.Areas.Household
               defaults: new { action = "Create", controller = "Household" }
             );
 
-            //context.MapRoute(
-            //    name: "Household_default",
-            //    url: "Household/{controller}/{action}/{id}",
-            //    defaults: new { action = "Index", id = UrlParameter.Optional }
-            //);
+            context.MapRoute(
+                name: "Household_default",
+                url: "Household/{controller}/{action}/{id}",
+                defaults: new { action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

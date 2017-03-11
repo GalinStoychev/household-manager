@@ -59,7 +59,6 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [HttpPost]
         public ActionResult Create(HouseholdViewModel model)
         {
-            // add household via hhservice or via userservice
             var household = this.householdService.CreateHousehold(model.Name, model.Address, model.Image);
             this.userService.AddHousehold(household, this.User.Identity.GetUserId());
 
