@@ -16,14 +16,20 @@ namespace HouseholdManager.Web.Areas.Household
         {
             context.MapRoute(
               name: "Household_create",
-              url: "Household/{action}",
+              url: "Household/Create",
               defaults: new { action = "Create", controller = "Household" }
             );
 
             context.MapRoute(
+                name: "Household_single",
+                url: "Household/{name}",
+                defaults: new { action = "Index", controller = "Household", name = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
                 name: "Household_default",
-                url: "Household/{controller}/{action}/{id}",
-                defaults: new { action = "Index", id = UrlParameter.Optional }
+                url: "Household/{controller}/{action}/{name}",
+                defaults: new { action = "Index", name = UrlParameter.Optional }
             );
         }
     }
