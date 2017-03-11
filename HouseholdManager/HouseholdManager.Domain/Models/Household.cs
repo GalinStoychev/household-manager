@@ -5,17 +5,18 @@ namespace HouseholdManager.Domain.Models
 {
     public class Household : BaseDomain, IHousehold, IIdentifiable
     {
-        public Household(string name, string address)
+        public Household(string name, string address, byte[] image)
         {
             this.Name = name;
             this.Address = address;
+            this.Image = image;
             this.Users = new List<IUser>();
             this.Expenses = new List<IExpense>();
         }
 
         public string Name { get; private set; }
 
-        public byte[] Image { get; set; }
+        public byte[] Image { get; private set; }
 
         public string Address { get; private set; }
 

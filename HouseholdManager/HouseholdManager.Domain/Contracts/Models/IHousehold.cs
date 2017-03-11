@@ -6,7 +6,7 @@ namespace HouseholdManager.Domain.Contracts.Models
     {
         string Name { get; }
 
-        byte[] Image { get; set; }
+        byte[] Image { get; }
 
         string Address { get; }
 

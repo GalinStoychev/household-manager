@@ -19,6 +19,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             {
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "user service"));
             }
+
             this.userService = userService;
         }
 
@@ -44,7 +45,9 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult Create(HouseholdViewModel model)
         {
             // add household via hhservice or via userservice
-            return null;
+            this.userService.AddHousehold(model.Name, model.Address, model.Image, this.User.Identity.Name);
+
+            return RedirectToAction("Index");
         }
     }
 }

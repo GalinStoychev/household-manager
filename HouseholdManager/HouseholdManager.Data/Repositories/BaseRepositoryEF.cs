@@ -40,14 +40,6 @@ namespace HouseholdManager.Data.Repositories
 
         public virtual IEnumerable<DomainType> GetAll()
         {
-            //var entities = this.DbSet
-            //    .Include("Comments")
-            //    .Include("ExpenseCategory")
-            //    .Include("Household")
-            //    .Include("AssignedUser")
-            //    .Include("PaidBy")
-            //    .ToList();
-            //var models = this.MapEntitiesToDomains(entities);
             var models = this.EntitiesToDomains(this.DbSet.ToList());
             return models;
         }
