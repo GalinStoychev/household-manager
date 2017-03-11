@@ -40,11 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IHouseholdService.cs" />
+    <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\HouseholdManager.Common\HouseholdManager.Common.csproj">
+      <Project>{C3378ACC-73A1-4436-B246-730449EBA17D}</Project>
+      <Name>HouseholdManager.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HouseholdManager.Domain\HouseholdManager.Domain.csproj">
+      <Project>{CE463B3F-3D20-4338-9FAF-4E24F8913D4E}</Project>
+      <Name>HouseholdManager.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

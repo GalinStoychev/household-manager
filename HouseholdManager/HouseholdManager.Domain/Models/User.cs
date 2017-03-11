@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HouseholdManager.Domain.Models
 {
-    public class User : BaseDomain, IUser, IIdentifiable
+    public class User : IUser
     {
         public User(string firstName, string lastName, string username, string email, string phoneNumber)
         {
@@ -18,15 +18,19 @@ namespace HouseholdManager.Domain.Models
             this.Households = new List<IHousehold>();
         }
 
-        public string FirstName { get; set; }
+        public string Id { get; set; }
 
-        public string LastName { get; set; }
+        public string FirstName { get; private set; }
 
-        public string Username { get; set; }
+        public string LastName { get; private set; }
 
-        public string Email { get; set; }
+        public string Username { get; private set; }
+
+        public string Email { get; private set; }
 
         public string PhoneNumber { get; set; }
+
+        public IHousehold CurrentHousehold { get; set; }
 
         public bool IsDeleted { get; set; }
 

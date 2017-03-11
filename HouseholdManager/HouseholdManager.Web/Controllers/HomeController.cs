@@ -14,7 +14,6 @@ namespace HouseholdManager.Web.Controllers
     {
         public ActionResult Index()
         {
-
             return View();
         }
 

@@ -2,26 +2,30 @@
 
 namespace HouseholdManager.Domain.Contracts.Models
 {
-    public interface IUser : IIdentifiable
+    public interface IUser
     {
-       string FirstName { get; set; }
+        string Id { get; set; }
 
-       string LastName { get; set; }
+        string FirstName { get; }
 
-       string Username { get; set; }
+        string LastName { get; }
 
-       string Email { get; set; }
+        string Username { get; }
 
-       string PhoneNumber { get; set; }
+        string Email { get; }
 
-       bool IsDeleted { get; set; }
+        string PhoneNumber { get; set; }
 
-       ICollection<IExpense> ExpensesWillPay { get; set; }
+        IHousehold CurrentHousehold { get; set; }
 
-       ICollection<IExpense> ExpensesPaid { get; set; }
+        bool IsDeleted { get; set; }
 
-       ICollection<IComment> Comments { get; set; }
+        ICollection<IExpense> ExpensesWillPay { get; set; }
 
-       ICollection<IHousehold> Households { get; set; }
+        ICollection<IExpense> ExpensesPaid { get; set; }
+
+        ICollection<IComment> Comments { get; set; }
+
+        ICollection<IHousehold> Households { get; set; }
     }
 }

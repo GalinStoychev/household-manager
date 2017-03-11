@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HouseholdManager.Common.Constants;
 using HouseholdManager.Data.Contracts;
 using HouseholdManager.Data.Models;
 using HouseholdManager.Domain.Contracts.Models;
@@ -17,6 +18,11 @@ namespace HouseholdManager.Data.Repositories
     {
         public BaseRepositoryEF(IHouseholdManagerDbContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ARGUMENT_CANNOT_BE_NULL, context));
+            }
+
             this.Context = context;
             this.DbSet = this.Context.Set<EntityType>();
         }

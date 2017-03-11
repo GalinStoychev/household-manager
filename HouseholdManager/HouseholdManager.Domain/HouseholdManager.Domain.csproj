@@ -48,6 +48,7 @@
     <Compile Include="Contracts\Models\IHousehold.cs" />
     <Compile Include="Contracts\Models\IIdentifiable.cs" />
     <Compile Include="Contracts\Models\IUser.cs" />
+    <Compile Include="Contracts\Repositories\IUserRepositoryEF.cs" />
     <Compile Include="Models\BaseDomain.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Expense.cs" />

@@ -1,7 +1,6 @@
 ﻿using HouseholdManager.Domain.Contracts.Models;
 using HouseholdManager.Data.Contracts;
 using HouseholdManager.Domain.Contracts.Repositories;
-using System.Collections.Generic;
 
 namespace HouseholdManager.Data.Repositories
 {

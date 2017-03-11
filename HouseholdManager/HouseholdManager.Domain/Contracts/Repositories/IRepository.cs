@@ -10,10 +10,10 @@ namespace HouseholdManager.Domain.Contracts.Repositories
 
         DomainType GetById(object id);
 
-        void Add(DomainType entity);
+        void Add(DomainType model);
 
-        void Delete(DomainType entity);
+        void Delete(DomainType model);
 
-        void Update(DomainType entity);
+        void Update(DomainType model);
     }
 }
