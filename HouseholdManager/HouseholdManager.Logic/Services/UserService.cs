@@ -27,9 +27,11 @@ namespace HouseholdManager.Logic.Services
             this.userRepositoryEF = userRepositoryEF;
         }
 
-        public void AddHousehold(string name, string address, byte[] image, string username)
+        public void AddHousehold(Household household, string id)
         {
-            throw new NotImplementedException();
+            var user = this.userRepositoryEF.GetById(id);
+            user.Households.Add(household);
+            this.unitOfWork.Commit();
         }
 
         public User GetUserInfo(string id)

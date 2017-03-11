@@ -15,16 +15,16 @@ namespace HouseholdManager.Web.Areas.Household
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-              "Household_create",
-              "Household/{action}",
-              new { action = "Create", controller = "Household" }
+              name: "Household_create",
+              url: "Household/{action}",
+              defaults: new { action = "Create", controller = "Household" }
             );
 
-            context.MapRoute(
-                "Household_default",
-                "Household/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+            //context.MapRoute(
+            //    name: "Household_default",
+            //    url: "Household/{controller}/{action}/{id}",
+            //    defaults: new { action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }

@@ -3,6 +3,7 @@ using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Data.Contracts;
 using HouseholdManager.Common.Constants;
 using HouseholdManager.Models;
+using HouseholdManager.Logic.Contracts.Factories;
 
 namespace HouseholdManager.Logic.Services
 {
@@ -10,8 +11,9 @@ namespace HouseholdManager.Logic.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IRepository<Household> householdRepositoryEF;
+        private readonly IHouseholdFactory householdFactory;
 
-        public HouseholdService(IUnitOfWork unitOfWork, IRepository<Household> householdRepositoryEF)
+        public HouseholdService(IUnitOfWork unitOfWork, IRepository<Household> householdRepositoryEF, IHouseholdFactory householdFactory)
         {
             if (unitOfWork == null)
             {
@@ -23,18 +25,29 @@ namespace HouseholdManager.Logic.Services
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, householdRepositoryEF));
             }
 
+            if (householdFactory == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, householdFactory));
+            }
+
             this.unitOfWork = unitOfWork;
             this.householdRepositoryEF = householdRepositoryEF;
+            this.householdFactory = householdFactory;
         }
 
-        public void CraeteHousehold(string name, string address, byte[] image)
+        public Household CreateHousehold(string name, string address, byte[] image)
         {
-            throw new NotImplementedException();
+            var household = this.householdFactory.CreateHousehold(name, address, image);
+            this.householdRepositoryEF.Add(household);
+            this.unitOfWork.Commit();
+
+            return household;
         }
 
         public Household GetHousehold(Guid id)
         {
-            throw new NotImplementedException();
+            var household = this.householdRepositoryEF.GetById(id);
+            return household;
         }
     }
 }

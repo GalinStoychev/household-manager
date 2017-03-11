@@ -9,7 +9,7 @@ namespace HouseholdManager.Logic.Contracts
 
         void SetCurrentHousehold(Guid Id);
 
-        void AddHousehold(string name, string address, byte[] image, string username);
+        void AddHousehold(Household household, string username);
 
         void UpdateUserInfo(string username, string firstName, string lastName, string phoneNumber);
     }

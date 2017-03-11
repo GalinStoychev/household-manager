@@ -1,6 +1,7 @@
 ﻿using HouseholdManager.Common.Constants;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Household.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,29 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
     public class HouseholdController : Controller
     {
         private readonly IUserService userService;
+        private readonly IHouseholdService householdService;
+        private readonly IImageService imageService;
 
-        public HouseholdController(IUserService userService)
+        public HouseholdController(IUserService userService, IHouseholdService householdService, IImageService imageService)
         {
             if (userService == null)
             {
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "user service"));
             }
 
+            if (householdService == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "householdService"));
+            }
+
+            if (imageService == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "imageService"));
+            }
+
             this.userService = userService;
+            this.householdService = householdService;
+            this.imageService = imageService;
         }
 
         [HttpGet]
@@ -34,7 +49,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         {
             var model = new HouseholdViewModel()
             {
-                Image = (byte[])this.TempData["image"],
+                Image = (byte[])this.TempData["image"] ?? this.imageService.LoadHouseholdDefaultImage(),
                 ImageUploadMessage = (string)this.TempData[CommonConstants.UploadMessage]
             };
 
@@ -45,7 +60,8 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult Create(HouseholdViewModel model)
         {
             // add household via hhservice or via userservice
-            this.userService.AddHousehold(model.Name, model.Address, model.Image, this.User.Identity.Name);
+            var household = this.householdService.CreateHousehold(model.Name, model.Address, model.Image);
+            this.userService.AddHousehold(household, this.User.Identity.GetUserId());
 
             return RedirectToAction("Index");
         }

@@ -29,6 +29,12 @@ namespace HouseholdManager.Web.App_Start.BindingModules
             this.Bind<IRepository<User>>()
                 .To<GenericRepositoryEF<User>>();
 
+            this.Bind<IRepository<Household>>()
+                .To<GenericRepositoryEF<Household>>();
+
+            this.Bind<IRepository<Expense>>()
+              .To<GenericRepositoryEF<Expense>>();
+
             //this.Bind<IUnitOfWork>()
             //    .To<UnitOfWork>();
         }

@@ -31,7 +31,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,10 +44,16 @@
   <ItemGroup>
     <Compile Include="Contracts\Factories\IHouseholdFactory.cs" />
     <Compile Include="Contracts\IHouseholdService.cs" />
+    <Compile Include="Contracts\IImageLoader.cs" />
+    <Compile Include="Contracts\IImagePathResolver.cs" />
+    <Compile Include="Contracts\IImageService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HouseholdService.cs" />
+    <Compile Include="Services\ImageService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Utils\ImageLoader.cs" />
+    <Compile Include="Utils\ImagePathResolver.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using HouseholdManager.Logic.Contracts;
-using HouseholdManager.Logic.Services;
+using HouseholdManager.Logic.Contracts.Factories;
 using Ninject.Extensions.Conventions;
+using Ninject.Extensions.Factory;
 using Ninject.Modules;
 using System.IO;
 using System.Reflection;
@@ -17,6 +18,10 @@ namespace HouseholdManager.Web.App_Start.BindingModules
                     .SelectAllClasses()
                     .BindDefaultInterface();
             });
+
+            this.Bind<IHouseholdFactory>()
+                .ToFactory()
+                .InSingletonScope();
         }
     }
 }

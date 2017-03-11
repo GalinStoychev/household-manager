@@ -244,6 +244,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\defaultHousehold.png" />
     <Content Include="Content\Profile.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -252,8 +253,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Household\Views\web.config" />
-    <Content Include="Areas\Household\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Household\Views\Household\Create.cshtml" />
+    <Content Include="Areas\Household\Views\Household\Index.cshtml" />
+    <Content Include="Areas\Household\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
