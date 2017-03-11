@@ -22,3 +22,24 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.header-page{
+    margin-bottom:30px;
+}
+
+.hh-image {
+    width: 100px;
+}
+
+#btn-upload {
+    z-index: -1;
+    opacity: 0;
+}
+
+.submit-form input {
+    margin-bottom: 20px;
+}
+
+.btn {
+    border-radius: 0;
+}

@@ -1,0 +1,60 @@
+﻿@model HouseholdManager.Web.Areas.Household.Models.HouseholdViewModel
+
+@{
+    string image = "http://www.myiconfinder.com/uploads/iconsets/1b751226558e77b2a304882fe19bbdde.png";
+    if (Model.Image != null)
+    {
+
+        image = "data: image/jpeg; base64," + Convert.ToBase64String(Model.Image);
+    }
+}
+
+<div class="row ">
+    <div class="col-md-offset-4 col-md-5">
+        <h2 class="header-page text-center">Create household</h2>
+
+        <div class="text-center">
+
+        <img src="@image" alt="household image" class="hh-image" />
+
+        @Html.Partial("_UploadImage")
+        @Model.ImageUploadMessage
+        </div>
+
+        @using (Html.BeginForm("Create", "Household", FormMethod.Post, new { @class = "submit-form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-3 control-label" })
+                @Html.ValidationMessageFor(m => m.Name)
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Address, new { @class = "col-md-3 control-label" })
+                @Html.ValidationMessageFor(m => m.Address)
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.HiddenFor(m => m.Image, new { @class = "form-control" })
+                </div>
+            </div>
+
+
+            <div class="form-group text-right">
+                <div>
+                    <input type="submit" class="btn btn-default" value="SUBMIT" />
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

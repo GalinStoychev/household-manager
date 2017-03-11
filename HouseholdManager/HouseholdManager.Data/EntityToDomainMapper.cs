@@ -4,7 +4,6 @@ using HouseholdManager.Data.Contracts.Factories;
 using HouseholdManager.Data.Models;
 using HouseholdManager.Domain.Contracts.Models;
 using System;
-using System.Collections.Generic;
 
 namespace HouseholdManager.Data
 {
@@ -21,12 +20,16 @@ namespace HouseholdManager.Data
         {
             if (userToMap == null)
             {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ARGUMENT_CANNOT_BE_NULL, "userToMap"));
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "userToMap"));
             }
 
             var mapped = this.modelFactory.CreateUser(userToMap.FirstName, userToMap.LastName, userToMap.UserName, userToMap.Email, userToMap.PhoneNumber);
-            var currentHouseHold = this.modelFactory.CreateHousehold(userToMap.CurrentHousehold.Name, userToMap.CurrentHousehold.Address);
-            mapped.CurrentHousehold = currentHouseHold;
+            if (userToMap.CurrentHousehold != null)
+            {
+                var currentHouseHold = this.modelFactory.CreateHousehold(userToMap.CurrentHousehold.Name, userToMap.CurrentHousehold.Address);
+                mapped.CurrentHousehold = currentHouseHold;
+            }
+
             return mapped;
         }
     }

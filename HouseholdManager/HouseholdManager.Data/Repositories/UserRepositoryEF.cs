@@ -18,12 +18,12 @@ namespace HouseholdManager.Data.Repositories
         {
             if (context == null)
             {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ARGUMENT_CANNOT_BE_NULL, context));
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, context));
             }
 
             if (entityToDomainMapper == null)
             {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ARGUMENT_CANNOT_BE_NULL, entityToDomainMapper));
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, entityToDomainMapper));
             }
 
             this.Context = context;

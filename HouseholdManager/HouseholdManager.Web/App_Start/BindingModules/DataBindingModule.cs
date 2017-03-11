@@ -1,9 +1,6 @@
 ﻿using HouseholdManager.Data;
 using HouseholdManager.Data.Contracts;
 using HouseholdManager.Data.Contracts.Factories;
-using HouseholdManager.Data.Repositories;
-using HouseholdManager.Domain.Contracts;
-using HouseholdManager.Domain.Contracts.Repositories;
 using Ninject.Extensions.Conventions;
 using Ninject.Extensions.Factory;
 using Ninject.Modules;

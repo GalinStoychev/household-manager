@@ -20,7 +20,7 @@ namespace HouseholdManager.Data.Repositories
         {
             if (context == null)
             {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ARGUMENT_CANNOT_BE_NULL, context));
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, context));
             }
 
             this.Context = context;

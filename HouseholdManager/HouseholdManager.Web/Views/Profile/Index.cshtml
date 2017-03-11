@@ -1,0 +1,33 @@
+﻿@model HouseholdManager.Web.Models.ProfileViewModel
+
+@section styles {
+    @Styles.Render("~/Content/profile-css")
+}
+
+<div class="row text-center">
+    <div class="col-md-12 profile-container">
+        <h2 class="header-page">@Model.FullName</h2>
+        <div>
+            <strong>Name: <span>@Model.FullName</span></strong>
+        </div>
+        <div>
+            <strong>Email: <span>@Model.Email</span></strong>
+        </div>
+        <div>
+            <strong>Phone number: <span>@Model.PhoneNumber</span></strong>
+        </div>
+        <div>
+            <h4>Your Households: @Model.Households.Count</h4>
+            @foreach (var household in Model.Households)
+            {
+                <div class="hh-container">
+                    @household
+                </div>
+            }
+        </div>
+        <div>
+            @Html.ActionLink("ADD HOUSEHOLD", "Create", "Household")
+        </div>
+    </div>
+</div>
+

@@ -16,12 +16,12 @@ namespace HouseholdManager.Logic.Services
         {
             if (unitOfWork == null)
             {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ARGUMENT_CANNOT_BE_NULL, unitOfWork));
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, unitOfWork));
             }
 
             if (userRepositoryEF == null)
             {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ARGUMENT_CANNOT_BE_NULL, userRepositoryEF));
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, userRepositoryEF));
             }
 
             this.unitOfWork = unitOfWork;
@@ -33,7 +33,7 @@ namespace HouseholdManager.Logic.Services
             var user = this.userRepositoryEF.GetByUsername(username);
             if (user == null)
             {
-                throw new ArgumentNullException(ExceptionConstants.USER_WAS_NOT_FOUND);
+                throw new ArgumentNullException(ExceptionConstants.UserWasNotFound);
             }
 
             return user;

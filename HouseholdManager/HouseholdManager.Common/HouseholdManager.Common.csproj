@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\CommonConstants.cs" />
     <Compile Include="Constants\ExceptionConstants.cs" />
     <Compile Include="Contracts\IHaveCustomMappings.cs" />
     <Compile Include="Contracts\IMapFrom.cs" />
