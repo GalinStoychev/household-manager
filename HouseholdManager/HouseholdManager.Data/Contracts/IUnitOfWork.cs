@@ -1,4 +1,4 @@
-﻿namespace HouseholdManager.Domain.Contracts
+﻿namespace HouseholdManager.Data.Contracts
 {
     public interface IUnitOfWork
     {

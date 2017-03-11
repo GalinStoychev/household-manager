@@ -1,8 +1,6 @@
 ﻿using HouseholdManager.Common.Constants;
-using HouseholdManager.Domain.Contracts;
-using HouseholdManager.Domain.Contracts.Models;
-using HouseholdManager.Domain.Contracts.Repositories;
-using HouseholdManager.Domain.Models;
+using HouseholdManager.Data.Contracts;
+using HouseholdManager.Data.Models;
 using HouseholdManager.Logic.Contracts;
 using System;
 
@@ -11,9 +9,9 @@ namespace HouseholdManager.Logic.Services
     public class UserService : IUserService
     {
         private readonly IUnitOfWork unitOfWork;
-        private readonly IUserRepositoryEF userRepositoryEF;
+        private readonly IRepository<User> userRepositoryEF;
 
-        public UserService(IUnitOfWork unitOfWork, IUserRepositoryEF userRepositoryEF)
+        public UserService(IUnitOfWork unitOfWork, IRepository<User> userRepositoryEF)
         {
             if (unitOfWork == null)
             {
@@ -31,21 +29,16 @@ namespace HouseholdManager.Logic.Services
 
         public void AddHousehold(string name, string address, byte[] image, string username)
         {
-            var user = this.userRepositoryEF.GetByUsername(username);
-            var household = new Household(name, address, image);
-            user.Households.Add(household);
-
-            this.userRepositoryEF.Update(user);
-            this.unitOfWork.Commit();
+            throw new NotImplementedException();
         }
 
-        public IUser GetUserInfo(string username)
+        public User GetUserInfo(string id)
         {
-            var user = this.userRepositoryEF.GetByUsername(username);
-            if (user == null)
-            {
-                throw new ArgumentNullException(ExceptionConstants.UserWasNotFound);
-            }
+            var user = this.userRepositoryEF.GetById(id);
+            //if (user == null)
+            //{
+            //    throw new ArgumentNullException(ExceptionConstants.UserWasNotFound);
+            //}
 
             return user;
         }

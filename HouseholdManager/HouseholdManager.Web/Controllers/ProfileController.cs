@@ -1,9 +1,7 @@
 ﻿using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Models;
-using System;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Controllers
@@ -20,7 +18,7 @@ namespace HouseholdManager.Web.Controllers
         // GET: Profile
         public ActionResult Index()
         {
-            var user = this.userService.GetUserInfo(this.User.Identity.Name);
+            var user = this.userService.GetUserInfo(this.User.Identity.GetUserId());
             var profileUser = new ProfileViewModel();
             profileUser.FullName = user.FirstName + " " + user.LastName;
             profileUser.Email = user.Email;

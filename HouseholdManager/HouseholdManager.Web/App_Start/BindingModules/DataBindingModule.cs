@@ -1,6 +1,7 @@
 ﻿using HouseholdManager.Data;
 using HouseholdManager.Data.Contracts;
-using HouseholdManager.Data.Contracts.Factories;
+using HouseholdManager.Data.Models;
+using HouseholdManager.Data.Repositories;
 using Ninject.Extensions.Conventions;
 using Ninject.Extensions.Factory;
 using Ninject.Modules;
@@ -25,12 +26,11 @@ namespace HouseholdManager.Web.App_Start.BindingModules
                  .To<HouseholdManagerDbContext>()
                  .InRequestScope();
 
+            this.Bind<IRepository<User>>()
+                .To<GenericRepositoryEF<User>>();
+
             //this.Bind<IUnitOfWork>()
             //    .To<UnitOfWork>();
-
-            this.Bind<IModelsFactory>()
-                .ToFactory()
-                .InSingletonScope();
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using HouseholdManager.Domain.Contracts.Models;
+﻿using HouseholdManager.Data.Models;
 using System;
 
 namespace HouseholdManager.Logic.Contracts
 {
     public interface IUserService
     {
-        IUser GetUserInfo(string username);
+        User GetUserInfo(string username);
 
         void SetCurrentHousehold(Guid Id);
 
