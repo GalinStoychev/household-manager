@@ -1,6 +1,6 @@
 ﻿using HouseholdManager.Data;
-using HouseholdManager.Data.Models;
 using HouseholdManager.Identity.Services;
+using HouseholdManager.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;

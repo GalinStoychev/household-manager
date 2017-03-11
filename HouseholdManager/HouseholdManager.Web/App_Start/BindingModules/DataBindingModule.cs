@@ -1,7 +1,7 @@
 ﻿using HouseholdManager.Data;
 using HouseholdManager.Data.Contracts;
-using HouseholdManager.Data.Models;
 using HouseholdManager.Data.Repositories;
+using HouseholdManager.Models;
 using Ninject.Extensions.Conventions;
 using Ninject.Extensions.Factory;
 using Ninject.Modules;

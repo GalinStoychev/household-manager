@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HouseholdManager.Models
 {
-    public class Comment: BaseEntity
+    public class Comment : BaseEntity
     {
         private ICollection<Expense> expenses;
 

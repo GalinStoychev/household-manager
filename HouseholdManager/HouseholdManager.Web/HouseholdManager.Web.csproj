@@ -216,7 +216,6 @@
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BindingModules\DataBindingModule.cs" />
-    <Compile Include="App_Start\BindingModules\DomainBindingModule.cs" />
     <Compile Include="App_Start\BindingModules\IdentityBindingModule.cs" />
     <Compile Include="App_Start\BindingModules\ServiceBindingModule.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -321,10 +320,6 @@
       <Project>{83c1c8ac-9f13-4584-a85a-ad5a3859b0b1}</Project>
       <Name>HouseholdManager.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HouseholdManager.Domain\HouseholdManager.Domain.csproj">
-      <Project>{CE463B3F-3D20-4338-9FAF-4E24F8913D4E}</Project>
-      <Name>HouseholdManager.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HouseholdManager.Identity\HouseholdManager.Identity.csproj">
       <Project>{627AE11A-BE5F-4273-9E7A-B4367483B7F9}</Project>
       <Name>HouseholdManager.Identity</Name>
@@ -332,6 +327,10 @@
     <ProjectReference Include="..\HouseholdManager.Logic\HouseholdManager.Logic.csproj">
       <Project>{4840147D-77B9-4E74-BB55-366E0C4D695B}</Project>
       <Name>HouseholdManager.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HouseholdManager.Models\HouseholdManager.Models.csproj">
+      <Project>{C3551296-337F-437F-B2B5-71E9E3FEF995}</Project>
+      <Name>HouseholdManager.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

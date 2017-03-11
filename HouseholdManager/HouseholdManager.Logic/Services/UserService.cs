@@ -1,7 +1,7 @@
 ﻿using HouseholdManager.Common.Constants;
 using HouseholdManager.Data.Contracts;
-using HouseholdManager.Data.Models;
 using HouseholdManager.Logic.Contracts;
+using HouseholdManager.Models;
 using System;
 
 namespace HouseholdManager.Logic.Services

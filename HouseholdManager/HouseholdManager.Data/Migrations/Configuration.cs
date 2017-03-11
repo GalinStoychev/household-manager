@@ -1,8 +1,8 @@
-using HouseholdManager.Data.Models;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System;
+using HouseholdManager.Models;
 
 namespace HouseholdManager.Data.Migrations
 {

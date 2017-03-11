@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HouseholdManager.Models;
+using System;
 
 namespace HouseholdManager.Logic.Contracts
 {
-    public class IHouseholdService
+    public interface IHouseholdService
     {
+        Household GetHousehold(Guid id);
+
+        void CraeteHousehold(string name, string address, byte[] image);
     }
 }

@@ -14,6 +14,18 @@ namespace HouseholdManager.Models
             this.comments = new HashSet<Comment>();
         }
 
+        public Expense(string name, ExpenseCategory category, Household household, decimal expectedCost, DateTime dueDate, DateTime createdOn)
+        {
+            this.Name = name;
+            this.ExpenseCategory = category;
+            this.Household = household;
+            this.ExpectedCost = expectedCost;
+            this.DueDate = dueDate;
+            this.Comments = new List<Comment>();
+            this.CreatedOn = createdOn;
+            this.comments = new HashSet<Comment>();
+        }
+
         [Required]
         public string Name { get; set; }
 
@@ -55,6 +67,33 @@ namespace HouseholdManager.Models
         {
             get { return this.comments; }
             set { this.comments = value; }
+        }
+
+        public void Pay(User user, DateTime payDate)
+        {
+            if (this.IsPaid)
+            {
+                throw new ApplicationException("The expense is already paid!");
+            }
+
+            if (user == null)
+            {
+                throw new ArgumentNullException("user cannot be null!");
+            }
+
+            this.IsPaid = true;
+            this.PaidBy = user;
+            this.PaidOnDate = payDate;
+        }
+
+        public void AddComment(Comment comment)
+        {
+            if (comment == null)
+            {
+                throw new ArgumentNullException("comment cannot be null!");
+            }
+
+            this.Comments.Add(comment);
         }
     }
 }

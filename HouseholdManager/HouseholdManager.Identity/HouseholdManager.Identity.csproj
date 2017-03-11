@@ -100,6 +100,10 @@
       <Project>{83C1C8AC-9F13-4584-A85A-AD5A3859B0B1}</Project>
       <Name>HouseholdManager.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HouseholdManager.Models\HouseholdManager.Models.csproj">
+      <Project>{C3551296-337F-437F-B2B5-71E9E3FEF995}</Project>
+      <Name>HouseholdManager.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

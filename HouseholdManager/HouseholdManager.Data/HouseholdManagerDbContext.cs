@@ -1,5 +1,5 @@
 ﻿using HouseholdManager.Data.Contracts;
-using HouseholdManager.Data.Models;
+using HouseholdManager.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;

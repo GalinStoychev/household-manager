@@ -1,5 +1,5 @@
-﻿using HouseholdManager.Data.Models;
-using HouseholdManager.Identity;
+﻿using HouseholdManager.Identity;
+using HouseholdManager.Models;
 using HouseholdManager.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;

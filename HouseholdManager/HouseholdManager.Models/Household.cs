@@ -15,6 +15,15 @@ namespace HouseholdManager.Models
             this.expenses= new HashSet<Expense>();
         }
 
+        public Household(string name, string address, byte[] image)
+        {
+            this.Name = name;
+            this.Address = address;
+            this.Image = image;
+            this.users = new HashSet<User>();
+            this.expenses = new HashSet<Expense>();
+        }
+
         [Required]
         public string Name { get; set; }
 

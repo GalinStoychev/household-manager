@@ -11,8 +11,6 @@ namespace HouseholdManager.Web.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using BindingModules;
-    using Microsoft.AspNet.Identity;
-    using Data.Models;
 
     public static class NinjectWebCommon 
     {
@@ -67,7 +65,6 @@ namespace HouseholdManager.Web.App_Start
             kernel.Load(new DataBindingModule());
             kernel.Load(new ServiceBindingModule());
             kernel.Load(new IdentityBindingModule());
-            kernel.Load(new DomainBindingModule());
         }
     }
 }

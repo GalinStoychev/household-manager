@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Owin;
 using HouseholdManager.Data;
 using HouseholdManager.Identity;
-using HouseholdManager.Data.Models;
+using HouseholdManager.Models;
 
 namespace HouseholdManager.Web
 {

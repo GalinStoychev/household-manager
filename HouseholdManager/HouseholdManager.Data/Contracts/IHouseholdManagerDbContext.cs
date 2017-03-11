@@ -1,4 +1,4 @@
-﻿using HouseholdManager.Data.Models;
+﻿using HouseholdManager.Models;
 using System.Data.Entity;
 
 namespace HouseholdManager.Data.Contracts

@@ -1,4 +1,4 @@
-﻿using HouseholdManager.Data.Models;
+﻿using HouseholdManager.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
