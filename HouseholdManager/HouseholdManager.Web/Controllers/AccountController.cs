@@ -1,9 +1,12 @@
-﻿using HouseholdManager.Identity;
+﻿using HouseholdManager.Common.Constants;
+using HouseholdManager.Identity;
+using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Models;
 using HouseholdManager.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -15,9 +18,16 @@ namespace HouseholdManager.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IUserService userService;
 
-        public AccountController()
+        public AccountController(IUserService userService)
         {
+            if (userService == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "userService"));
+            }
+
+            this.userService = userService;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -77,7 +87,7 @@ namespace HouseholdManager.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal(returnUrl, model.Email);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -252,7 +262,7 @@ namespace HouseholdManager.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal(returnUrl, loginInfo.Email);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -294,7 +304,7 @@ namespace HouseholdManager.Web.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToLocal(returnUrl, user.Email);
                     }
                 }
                 AddErrors(result);
@@ -311,6 +321,12 @@ namespace HouseholdManager.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+            var nameCookie = this.Response.Cookies.Get(CommonConstants.CurrentHouseholdName);
+            nameCookie.Expires = DateTime.Now.AddDays(-1);
+            var idCookie = this.Response.Cookies.Get(CommonConstants.CurrentHouseholdId);
+            idCookie.Expires = DateTime.Now.AddDays(-1);
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -362,12 +378,21 @@ namespace HouseholdManager.Web.Controllers
             }
         }
 
-        private ActionResult RedirectToLocal(string returnUrl)
+        private ActionResult RedirectToLocal(string returnUrl, string email)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
+
+            return RedirectToAction("SetCookies", "Account");
+        }
+
+        public ActionResult SetCookies()
+        {
+            var currentHousehold = this.userService.GetCurrentHousehold(this.User.Identity.GetUserId());
+            this.HttpContext.Response.Cookies.Add(new HttpCookie(CommonConstants.CurrentHouseholdName, currentHousehold?.Name));
+            this.HttpContext.Response.Cookies.Add(new HttpCookie(CommonConstants.CurrentHouseholdId, currentHousehold?.Id.ToString()));
 
             return RedirectToAction("Index", "Home");
         }

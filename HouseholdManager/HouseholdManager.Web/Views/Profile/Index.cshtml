@@ -21,12 +21,13 @@
             @foreach (var household in Model.Households)
             {
                 <div class="hh-container">
+                    @Html.ActionLink("redirect", "RedirectToHousehold", "Household", new { area = "Household", name = household }, new { });
                     @Html.ActionLink(household, "Index", "Household", new { area = "Household", name = household }, new { })
                 </div>
             }
         </div>
         <div>
-            @Html.ActionLink("ADD HOUSEHOLD", "Create", "Household")
+            @Html.ActionLink("ADD HOUSEHOLD", "Create", "Household", new { }, new { @class = "btn btn-success" })
         </div>
     </div>
 </div>

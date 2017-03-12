@@ -34,7 +34,7 @@ namespace HouseholdManager.Models
         [ForeignKey("CurrentHousehold")]
         public Guid? CurrentHouseholdId { get; set; }
 
-        public virtual Household CurrentHousehold { get; set; }
+        public virtual Household CurrentHousehold { get; protected set; }
 
         public bool IsDeleted { get; set; }
 
@@ -68,6 +68,11 @@ namespace HouseholdManager.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
+        }
+
+        public void SetCurrentHousehold(Household household)
+        {
+            this.CurrentHousehold = household;
         }
     }
 }

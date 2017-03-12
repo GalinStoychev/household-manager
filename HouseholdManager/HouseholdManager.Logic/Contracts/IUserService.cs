@@ -5,9 +5,11 @@ namespace HouseholdManager.Logic.Contracts
 {
     public interface IUserService
     {
-        User GetUserInfo(string username);
+        User GetUserInfo(string id);
 
-        void SetCurrentHousehold(Guid Id);
+        Household GetCurrentHousehold(string id);
+
+        void SetCurrentHousehold(Guid householdId, string userId);
 
         void AddHousehold(Household household, string username);
 

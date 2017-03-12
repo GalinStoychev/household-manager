@@ -3,6 +3,7 @@ using HouseholdManager.Data.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Models;
 using System;
+using System.Linq;
 
 namespace HouseholdManager.Logic.Services
 {
@@ -31,23 +32,39 @@ namespace HouseholdManager.Logic.Services
         {
             var user = this.userRepositoryEF.GetById(id);
             user.Households.Add(household);
+            if (user.CurrentHousehold == null)
+            {
+                user.SetCurrentHousehold(household);
+            }
+
             this.unitOfWork.Commit();
+        }
+
+        public Household GetCurrentHousehold(string id)
+        {
+            var currentHousehold = this.userRepositoryEF.GetById(id).CurrentHousehold;
+            return currentHousehold;
         }
 
         public User GetUserInfo(string id)
         {
             var user = this.userRepositoryEF.GetById(id);
-            //if (user == null)
-            //{
-            //    throw new ArgumentNullException(ExceptionConstants.UserWasNotFound);
-            //}
+            if (user == null)
+            {
+                throw new ArgumentNullException(ExceptionConstants.UserWasNotFound);
+            }
 
             return user;
         }
 
-        public void SetCurrentHousehold(Guid Id)
+        public void SetCurrentHousehold(Guid householdId, string userId)
         {
-            throw new NotImplementedException();
+            var user = this.userRepositoryEF.GetById(userId);
+            var household = user.Households.Where(x => x.Id == householdId).FirstOrDefault();
+            if (household != null)
+            {
+                user.SetCurrentHousehold(household);
+            }
         }
 
         public void UpdateUserInfo(string username, string firstName, string lastName, string phoneNumber)

@@ -3,6 +3,7 @@ using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Household.Models;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Web;
 using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
@@ -59,7 +60,16 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             var household = this.householdService.CreateHousehold(model.Name, model.Address, model.Image);
             this.userService.AddHousehold(household, this.User.Identity.GetUserId());
 
-            return RedirectToAction("Index");
+            return RedirectToAction("RedirectToHousehold", new { name = household.Name });
+        }
+
+        public ActionResult RedirectToHousehold(string name)
+        {
+            var currentHousehold = this.userService.GetCurrentHousehold(this.User.Identity.GetUserId());
+            this.HttpContext.Response.Cookies.Add(new HttpCookie(CommonConstants.CurrentHouseholdName, currentHousehold.Name));
+            this.HttpContext.Response.Cookies.Add(new HttpCookie(CommonConstants.CurrentHouseholdId, currentHousehold.Id.ToString()));
+
+            return this.RedirectToRoute("Household_single", new { name = name });
         }
     }
 }
