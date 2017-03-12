@@ -1,5 +1,12 @@
 ﻿@model HouseholdManager.Web.Areas.Household.Models.ExpenseViewModel
 
+@section styles {
+    @Styles.Render("~/Content/kendo/css")
+}
+
+@section kendoScripts {
+    @Scripts.Render("~/bundles/kendo")
+}
     <div class="row">
         <div class="col-md-12">
             <h2 class="header-page text-center">Add item or bill</h2>
@@ -8,4 +15,6 @@
     </div>
 
 
-
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

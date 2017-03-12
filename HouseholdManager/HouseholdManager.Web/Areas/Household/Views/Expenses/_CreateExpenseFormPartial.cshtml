@@ -28,11 +28,17 @@
         </div>
     </div>
 
+    <div class="demo-section k-content">
+
+    </div>
     <div class="form-group">
         @Html.LabelFor(m => m.DueDate, new { @class = "col-md-2 control-label" })
         @Html.ValidationMessageFor(m => m.DueDate, "", new { @class = "text-danger" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.DueDate, new { @class = "form-control" })
+            @(Html.Kendo().DatePickerFor(m => m.DueDate)
+                        .Value(DateTime.Now)
+                        .Format("yyyy/MM/dd")
+            )
         </div>
     </div>
 
@@ -46,12 +52,8 @@
 
 
     <div class="form-group">
-        <div>
-            <input type="submit" class="btn btn-default" value="SUBMIT" />
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="SUBMIT" class="btn btn-default" />
         </div>
     </div>
-}
-
-@section scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

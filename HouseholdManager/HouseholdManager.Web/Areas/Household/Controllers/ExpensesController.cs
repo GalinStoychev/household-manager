@@ -18,7 +18,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         private readonly IExpenseService expenseService;
         private readonly MappingService mappingService;
 
-        public ExpensesController(IExpenseService expenseService, MappingService mappingService)
+        public ExpensesController(IExpenseService expenseService, MappingService mappingService, IHouseholdService householdService)
         {
             if (expenseService == null)
             {
@@ -30,8 +30,14 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "mappingService"));
             }
 
+            if (householdService == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "householdService"));
+            }
+
             this.expenseService = expenseService;
             this.mappingService = mappingService;
+            this.householdService = householdService;
         }
 
         // GET: Household/Expense
@@ -52,13 +58,16 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
             var model = new ExpenseViewModel() { Categories = modelCategories };
 
+            // get household users and put them into the model
+
             return View(model);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(ExpenseViewModel model)
         {
-            return View();
+            return null;
         }
     }
 }
