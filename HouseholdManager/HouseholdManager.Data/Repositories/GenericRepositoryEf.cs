@@ -106,7 +106,8 @@ namespace HouseholdManager.Data.Repositories
 
         public T GetById(object id)
         {
-            return this.DbSet.Find(id);
+            var entity =  this.DbSet.Find(id);
+            return entity;
         }
 
         public T GetFirst(Expression<Func<T, bool>> filterExpression)

@@ -1,8 +1,10 @@
 ﻿using HouseholdManager.Common.Constants;
+using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Household.Models;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,8 +15,9 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         private readonly IUserService userService;
         private readonly IHouseholdService householdService;
         private readonly IImageService imageService;
+        private readonly IMapingService mappingService;
 
-        public HouseholdController(IUserService userService, IHouseholdService householdService, IImageService imageService)
+        public HouseholdController(IUserService userService, IHouseholdService householdService, IImageService imageService, IMapingService mappingService)
         {
             if (userService == null)
             {
@@ -34,12 +37,20 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             this.userService = userService;
             this.householdService = householdService;
             this.imageService = imageService;
+            this.mappingService = mappingService;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var householdIdAsString = this.HttpContext.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdId];
+            var householdIdAsGuid = Guid.Parse(householdIdAsString);
+            var household = this.householdService.GetHousehold(householdIdAsGuid);
+
+            var model = new HouseholdViewModel();
+            mappingService.Map<HouseholdManager.Models.Household, HouseholdViewModel>(household, model);
+
+            return View(model);
         }
 
         [HttpGet]
@@ -55,6 +66,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(HouseholdViewModel model)
         {
             this.householdService.CreateHousehold(model.Name, model.Address, model.Image, this.User.Identity.GetUserId());

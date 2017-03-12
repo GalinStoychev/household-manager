@@ -4,6 +4,6 @@ namespace HouseholdManager.Common.Contracts
 {
     public interface IHaveCustomMappings
     {
-        void CreateMappings(IConfigurationProvider configuration);
+        void CreateMappings(IMapperConfigurationExpression configuration);
     }
 }

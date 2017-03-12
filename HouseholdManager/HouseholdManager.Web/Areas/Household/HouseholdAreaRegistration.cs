@@ -23,7 +23,13 @@ namespace HouseholdManager.Web.Areas.Household
             context.MapRoute(
                 name: "Household_single",
                 url: "Household/{name}",
-                defaults: new { action = "Index", controller = "Household", name = UrlParameter.Optional }
+                defaults: new { action = "Index", controller = "Household"}
+            );
+
+            context.MapRoute(
+                name: "Household_expenses",
+                url: "Household/{name}/Expenses",
+                defaults: new { action = "Index", controller = "Expenses"}
             );
 
             context.MapRoute(

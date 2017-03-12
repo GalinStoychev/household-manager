@@ -53,7 +53,7 @@ namespace HouseholdManager.Logic.Services
 
         public Household GetHousehold(Guid id)
         {
-            var household = this.householdRepositoryEF.GetById(id);
+            var household = this.householdRepositoryEF.GetFirst(x => x.Id == id, x => x.Users);
             return household;
         }
     }

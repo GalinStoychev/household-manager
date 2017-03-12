@@ -1,7 +1,6 @@
 ﻿@using HouseholdManager.Common.Constants
 @{
     var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
-    
 }
 
 <!DOCTYPE html>
@@ -30,6 +29,7 @@
                     @if (householdName != null)
                     {
                         <li>@Html.RouteLink("Household", "Household_single", new { area = "", name = householdName }, null)</li>
+                        <li>@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName }, null)</li>
                     }
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</li>

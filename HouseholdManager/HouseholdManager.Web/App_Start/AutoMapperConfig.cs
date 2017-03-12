@@ -4,24 +4,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Web.Mvc;
 
 namespace HouseholdManager.Web.App_Start
 {
     public class AutoMapperConfig
     {
-        public static void RegisterMappings()
+        public static void Config(params Assembly[] assemblies)
         {
-            var types = Assembly.GetExecutingAssembly().GetExportedTypes();
-            var viewModelTypes = Assembly.Load("HouseholdManager.Domain.Models").GetExportedTypes();
-
-            LoadStandardMappings(types);
-            LoadStandardMappings(viewModelTypes);
-
-            LoadCustomMappings(types);
-            LoadCustomMappings(viewModelTypes);
+            Mapper.Initialize(c => RegisterMappings(c, assemblies));
         }
 
-        private static void LoadStandardMappings(IEnumerable<Type> types)
+        public static void RegisterMappings(IMapperConfigurationExpression config, params Assembly[] assemblies)
+        {
+            config.ConstructServicesUsing(t => DependencyResolver.Current.GetService(t));
+            var types = new List<Type>();
+            foreach (var assembly in assemblies)
+            {
+                types.AddRange(assembly.GetExportedTypes());
+            }
+
+            LoadStandardMappings(config, types);
+            LoadCustomMappings(config, types);
+        }
+
+        private static void LoadStandardMappings(IMapperConfigurationExpression config, IEnumerable<Type> types)
         {
             var maps = (from t in types
                         from i in t.GetInterfaces()
@@ -36,20 +43,12 @@ namespace HouseholdManager.Web.App_Start
 
             foreach (var map in maps)
             {
-                Mapper.Initialize(config =>
-                {
-                    config.CreateMap(map.Source, map.Destination);
-                    config.CreateMap(map.Destination, map.Source);
-                });
-
-                //Mapper.Initialize(config => config.CreateMap(map.Destination, map.Source));
-
-                //Mapper.CreateMap(map.Source, map.Destination);
-                //Mapper.CreateMap(map.Destination, map.Source);
+                config.CreateMap(map.Source, map.Destination);
+                config.CreateMap(map.Destination, map.Source);
             }
         }
 
-        private static void LoadCustomMappings(IEnumerable<Type> types)
+        private static void LoadCustomMappings(IMapperConfigurationExpression config, IEnumerable<Type> types)
         {
             var maps = (from t in types
                         from i in t.GetInterfaces()
@@ -60,7 +59,7 @@ namespace HouseholdManager.Web.App_Start
 
             foreach (var map in maps)
             {
-                map.CreateMappings(Mapper.Configuration);
+                map.CreateMappings(config);
             }
         }
     }

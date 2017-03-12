@@ -48,6 +48,8 @@
     <Compile Include="Constants\ExceptionConstants.cs" />
     <Compile Include="Contracts\IHaveCustomMappings.cs" />
     <Compile Include="Contracts\IMapFrom.cs" />
+    <Compile Include="Contracts\IMapingService.cs" />
+    <Compile Include="MappingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

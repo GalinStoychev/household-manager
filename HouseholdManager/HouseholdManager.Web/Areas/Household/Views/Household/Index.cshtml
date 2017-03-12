@@ -1,7 +1,31 @@
 ﻿@using HouseholdManager.Common.Constants
+
+@model HouseholdManager.Web.Areas.Household.Models.HouseholdViewModel
+
 @{
-    var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold][CommonConstants.CurrentHouseholdName];
+    var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
+    var image = "data: image/jpeg; base64," + Convert.ToBase64String(Model.Image);
 }
 
-<h2>@householdName</h2>
+
+<div class="row">
+    <div class="col-md-12  text-center">
+        <h2 class="header-page">@householdName</h2>
+        <hr />
+        <img src="@image" alt="household image" class="hh-image" />
+        <br />
+        <span>@Model.Address</span>
+
+        <h4 class="header-page">People in this household</h4>
+        @foreach (var person in Model.Users)
+        {
+            <div class="person-container">
+                <strong>Name: </strong><span>@person.FullName</span>
+                <strong>Email: </strong><span>@person.Email</span>
+                <strong>Phone number: </strong><span>@person.PhoneNumber</span>
+            </div>
+        }
+
+    </div>
+</div>
 
