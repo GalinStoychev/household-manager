@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HouseholdManager.Models
 {
-    public class Household: BaseEntity
+    public class Household : BaseEntity
     {
         private ICollection<User> users;
         private ICollection<Expense> expenses;
 
-        public Household()
+        private Household()
         {
             this.users = new HashSet<User>();
-            this.expenses= new HashSet<Expense>();
+            this.expenses = new HashSet<Expense>();
         }
 
         public Household(string name, string address, byte[] image)
@@ -37,13 +37,13 @@ namespace HouseholdManager.Models
         public virtual ICollection<User> Users
         {
             get { return this.users; }
-            set { this.users = value; }
+            protected set { this.users = value; }
         }
 
         public virtual ICollection<Expense> Expenses
         {
             get { return this.expenses; }
-            set { this.expenses = value; }
+            protected set { this.expenses = value; }
         }
     }
 }

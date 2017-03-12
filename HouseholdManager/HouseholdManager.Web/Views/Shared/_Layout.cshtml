@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using HouseholdManager.Common.Constants
+@{
+    var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
+    
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,7 +27,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    @if (householdName != null)
+                    {
+                        <li>@Html.RouteLink("Household", "Household_single", new { area = "", name = householdName }, null)</li>
+                    }
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</li>
                 </ul>

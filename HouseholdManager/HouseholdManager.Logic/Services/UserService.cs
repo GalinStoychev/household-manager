@@ -40,9 +40,9 @@ namespace HouseholdManager.Logic.Services
             this.unitOfWork.Commit();
         }
 
-        public Household GetCurrentHousehold(string id)
+        public Household GetCurrentHousehold(string userId)
         {
-            var currentHousehold = this.userRepositoryEF.GetById(id).CurrentHousehold;
+            var currentHousehold = this.userRepositoryEF.GetById(userId).CurrentHousehold;
             return currentHousehold;
         }
 
@@ -64,6 +64,18 @@ namespace HouseholdManager.Logic.Services
             if (household != null)
             {
                 user.SetCurrentHousehold(household);
+                this.unitOfWork.Commit();
+            }
+        }
+
+        public void SetCurrentHousehold(string householdName, string userId)
+        {
+            var user = this.userRepositoryEF.GetById(userId);
+            var household = user.Households.Where(x => x.Name == householdName).FirstOrDefault();
+            if (household != null)
+            {
+                user.SetCurrentHousehold(household);
+                this.unitOfWork.Commit();
             }
         }
 

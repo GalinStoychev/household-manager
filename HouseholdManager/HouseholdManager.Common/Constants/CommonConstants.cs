@@ -7,5 +7,7 @@
         public const string CurrentHouseholdName = "householdName";
 
         public const string CurrentHouseholdId = "householdId";
+
+        public const string CurrentHousehold = "currentHousehold";
     }
 }

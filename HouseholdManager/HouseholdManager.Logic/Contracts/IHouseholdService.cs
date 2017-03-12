@@ -7,6 +7,6 @@ namespace HouseholdManager.Logic.Contracts
     {
         Household GetHousehold(Guid id);
 
-        Household CreateHousehold(string name, string address, byte[] image);
+        void CreateHousehold(string name, string address, byte[] image, string userId);
     }
 }

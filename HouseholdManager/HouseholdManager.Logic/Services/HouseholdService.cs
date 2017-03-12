@@ -11,9 +11,10 @@ namespace HouseholdManager.Logic.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IRepository<Household> householdRepositoryEF;
+        private readonly IRepository<User> userRepositoryEF;
         private readonly IHouseholdFactory householdFactory;
 
-        public HouseholdService(IUnitOfWork unitOfWork, IRepository<Household> householdRepositoryEF, IHouseholdFactory householdFactory)
+        public HouseholdService(IUnitOfWork unitOfWork, IRepository<Household> householdRepositoryEF, IRepository<User> userRepositoryEF, IHouseholdFactory householdFactory)
         {
             if (unitOfWork == null)
             {
@@ -25,6 +26,11 @@ namespace HouseholdManager.Logic.Services
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, householdRepositoryEF));
             }
 
+            if (userRepositoryEF == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, userRepositoryEF));
+            }
+
             if (householdFactory == null)
             {
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, householdFactory));
@@ -32,16 +38,17 @@ namespace HouseholdManager.Logic.Services
 
             this.unitOfWork = unitOfWork;
             this.householdRepositoryEF = householdRepositoryEF;
+            this.userRepositoryEF = userRepositoryEF;
             this.householdFactory = householdFactory;
         }
 
-        public Household CreateHousehold(string name, string address, byte[] image)
+        public void CreateHousehold(string name, string address, byte[] image, string userId)
         {
             var household = this.householdFactory.CreateHousehold(name, address, image);
+            var user = this.userRepositoryEF.GetById(userId);
+            household.Users.Add(user);
             this.householdRepositoryEF.Add(household);
             this.unitOfWork.Commit();
-
-            return household;
         }
 
         public Household GetHousehold(Guid id)

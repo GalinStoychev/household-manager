@@ -322,10 +322,8 @@ namespace HouseholdManager.Web.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
-            var nameCookie = this.Response.Cookies.Get(CommonConstants.CurrentHouseholdName);
-            nameCookie.Expires = DateTime.Now.AddDays(-1);
-            var idCookie = this.Response.Cookies.Get(CommonConstants.CurrentHouseholdId);
-            idCookie.Expires = DateTime.Now.AddDays(-1);
+            var householdCookie = this.Response.Cookies.Get(CommonConstants.CurrentHousehold);
+            householdCookie.Expires = DateTime.Now.AddDays(-1);
 
             return RedirectToAction("Index", "Home");
         }
@@ -391,8 +389,10 @@ namespace HouseholdManager.Web.Controllers
         public ActionResult SetCookies()
         {
             var currentHousehold = this.userService.GetCurrentHousehold(this.User.Identity.GetUserId());
-            this.HttpContext.Response.Cookies.Add(new HttpCookie(CommonConstants.CurrentHouseholdName, currentHousehold?.Name));
-            this.HttpContext.Response.Cookies.Add(new HttpCookie(CommonConstants.CurrentHouseholdId, currentHousehold?.Id.ToString()));
+            var cookie = new HttpCookie(CommonConstants.CurrentHousehold);
+            cookie.Values.Add(CommonConstants.CurrentHouseholdName, currentHousehold?.Name);
+            cookie.Values.Add(CommonConstants.CurrentHouseholdId, currentHousehold?.Id.ToString());
+            this.HttpContext.Response.Cookies.Set(cookie);
 
             return RedirectToAction("Index", "Home");
         }

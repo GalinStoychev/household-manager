@@ -57,19 +57,33 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [HttpPost]
         public ActionResult Create(HouseholdViewModel model)
         {
-            var household = this.householdService.CreateHousehold(model.Name, model.Address, model.Image);
-            this.userService.AddHousehold(household, this.User.Identity.GetUserId());
+            this.householdService.CreateHousehold(model.Name, model.Address, model.Image, this.User.Identity.GetUserId());
 
-            return RedirectToAction("RedirectToHousehold", new { name = household.Name });
+            return RedirectToAction("SetCurrentHousehold", new { name = model.Name });
         }
 
-        public ActionResult RedirectToHousehold(string name)
+        [HttpGet]
+        public ActionResult SetCurrentHousehold(string name)
+        {
+            this.userService.SetCurrentHousehold(name, this.User.Identity.GetUserId());
+
+            return this.RedirectToHousehold(name);
+        }
+
+        private ActionResult RedirectToHousehold(string name)
         {
             var currentHousehold = this.userService.GetCurrentHousehold(this.User.Identity.GetUserId());
-            this.HttpContext.Response.Cookies.Add(new HttpCookie(CommonConstants.CurrentHouseholdName, currentHousehold.Name));
-            this.HttpContext.Response.Cookies.Add(new HttpCookie(CommonConstants.CurrentHouseholdId, currentHousehold.Id.ToString()));
+            this.SetHouseholdCookie(currentHousehold?.Name, currentHousehold?.Id.ToString());
 
             return this.RedirectToRoute("Household_single", new { name = name });
+        }
+
+        private void SetHouseholdCookie(string name, string id)
+        {
+            var cookie = new HttpCookie(CommonConstants.CurrentHousehold);
+            cookie.Values.Add(CommonConstants.CurrentHouseholdName, name);
+            cookie.Values.Add(CommonConstants.CurrentHouseholdId, id);
+            this.HttpContext.Response.Cookies.Set(cookie);
         }
     }
 }
