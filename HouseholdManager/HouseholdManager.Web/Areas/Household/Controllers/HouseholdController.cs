@@ -21,7 +21,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         {
             if (userService == null)
             {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "user service"));
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "userService"));
             }
 
             if (householdService == null)

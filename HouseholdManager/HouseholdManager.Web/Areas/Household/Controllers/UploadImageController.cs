@@ -1,9 +1,7 @@
 ﻿using HouseholdManager.Common.Constants;
 using ImageResizer;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,7 +17,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         private const string ImageSizeError = "The image must be up to 4MB.";
         private const string ImageUploadGeneralError = "There was error when uplaoding. Please, try again.";
         private const string ImageUplaodedSuccessfully = "Image uploaded.";
-        private const string InstructionsQueryString = "width=300;format=jpg;mode=max";
+        private const string InstructionsQueryString = "width=500;format=jpg;mode=max";
 
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)

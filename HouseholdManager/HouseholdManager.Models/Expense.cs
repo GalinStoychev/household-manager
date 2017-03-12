@@ -9,19 +9,18 @@ namespace HouseholdManager.Models
     {
         private ICollection<Comment> comments;
 
-        public Expense()
+        private Expense()
         {
             this.comments = new HashSet<Comment>();
         }
 
-        public Expense(string name, ExpenseCategory category, Household household, decimal expectedCost, DateTime dueDate, DateTime createdOn)
+        public Expense(string name, ExpenseCategory category, Guid householdId, decimal expectedCost, DateTime dueDate, DateTime createdOn)
         {
             this.Name = name;
             this.ExpenseCategory = category;
-            this.Household = household;
+            this.HouseholdId = householdId;
             this.ExpectedCost = expectedCost;
             this.DueDate = dueDate;
-            this.Comments = new List<Comment>();
             this.CreatedOn = createdOn;
             this.comments = new HashSet<Comment>();
         }

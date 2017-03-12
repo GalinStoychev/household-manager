@@ -31,7 +31,5 @@ namespace HouseholdManager.Web.Areas.Household.Models
         {
             configuration.CreateMap<HouseholdManager.Models.Household, HouseholdViewModel>();
         }
-
-        //public ICollection<IExpense> Expenses { get; set; }
     }
 }

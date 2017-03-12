@@ -228,6 +228,9 @@
     <Compile Include="Areas\Household\Controllers\HouseholdController.cs" />
     <Compile Include="Areas\Household\Controllers\UploadImageController.cs" />
     <Compile Include="Areas\Household\HouseholdAreaRegistration.cs" />
+    <Compile Include="Areas\Household\Models\CommentViewModel.cs" />
+    <Compile Include="Areas\Household\Models\ExpenseCategoryViewModel.cs" />
+    <Compile Include="Areas\Household\Models\ExpenseViewModel.cs" />
     <Compile Include="Areas\Household\Models\HouseholdViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -259,6 +262,8 @@
     <Content Include="Areas\Household\Views\Household\Index.cshtml" />
     <Content Include="Areas\Household\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Household\Views\Expenses\Index.cshtml" />
+    <Content Include="Areas\Household\Views\Expenses\Create.cshtml" />
+    <Content Include="Areas\Household\Views\Expenses\_CreateExpenseFormPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

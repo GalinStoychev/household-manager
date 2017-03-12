@@ -33,6 +33,12 @@ namespace HouseholdManager.Web.Areas.Household
             );
 
             context.MapRoute(
+              name: "Household_add_expense",
+              url: "Household/{name}/Add",
+              defaults: new { action = "Create", controller = "Expenses" }
+          );
+
+            context.MapRoute(
                 name: "Household_default",
                 url: "Household/{controller}/{action}/{name}",
                 defaults: new { action = "Index", name = UrlParameter.Optional }

@@ -3,7 +3,6 @@ using HouseholdManager.Data.Contracts;
 using HouseholdManager.Data.Repositories;
 using HouseholdManager.Models;
 using Ninject.Extensions.Conventions;
-using Ninject.Extensions.Factory;
 using Ninject.Modules;
 using Ninject.Web.Common;
 using System.IO;
@@ -35,8 +34,8 @@ namespace HouseholdManager.Web.App_Start.BindingModules
             this.Bind<IRepository<Expense>>()
               .To<GenericRepositoryEF<Expense>>();
 
-            //this.Bind<IUnitOfWork>()
-            //    .To<UnitOfWork>();
+            this.Bind<IRepository<ExpenseCategory>>()
+                .To<GenericRepositoryEF<ExpenseCategory>>();
         }
     }
 }

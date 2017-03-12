@@ -20,20 +20,20 @@
         @Model.ImageUploadMessage
         </div>
 
-        @using (Html.BeginForm("Create", "Household", FormMethod.Post, new { @class = "submit-form" }))
+        @using (Html.BeginForm("Create", "Household", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
             <div class="form-group">
-                @Html.LabelFor(m => m.Name, new { @class = "col-md-3 control-label" })
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
                 @Html.ValidationMessageFor(m => m.Name)
-                <div class="col-md-9">
+                <div class="col-md-10">
                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Address, new { @class = "col-md-3 control-label" })
+                @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
                 @Html.ValidationMessageFor(m => m.Address)
-                <div class="col-md-9">
+                <div class="col-md-10">
                     @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
                 </div>
             </div>
