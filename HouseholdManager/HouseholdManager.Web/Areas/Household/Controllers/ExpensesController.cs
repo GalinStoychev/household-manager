@@ -40,7 +40,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             this.householdService = householdService;
         }
 
-        // GET: Household/Expense
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
@@ -58,7 +58,14 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
             var model = new ExpenseViewModel() { Categories = modelCategories };
 
-            // get household users and put them into the model
+            var housholdId = this.HttpContext.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdId];
+            var users = this.householdService.GetHouseholdUsers(Guid.Parse(housholdId));
+            model.Users = new List<SelectListItem>();
+            model.Users.Add(new SelectListItem() );
+            foreach (var user in users)
+            {
+                model.Users.Add(new SelectListItem() { Value = user.Id, Text = user.FirstName + " " + user.LastName});
+            }
 
             return View(model);
         }

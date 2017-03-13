@@ -43,6 +43,13 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(m => m.AssignedUser, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.AssignedUser, Model.Users, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(m => m.Comment, new { @class = "col-md-2 control-label" })
         @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "text-danger" })
         <div class="col-md-10">

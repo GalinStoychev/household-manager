@@ -16,7 +16,7 @@ namespace HouseholdManager.Web.Areas.Household.Models
 
         public string Category { get; set; }
 
-        public List<SelectListItem> Categories { get; set; }
+        public IList<SelectListItem> Categories { get; set; }
 
         [Required(ErrorMessage =" Expected cost is required.")]
         [Display(Name = "Expected cost")]
@@ -41,6 +41,8 @@ namespace HouseholdManager.Web.Areas.Household.Models
 
         [Display(Name = "Assigned user")]
         public string AssignedUser { get; set; }
+
+        public IList<SelectListItem> Users { get; set; }
 
         [StringLength(100, ErrorMessage = "The {0} must be maximum 100 characters long.")]
         public string Comment { get; set; }

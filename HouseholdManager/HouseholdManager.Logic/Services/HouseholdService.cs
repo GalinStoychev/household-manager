@@ -4,6 +4,7 @@ using HouseholdManager.Data.Contracts;
 using HouseholdManager.Common.Constants;
 using HouseholdManager.Models;
 using HouseholdManager.Logic.Contracts.Factories;
+using System.Collections.Generic;
 
 namespace HouseholdManager.Logic.Services
 {
@@ -55,6 +56,12 @@ namespace HouseholdManager.Logic.Services
         {
             var household = this.householdRepositoryEF.GetFirst(x => x.Id == id, x => x.Users);
             return household;
+        }
+
+        public IEnumerable<User> GetHouseholdUsers(Guid id)
+        {
+          var users = this.GetHousehold(id).Users;
+            return users;
         }
     }
 }
