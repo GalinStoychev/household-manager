@@ -1,13 +1,11 @@
-﻿using HouseholdManager.Common;
-using HouseholdManager.Common.Constants;
+﻿using HouseholdManager.Common.Constants;
+using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Models;
 using HouseholdManager.Web.Areas.Household.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
@@ -16,9 +14,9 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
     {
         private readonly IHouseholdService householdService;
         private readonly IExpenseService expenseService;
-        private readonly MappingService mappingService;
+        private readonly IMapingService mappingService;
 
-        public ExpensesController(IExpenseService expenseService, MappingService mappingService, IHouseholdService householdService)
+        public ExpensesController(IExpenseService expenseService, IMapingService mappingService, IHouseholdService householdService)
         {
             if (expenseService == null)
             {
@@ -43,7 +41,15 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var expenses = this.expenseService.GetExpenses(this.GetHouseholdId());
+            var modelExpenses = new List<ShowExpenseViewModel>();
+            foreach (var expense in expenses)
+            {
+                var mapped = this.mappingService.Map<ShowExpenseViewModel>(expense);
+                modelExpenses.Add(mapped);
+            }
+
+            return View(modelExpenses);
         }
 
         [HttpGet]
@@ -74,9 +80,22 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult Create(CreateExpenseViewModel model)
         {
             this.expenseService.CreateExpense(this.User.Identity.GetUserId(), model.Name, Guid.Parse(model.Category), this.GetHouseholdId(), model.ExpectedCost, model.DueDate, model.Comment, model.AssignedUser);
-           
-            return View("Index");
+
+            return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Pay()
+        {
+
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult Pay()
+        //{
+
+        //}
 
         private Guid GetHouseholdId()
         {

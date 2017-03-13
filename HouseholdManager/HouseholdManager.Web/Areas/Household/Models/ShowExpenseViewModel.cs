@@ -30,8 +30,10 @@ namespace HouseholdManager.Web.Areas.Household.Models
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Expense, ShowExpenseViewModel>()
-                .ForMember(s => s.AssignedUser, opt => opt.MapFrom(d => d.AssignedUser.FirstName + " " + d.AssignedUser.FirstName))
-                .ForMember(s => s.PaidBy, opt => opt.MapFrom(d => d.PaidBy.FirstName + " " + d.PaidBy.FirstName));
+                .ForMember(d => d.Category, opt => opt.MapFrom(s => s.ExpenseCategory.Name))
+                .ForMember(d => d.AssignedUser, opt => opt.MapFrom(s => s.AssignedUser.FirstName + " " + s.AssignedUser.LastName))
+                .ForMember(d => d.CreatedBy, opt => opt.MapFrom(s => s.CreatedBy.FirstName + " " + s.CreatedBy.LastName))
+                .ForMember(d => d.PaidBy, opt => opt.MapFrom(s => s.PaidBy.FirstName + " " + s.PaidBy.LastName));
         }
     }
 }

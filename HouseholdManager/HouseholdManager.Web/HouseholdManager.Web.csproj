@@ -705,6 +705,7 @@
     <Content Include="Content\kendo\kendo.silver.mobile.min.css.map" />
     <Content Include="Content\kendo\kendo.uniform.min.css.map" />
     <Content Include="Content\kendo\kendo.uniform.mobile.min.css.map" />
+    <Content Include="Areas\Household\Views\Expenses\_ExpensePartial.cshtml" />
     <None Include="Properties\PublishProfiles\householdmanager - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\householdmanager - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

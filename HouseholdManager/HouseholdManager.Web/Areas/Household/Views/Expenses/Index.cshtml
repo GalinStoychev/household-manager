@@ -1,7 +1,21 @@
-﻿
+﻿@using HouseholdManager.Common.Constants
+
+@model IEnumerable<HouseholdManager.Web.Areas.Household.Models.ShowExpenseViewModel>
 @{
-    ViewBag.Title = "Index";
+    var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
 }
 
-<h2>Expenses</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="header-page">@householdName</h2>
+    </div>
+
+    
+
+    @foreach (var expense in Model)
+    {
+        @Html.Partial("_ExpensePartial", expense);
+    }
+</div>
 

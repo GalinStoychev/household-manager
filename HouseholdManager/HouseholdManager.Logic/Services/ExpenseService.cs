@@ -5,6 +5,8 @@ using HouseholdManager.Models;
 using HouseholdManager.Data.Contracts;
 using HouseholdManager.Common.Constants;
 using HouseholdManager.Logic.Contracts.Factories;
+using System.Linq.Expressions;
+using System.Data.Entity.Infrastructure;
 
 namespace HouseholdManager.Logic.Services
 {
@@ -96,7 +98,14 @@ namespace HouseholdManager.Logic.Services
 
         public IEnumerable<Expense> GetExpenses(Guid householdId)
         {
-            throw new NotImplementedException();
+            var parameters = new Expression<Func<Expense, object>>[] { x => x.AssignedUser, x => x.ExpenseCategory };
+            //var expeses = this.expenseRepositoryEF.All.include
+            var expenses = this.expenseRepositoryEF.GetAll<Expense>(
+                x => x.HouseholdId == householdId,
+                null
+               );
+
+            return expenses;
         }
     }
 }

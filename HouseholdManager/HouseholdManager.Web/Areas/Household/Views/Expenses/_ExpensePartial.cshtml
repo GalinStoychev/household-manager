@@ -1,0 +1,17 @@
+﻿@model HouseholdManager.Web.Areas.Household.Models.ShowExpenseViewModel
+
+<div class="expense-container">
+    <h3>@Model.Name</h3>
+    <span>@Model.Category</span>
+    <span>Created by: @Model.CreatedBy</span>
+    <span>Created on: @Model.CreatedOn.ToShortDateString()</span>
+    <br />
+    <span>Expected cost: </span><strong>@Model.ExpectedCost</strong>
+    @if (Model.AssignedUser != null)
+    {
+        <span>User assigned: </span><strong>@Model.AssignedUser</strong>
+    }
+    <span>Due date: @Model.DueDate.ToShortDateString()</span>
+    <div id="comments-container"></div>
+
+</div>
