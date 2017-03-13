@@ -25,13 +25,13 @@ namespace HouseholdManager.Models
         }
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; protected set; }
 
-        public byte[] Image { get; set; }
+        public byte[] Image { get; protected set; }
 
-        public string Address { get; set; }
+        public string Address { get; protected set; }
 
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; protected set; }
 
         [InverseProperty("Households")]
         public virtual ICollection<User> Users

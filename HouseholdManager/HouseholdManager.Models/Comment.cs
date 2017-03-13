@@ -9,16 +9,16 @@ namespace HouseholdManager.Models
         {
         }
 
-        public Comment(User user, string content, DateTime createdOn, Expense expense)
+        public Comment(string userId, string content, DateTime createdOn, Guid expenseId)
         {
-            this.User = user;
+            this.UserId = userId;
             this.CommentContent = content;
             this.CreatedOnDate = createdOn;
-            this.Expense = expense;
+            this.ExpenseId = expenseId;
         }
 
         [ForeignKey("User")]
-        public string UserId { get; set; }
+        public string UserId { get; protected set; }
 
         public virtual User User { get; protected set; }
 
@@ -26,7 +26,7 @@ namespace HouseholdManager.Models
 
         public DateTime CreatedOnDate { get; protected set; }
 
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; protected set; }
 
         [ForeignKey("Expense")]
         public Guid ExpenseId { get; protected set; }

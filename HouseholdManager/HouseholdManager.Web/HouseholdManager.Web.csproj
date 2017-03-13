@@ -232,10 +232,12 @@
     <Compile Include="Areas\Household\Controllers\HouseholdController.cs" />
     <Compile Include="Areas\Household\Controllers\UploadImageController.cs" />
     <Compile Include="Areas\Household\HouseholdAreaRegistration.cs" />
+    <Compile Include="Areas\Household\Models\BaseExpenseViewModel.cs" />
     <Compile Include="Areas\Household\Models\CommentViewModel.cs" />
     <Compile Include="Areas\Household\Models\ExpenseCategoryViewModel.cs" />
-    <Compile Include="Areas\Household\Models\ExpenseViewModel.cs" />
+    <Compile Include="Areas\Household\Models\CreateExpenseViewModel.cs" />
     <Compile Include="Areas\Household\Models\HouseholdViewModel.cs" />
+    <Compile Include="Areas\Household\Models\ShowExpenseViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

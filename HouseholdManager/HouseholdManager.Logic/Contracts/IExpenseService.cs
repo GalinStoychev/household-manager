@@ -6,7 +6,7 @@ namespace HouseholdManager.Logic.Contracts
 {
     public interface IExpenseService
     {
-        void CreateExpense(string name, string category, Guid householdId, decimal expectedCost, DateTime dueDate, DateTime createdOn);
+        void CreateExpense(string userId, string name, Guid categoryId, Guid householdId, decimal expectedCost, DateTime dueDate, string comment, string assignedUserId);
 
         IEnumerable<ExpenseCategory> GetExpenseCategories();
 
@@ -14,6 +14,6 @@ namespace HouseholdManager.Logic.Contracts
 
         Expense GetExpense(Guid expenseId);
 
-        IEnumerable<Expense> GetExpenses (Guid householdId);
+        IEnumerable<Expense> GetExpenses(Guid householdId);
     }
 }

@@ -27,39 +27,53 @@ namespace HouseholdManager.Models
             this.households = new HashSet<Household>();
         }
 
-        public string FirstName { get; set; }
+        public User(string username, string email)
+        {
+            this.UserName = username;
+            this.Email = email;
+        }
 
-        public string LastName { get; set; }
+        public User(string username, string email, string firstName, string lastName)
+        {
+            this.UserName = username;
+            this.Email = email;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+        }
+
+        public string FirstName { get; protected set; }
+
+        public string LastName { get; protected set; }
 
         [ForeignKey("CurrentHousehold")]
-        public Guid? CurrentHouseholdId { get; set; }
+        public Guid? CurrentHouseholdId { get; protected set; }
 
         public virtual Household CurrentHousehold { get; protected set; }
 
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; protected set; }
 
         public virtual ICollection<Expense> ExpensesWillPay
         {
             get { return this.expensesWillPay; }
-            set { this.expensesWillPay = value; }
+            protected set { this.expensesWillPay = value; }
         }
 
         public virtual ICollection<Expense> ExpensesPaid
         {
             get { return this.expensesPaid; }
-            set { this.expensesPaid = value; }
+            protected set { this.expensesPaid = value; }
         }
 
         public virtual ICollection<Comment> Comments
         {
             get { return this.comments; }
-            set { this.comments = value; }
+            protected set { this.comments = value; }
         }
 
         public virtual ICollection<Household> Households
         {
             get { return this.households; }
-            set { this.households = value; }
+            protected set { this.households = value; }
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)

@@ -35,6 +35,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Factories\ICommentFactory.cs" />
+    <Compile Include="Contracts\Factories\IExpenseFactory.cs" />
     <Compile Include="Contracts\Factories\IHouseholdFactory.cs" />
     <Compile Include="Contracts\IExpenseService.cs" />
     <Compile Include="Contracts\IHouseholdService.cs" />

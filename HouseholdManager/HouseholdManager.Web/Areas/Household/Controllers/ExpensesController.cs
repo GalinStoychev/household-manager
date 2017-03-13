@@ -3,6 +3,7 @@ using HouseholdManager.Common.Constants;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Models;
 using HouseholdManager.Web.Areas.Household.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 {
     public class ExpensesController : Controller
     {
-        // Take all expenses per household
         private readonly IHouseholdService householdService;
         private readonly IExpenseService expenseService;
         private readonly MappingService mappingService;
@@ -56,15 +56,14 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 modelCategories.Add(new SelectListItem() { Value = category.Id.ToString(), Text = category.Name });
             }
 
-            var model = new ExpenseViewModel() { Categories = modelCategories };
+            var model = new CreateExpenseViewModel() { Categories = modelCategories };
 
-            var housholdId = this.HttpContext.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdId];
-            var users = this.householdService.GetHouseholdUsers(Guid.Parse(housholdId));
+            var users = this.householdService.GetHouseholdUsers(this.GetHouseholdId());
             model.Users = new List<SelectListItem>();
-            model.Users.Add(new SelectListItem() );
+            model.Users.Add(new SelectListItem());
             foreach (var user in users)
             {
-                model.Users.Add(new SelectListItem() { Value = user.Id, Text = user.FirstName + " " + user.LastName});
+                model.Users.Add(new SelectListItem() { Value = user.Id, Text = user.FirstName + " " + user.LastName });
             }
 
             return View(model);
@@ -72,9 +71,17 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ExpenseViewModel model)
+        public ActionResult Create(CreateExpenseViewModel model)
         {
-            return null;
+            this.expenseService.CreateExpense(this.User.Identity.GetUserId(), model.Name, Guid.Parse(model.Category), this.GetHouseholdId(), model.ExpectedCost, model.DueDate, model.Comment, model.AssignedUser);
+           
+            return View("Index");
+        }
+
+        private Guid GetHouseholdId()
+        {
+            var housholdId = this.HttpContext.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdId];
+            return Guid.Parse(housholdId);
         }
     }
 }

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HouseholdManager.Common.Constants;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HouseholdManager.Models
 {
-    public class Expense: BaseEntity
+    public class Expense : BaseEntity
     {
         private ICollection<Comment> comments;
 
@@ -14,10 +15,11 @@ namespace HouseholdManager.Models
             this.comments = new HashSet<Comment>();
         }
 
-        public Expense(string name, ExpenseCategory category, Guid householdId, decimal expectedCost, DateTime dueDate, DateTime createdOn)
+        public Expense(string name, Guid categoryId, string createdById, Guid householdId, decimal expectedCost, DateTime dueDate, DateTime createdOn)
         {
             this.Name = name;
-            this.ExpenseCategory = category;
+            this.CategoryId = categoryId;
+            this.CreatedById = createdById;
             this.HouseholdId = householdId;
             this.ExpectedCost = expectedCost;
             this.DueDate = dueDate;
@@ -26,41 +28,46 @@ namespace HouseholdManager.Models
         }
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; protected set; }
 
         [ForeignKey("ExpenseCategory")]
-        public Guid CategoryId { get; set; }
+        public Guid CategoryId { get; protected set; }
 
-        public virtual ExpenseCategory ExpenseCategory { get; set; }
+        public virtual ExpenseCategory ExpenseCategory { get; protected set; }
 
         [ForeignKey("Household")]
-        public Guid HouseholdId { get; set; }
+        public Guid HouseholdId { get; protected set; }
 
-        public virtual Household Household { get; set; }
+        public virtual Household Household { get; protected set; }
 
         public decimal Cost { get; set; }
 
         public decimal ExpectedCost { get; set; }
 
-        public bool IsPaid { get; set; }
+        public bool IsPaid { get; protected set; }
+
+        [ForeignKey("CreatedBy")]
+        public string CreatedById { get; protected set; }
+
+        public virtual User CreatedBy { get; protected set; }
 
         [ForeignKey("AssignedUser")]
-        public string AssignedUserId { get; set; }
+        public string AssignedUserId { get; protected set; }
 
-        public virtual User AssignedUser { get; set; }
+        public virtual User AssignedUser { get; protected set; }
 
         [ForeignKey("PaidBy")]
-        public string PaidById { get; set; }
+        public string PaidById { get; protected set; }
 
-        public virtual User PaidBy { get; set; }
+        public virtual User PaidBy { get; protected set; }
 
-        public DateTime DueDate { get; set; }
+        public DateTime DueDate { get; protected set; }
 
-        public DateTime PaidOnDate { get; set; }
+        public DateTime? PaidOnDate { get; protected set; }
 
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; protected set; }
 
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; protected set; }
 
         public virtual ICollection<Comment> Comments
         {
@@ -89,10 +96,20 @@ namespace HouseholdManager.Models
         {
             if (comment == null)
             {
-                throw new ArgumentNullException("comment cannot be null!");
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "comment"));
             }
 
             this.Comments.Add(comment);
+        }
+
+        public void AssignUser(string userId)
+        {
+            if (String.IsNullOrEmpty(userId))
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNullOrEmpty, "userId"));
+            }
+
+            this.AssignedUserId = userId;
         }
     }
 }

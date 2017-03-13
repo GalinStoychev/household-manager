@@ -22,6 +22,14 @@ namespace HouseholdManager.Web.App_Start.BindingModules
             this.Bind<IHouseholdFactory>()
                 .ToFactory()
                 .InSingletonScope();
+
+            this.Bind<IExpenseFactory>()
+               .ToFactory()
+               .InSingletonScope();
+
+            this.Bind<ICommentFactory>()
+               .ToFactory()
+               .InSingletonScope();
         }
     }
 }

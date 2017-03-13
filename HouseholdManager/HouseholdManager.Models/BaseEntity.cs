@@ -8,6 +8,6 @@ namespace HouseholdManager.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; protected set; }
     }
 }

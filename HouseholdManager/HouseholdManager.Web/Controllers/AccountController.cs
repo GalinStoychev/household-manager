@@ -115,7 +115,7 @@ namespace HouseholdManager.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+                var user = new User(model.Email, model.Email, model.FirstName, model.LastName);
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -296,7 +296,7 @@ namespace HouseholdManager.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User { UserName = model.Email, Email = model.Email };
+                var user = new User(model.Email, model.Email);
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
