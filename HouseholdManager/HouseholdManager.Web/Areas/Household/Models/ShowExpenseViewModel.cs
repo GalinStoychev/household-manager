@@ -13,10 +13,10 @@ namespace HouseholdManager.Web.Areas.Household.Models
 
         [Required]
         [Range(0, double.MaxValue, ErrorMessage = "The cost cannot be a negative number.")]
-        public decimal Cost { get; set; }
+        public decimal? Cost { get; set; }
 
         [Display(Name = "Paid on date")]
-        public DateTime PaidOnDate { get; set; }
+        public DateTime? PaidOnDate { get; set; }
 
         [Display(Name = "Created on")]
         public DateTime CreatedOn { get; set; }

@@ -1,0 +1,84 @@
+﻿#expenses-container {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.expense-container {
+    margin: 0 1em 5em 1em;
+    width: 18em;
+    display: inline-block;
+}
+
+    .expense-container:hover {
+        box-shadow: 0 0 15px 0 #E3E3E5;
+        cursor: pointer;
+    }
+
+.info-container {
+    height: 22.5em;
+    border: 2px solid #E3E3E5;
+    margin: 0;
+    padding: 0.5em 1em 1em 1em;
+}
+
+.name-container {
+    min-height: 4em;
+}
+
+.expense-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.exp-cost {
+    font-size: 2em;
+}
+
+.exp-cost-label {
+    font-size: 0.9em;
+}
+
+.btn-pay {
+    width: 100%;
+}
+
+.divider {
+    margin-top:0.5em;
+}
+
+
+.category-Utilities {
+    border-top: 5px solid #0D80D9;
+}
+
+.category-Food {
+    border-top: 5px solid #AAD662;
+}
+
+.category-Bathroom {
+    border-top: 5px solid #42d7f4;
+}
+
+.category-Livingroom {
+    border-top: 5px solid #edd81c;
+}
+
+.category-Other {
+    border-top: 5px solid #cded1c;
+}
+
+.category-Cleaning {
+    border-top: 5px solid #41b5f4;
+}
+
+.category-Rent {
+    border-top: 5px solid #f4415b;
+}
+
+.category-Furniture {
+    border-top: 5px solid #f441eb;
+}
+
+.category-Kitchen {
+    border-top: 1px solid #1caf1a;
+}

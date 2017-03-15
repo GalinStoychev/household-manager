@@ -87,7 +87,14 @@ namespace HouseholdManager.Logic.Services
 
         public Expense GetExpense(Guid expenseId)
         {
-            var expense = this.expenseRepositoryEF.GetById(expenseId);
+            var expense = this.expenseRepositoryEF.GetFirst(
+                x => x.Id == expenseId,
+                x => x.CreatedBy,
+                x => x.AssignedUser,
+                x => x.PaidBy,
+                x => x.Comments,
+                x => x.ExpenseCategory);
+
             return expense;
         }
 
@@ -103,7 +110,7 @@ namespace HouseholdManager.Logic.Services
                 .Where(x => x.HouseholdId == householdId && x.IsPaid == false)
                 .Include(x => x.AssignedUser)
                 .Include(x => x.ExpenseCategory)
-                .OrderBy( x=> x.DueDate)
+                .OrderBy(x => x.DueDate)
                 .Skip((page - 1) * CommonConstants.DefaultPageSize)
                 .Take(CommonConstants.DefaultPageSize)
                 .ToList();

@@ -93,7 +93,6 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult Create(CreateExpenseViewModel model)
         {
             this.expenseService.CreateExpense(this.User.Identity.GetUserId(), model.Name, Guid.Parse(model.Category), this.GetHouseholdId(), model.ExpectedCost, model.DueDate, model.Comment, model.AssignedUser);
-
             return RedirectToAction("Index");
         }
 
@@ -101,7 +100,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Pay([Bind(Include = "Cost, Id, Comment, Name")] ShowExpenseViewModel model)
         {
-            this.expenseService.Pay(model.Id, this.User.Identity.GetUserId(), model.Comment, model.Cost);
+            this.expenseService.Pay(model.Id, this.User.Identity.GetUserId(), model.Comment, (decimal)model.Cost);
             return RedirectToRoute("Household_expenses", new { name = model.Name });
         }
 

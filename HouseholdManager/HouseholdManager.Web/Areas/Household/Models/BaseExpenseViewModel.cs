@@ -6,7 +6,7 @@ namespace HouseholdManager.Web.Areas.Household.Models
     public class BaseExpenseViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
+        [StringLength(30, ErrorMessage = "The {0} must be between {2} and 30 characters long.", MinimumLength = 2)]
         public string Name { get; set; }
 
         public string Category { get; set; }

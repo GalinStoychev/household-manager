@@ -40,7 +40,10 @@ namespace HouseholdManager.Web
                         "~/Content/kendo/kendo.bootstrap.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/profile-css").Include(
-                     "~/Content/profile.css"));
+                     "~/Content/Profile.css"));
+
+            bundles.Add(new StyleBundle("~/Content/household-css").Include(
+                     "~/Content/Household.css"));
         }
     }
 }

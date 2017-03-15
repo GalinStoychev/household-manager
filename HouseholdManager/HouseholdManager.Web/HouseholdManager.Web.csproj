@@ -228,6 +228,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Household\Controllers\ExpenseController.cs" />
     <Compile Include="Areas\Household\Controllers\ExpensesController.cs" />
     <Compile Include="Areas\Household\Controllers\HouseholdController.cs" />
     <Compile Include="Areas\Household\Controllers\UploadImageController.cs" />
@@ -255,6 +256,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Household.css" />
     <Content Include="Content\Images\defaultHousehold.png" />
     <Content Include="Content\kendo\Black\editor.png" />
     <Content Include="Content\kendo\Black\imagebrowser.png" />
@@ -707,6 +709,8 @@
     <Content Include="Content\kendo\kendo.uniform.mobile.min.css.map" />
     <Content Include="Areas\Household\Views\Expenses\_ExpensePartial.cshtml" />
     <Content Include="Areas\Household\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Household\Views\Expense\Index.cshtml" />
+    <Content Include="Areas\Household\Views\Expense\DisplayTemplates\ShowExpenseViewModel.cshtml" />
     <None Include="Properties\PublishProfiles\householdmanager - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\householdmanager - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
@@ -1966,7 +1970,9 @@
     <Content Include="Scripts\kendo\messages\kendo.messages.zh-HK.min.js.map" />
     <Content Include="Scripts\kendo\messages\kendo.messages.zh-TW.min.js.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\Household\Views\Expense\EditorTemplates\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

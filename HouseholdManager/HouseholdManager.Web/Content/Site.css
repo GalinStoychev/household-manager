@@ -23,8 +23,10 @@ textarea {
     max-width: 280px;
 }
 
-.header-page{
-    margin-bottom:30px;
+.header-page {
+    margin-bottom: 1em;
+    margin-top: 1em;
+    color: #0D83DD;
 }
 
 .hh-image {
@@ -38,4 +40,8 @@ textarea {
 
 .btn {
     border-radius: 0;
+}
+
+.color-grey {
+    color: #949494;
 }

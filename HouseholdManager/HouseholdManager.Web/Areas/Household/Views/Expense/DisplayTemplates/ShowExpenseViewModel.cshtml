@@ -1,0 +1,51 @@
+﻿@model HouseholdManager.Web.Areas.Household.Models.ShowExpenseViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>@Model.Name</h2>
+        <span class="color-grey">@Model.Category</span>
+        <ul>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.CreatedBy): </strong><span>@Model.CreatedBy</span>
+            </li>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.CreatedOn): </strong><span>@Model.CreatedOn</span>
+            </li>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.DueDate): </strong><span>@Model.DueDate.ToShortDateString()</span>
+            </li>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.AssignedUser): </strong><span>@Model.AssignedUser</span>
+            </li>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.ExpectedCost): </strong><span>$@Model.ExpectedCost</span>
+            </li>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.Cost): </strong>
+                @if (Model.Cost.ToString() != "0.00")
+                {
+                    <span>$@Model.Cost</span>
+                }
+            </li>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.PaidOnDate): </strong>
+                <span>@Model.PaidOnDate</span>
+                
+            </li>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.PaidBy): </strong><span>@Model.PaidBy</span>
+            </li>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.Comments)</strong>
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="single-comment">
+                        <strong>@comment.User</strong>
+                        <span>@comment.CreateOnDate.ToShortDateString()</span>
+                        <p>@comment.CommentContent</p>
+                    </div>
+                }
+            </li>
+        </ul>
+    </div>
+</div>

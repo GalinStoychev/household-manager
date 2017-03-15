@@ -1,3 +1,18 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section styles {
+    @Styles.Render("~/Content/household-css")
+    @RenderSection("styles", required: false)
+}
+
+@section kendoScripts {
+    @RenderSection("kendoScripts", required: false)
+}
+
+@RenderBody()
+
+@section scripts {
+    @RenderSection("scripts", required: false)
+}
