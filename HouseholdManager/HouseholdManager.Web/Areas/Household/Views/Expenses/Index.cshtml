@@ -3,19 +3,35 @@
 @model IEnumerable<HouseholdManager.Web.Areas.Household.Models.ShowExpenseViewModel>
 @{
     var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
+    var nextPage = (int)this.ViewData["nextPage"];
+    var previousPage = (int)this.ViewData["previousPage"];
+    var pagesCount = (int)this.ViewData["pagesCount"];
 }
 
 
 <div class="row">
     <div class="col-md-12">
-        <h2 class="header-page">@householdName</h2>
+        <div id="expenses-container">
+
+            <h2 class="header-page">@householdName</h2>
+
+            @foreach (var expense in Model)
+            {
+                @Html.Partial("_ExpensePartial", expense);
+            }
+
+            @if (previousPage >= 1)
+            {
+                @Html.RouteLink("PREVIOUS PAGE", "Household_expenses", new { name = householdName, page = previousPage },
+                    new { @class = "btn btn-default" })
+            }
+
+            @if (pagesCount > nextPage)
+            {
+                @Html.RouteLink("NEXT PAGE", "Household_expenses", new { name = householdName, page = nextPage },
+                     new { @class = "btn btn-default" })
+            }
+        </div>
     </div>
 
-    
-
-    @foreach (var expense in Model)
-    {
-        @Html.Partial("_ExpensePartial", expense);
-    }
 </div>
-

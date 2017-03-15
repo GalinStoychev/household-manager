@@ -6,7 +6,8 @@ using HouseholdManager.Data.Contracts;
 using HouseholdManager.Common.Constants;
 using HouseholdManager.Logic.Contracts.Factories;
 using System.Linq.Expressions;
-using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
+using System.Linq;
 
 namespace HouseholdManager.Logic.Services
 {
@@ -96,16 +97,24 @@ namespace HouseholdManager.Logic.Services
             return categories;
         }
 
-        public IEnumerable<Expense> GetExpenses(Guid householdId)
+        public IEnumerable<Expense> GetExpenses(Guid householdId, int page)
         {
-            var parameters = new Expression<Func<Expense, object>>[] { x => x.AssignedUser, x => x.ExpenseCategory };
-            //var expeses = this.expenseRepositoryEF.All.include
-            var expenses = this.expenseRepositoryEF.GetAll<Expense>(
-                x => x.HouseholdId == householdId,
-                null
-               );
+            var expenses = this.expenseRepositoryEF.All
+                .Where(x => x.HouseholdId == householdId)
+                .Include(x => x.AssignedUser)
+                .Include(x => x.ExpenseCategory)
+                .OrderBy( x=> x.DueDate)
+                .Skip((page - 1) * CommonConstants.DefaultPageSize)
+                .Take(CommonConstants.DefaultPageSize)
+                .ToList();
 
             return expenses;
+        }
+
+        public int GetExpensesCount()
+        {
+            var count = this.expenseRepositoryEF.All.Count();
+            return count;
         }
     }
 }

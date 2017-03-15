@@ -39,9 +39,22 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string name, int page = 1)
         {
-            var expenses = this.expenseService.GetExpenses(this.GetHouseholdId());
+            var expensesCount = this.expenseService.GetExpensesCount();
+            this.ViewData["pagesCount"] = expensesCount / CommonConstants.DefaultPageSize;
+            if (page < CommonConstants.DefaultStartingPage)
+            {
+                this.ViewData["previousPage"] = CommonConstants.DefaultStartingPage;
+                this.ViewData["nextPage"] = CommonConstants.DefaultStartingPage + 1;
+            }
+            else 
+            {
+                this.ViewData["previousPage"] = page - 1;
+                this.ViewData["nextPage"] = page + 1;
+            }
+
+            var expenses = this.expenseService.GetExpenses(this.GetHouseholdId(), page);
             var modelExpenses = new List<ShowExpenseViewModel>();
             foreach (var expense in expenses)
             {

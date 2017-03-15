@@ -28,8 +28,8 @@ namespace HouseholdManager.Web.Areas.Household
 
             context.MapRoute(
                 name: "Household_expenses",
-                url: "Household/{name}/Expenses",
-                defaults: new { action = "Index", controller = "Expenses"}
+                url: "Household/{name}/Expenses/{page}",
+                defaults: new { action = "Index", controller = "Expenses", page = UrlParameter.Optional }
             );
 
             context.MapRoute(
