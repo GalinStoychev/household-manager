@@ -23,5 +23,8 @@ namespace HouseholdManager.Web.Areas.Household.Models
         [Required(ErrorMessage = " Expected cost is required.")]
         [Display(Name = "Expected cost")]
         public decimal ExpectedCost { get; set; }
+
+        [StringLength(100, ErrorMessage = "The {0} must be maximum 100 characters long.")]
+        public string Comment { get; set; }
     }
 }

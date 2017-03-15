@@ -10,7 +10,7 @@
 
         public const string CurrentHousehold = "currentHousehold";
 
-        public const int DefaultPageSize = 2;
+        public const int DefaultPageSize = 12;
 
         public const int DefaultStartingPage = 1;
     }

@@ -9,8 +9,10 @@ namespace HouseholdManager.Web.Areas.Household.Models
 {
     public class ShowExpenseViewModel : BaseExpenseViewModel, IMapFrom<Expense>, IHaveCustomMappings
     {
-        public Guid  Id { get; set; }
+        public Guid Id { get; set; }
 
+        [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "The cost cannot be a negative number.")]
         public decimal Cost { get; set; }
 
         [Display(Name = "Paid on date")]

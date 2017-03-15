@@ -9,17 +9,18 @@
 }
 
 
-<div class="row">
-    <div class="col-md-12">
-        <div id="expenses-container">
+<div id="expenses-container">
+    <h2 class="header-page">@householdName</h2>
 
-            <h2 class="header-page">@householdName</h2>
-
-            @foreach (var expense in Model)
+    <div class="row">
+        @foreach (var expense in Model)
             {
-                @Html.Partial("_ExpensePartial", expense);
+            @Html.Partial("_ExpensePartial", expense);
             }
+    </div>
 
+    <div class="row">
+        <div class="col-md-12">
             @if (previousPage >= 1)
             {
                 @Html.RouteLink("PREVIOUS PAGE", "Household_expenses", new { name = householdName, page = previousPage },
@@ -33,5 +34,8 @@
             }
         </div>
     </div>
-
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

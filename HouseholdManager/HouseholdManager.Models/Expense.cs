@@ -75,21 +75,27 @@ namespace HouseholdManager.Models
             set { this.comments = value; }
         }
 
-        public void Pay(User user, DateTime payDate)
+        public void Pay(string userId, DateTime payDate, decimal cost)
         {
             if (this.IsPaid)
             {
                 throw new ApplicationException("The expense is already paid!");
             }
 
-            if (user == null)
+            if (String.IsNullOrEmpty(userId))
             {
-                throw new ArgumentNullException("user cannot be null!");
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNullOrEmpty, "userId"));
+            }
+
+            if (cost < 0)
+            {
+                throw new ArgumentOutOfRangeException("cost cannot be less than zero.");
             }
 
             this.IsPaid = true;
-            this.PaidBy = user;
+            this.PaidById = userId;
             this.PaidOnDate = payDate;
+            this.Cost = cost;
         }
 
         public void AddComment(Comment comment)

@@ -17,5 +17,7 @@ namespace HouseholdManager.Logic.Contracts
         IEnumerable<Expense> GetExpenses(Guid householdId, int page);
 
         int GetExpensesCount();
+
+        void Pay(Guid expenseId, string userId, string comment, decimal cost);
     }
 }

@@ -48,7 +48,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 this.ViewData["previousPage"] = CommonConstants.DefaultStartingPage;
                 this.ViewData["nextPage"] = CommonConstants.DefaultStartingPage + 1;
             }
-            else 
+            else
             {
                 this.ViewData["previousPage"] = page - 1;
                 this.ViewData["nextPage"] = page + 1;
@@ -97,18 +97,13 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public ActionResult Pay()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Pay([Bind(Include = "Cost, Id, Comment, Name")] ShowExpenseViewModel model)
         {
-
-            return View();
+            this.expenseService.Pay(model.Id, this.User.Identity.GetUserId(), model.Comment, model.Cost);
+            return RedirectToRoute("Household_expenses", new { name = model.Name });
         }
-
-        //[HttpPost]
-        //public ActionResult Pay()
-        //{
-
-        //}
 
         private Guid GetHouseholdId()
         {

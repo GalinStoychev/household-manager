@@ -100,7 +100,7 @@ namespace HouseholdManager.Logic.Services
         public IEnumerable<Expense> GetExpenses(Guid householdId, int page)
         {
             var expenses = this.expenseRepositoryEF.All
-                .Where(x => x.HouseholdId == householdId)
+                .Where(x => x.HouseholdId == householdId && x.IsPaid == false)
                 .Include(x => x.AssignedUser)
                 .Include(x => x.ExpenseCategory)
                 .OrderBy( x=> x.DueDate)
@@ -115,6 +115,16 @@ namespace HouseholdManager.Logic.Services
         {
             var count = this.expenseRepositoryEF.All.Count();
             return count;
+        }
+
+        public void Pay(Guid expenseId, string userId, string comment, decimal cost)
+        {
+            var expense = this.GetExpense(expenseId);
+            expense.Pay(userId, DateTime.Now, cost);
+            expense.AddComment(this.commentFactory.CreateComment(userId, comment, DateTime.Now, expense.Id));
+
+            this.expenseRepositoryEF.Update(expense);
+            this.unitOfWork.Commit();
         }
     }
 }
