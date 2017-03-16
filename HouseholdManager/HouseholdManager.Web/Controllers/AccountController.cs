@@ -385,18 +385,20 @@ namespace HouseholdManager.Web.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl, string email)
         {
+            this.SetCookies(email);
+
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
 
-            return RedirectToAction("SetCookies", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult SetCookies()
+        public ActionResult SetCookies(string email)
         {
-            var userId = this.webHelper.GetUserId();
-            var currentHousehold = this.userService.GetCurrentHousehold(userId);
+            //var userId = this.webHelper.GetUserId();
+            var currentHousehold = this.userService.GetCurrentHousehold(email);
             this.webHelper.SetHouseholdCookie(currentHousehold?.Name, currentHousehold?.Id.ToString());
 
             return RedirectToAction("Index", "Home");

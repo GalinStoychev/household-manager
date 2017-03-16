@@ -13,5 +13,7 @@ namespace HouseholdManager.Web.WebHelpers.Contracts
         void DeleteHouseholdCookie();
 
         string GetUserId();
+
+        string GetUserName();
     }
 }

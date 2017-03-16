@@ -50,5 +50,10 @@ namespace HouseholdManager.Web.WebHelpers
         {
             return HttpContext.Current.User.Identity.GetUserId();
         }
+
+        public string GetUserName()
+        {
+            return HttpContext.Current.User.Identity.GetUserName();
+        }
     }
 }

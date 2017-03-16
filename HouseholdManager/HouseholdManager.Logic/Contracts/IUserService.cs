@@ -7,7 +7,7 @@ namespace HouseholdManager.Logic.Contracts
     {
         User GetUserInfo(string id);
 
-        Household GetCurrentHousehold(string userId);
+        Household GetCurrentHousehold(string email);
 
         void SetCurrentHousehold(string householdName, string userId);
 

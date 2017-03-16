@@ -40,9 +40,9 @@ namespace HouseholdManager.Logic.Services
             this.unitOfWork.Commit();
         }
 
-        public Household GetCurrentHousehold(string userId)
+        public Household GetCurrentHousehold(string email)
         {
-            var currentHousehold = this.userRepositoryEF.GetById(userId).CurrentHousehold;
+            var currentHousehold = this.userRepositoryEF.GetFirst(x => x.Email == email).CurrentHousehold;
             return currentHousehold;
         }
 

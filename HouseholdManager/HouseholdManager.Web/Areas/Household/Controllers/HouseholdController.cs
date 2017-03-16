@@ -96,7 +96,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
         private ActionResult RedirectToHousehold(string name)
         {
-            var currentHousehold = this.userService.GetCurrentHousehold(this.webHelper.GetUserId());
+            var currentHousehold = this.userService.GetCurrentHousehold(this.webHelper.GetUserName());
             this.webHelper.SetHouseholdCookie(currentHousehold?.Name, currentHousehold?.Id.ToString());
 
             return this.RedirectToRoute("Household_single", new { name = name });
