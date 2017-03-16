@@ -9,7 +9,6 @@ using NUnit.Framework;
 using System;
 using System.Web.Mvc;
 using TestStack.FluentMVCTesting;
-using Microsoft.AspNet.Identity;
 
 namespace Householdmanager.Web.Tests
 {

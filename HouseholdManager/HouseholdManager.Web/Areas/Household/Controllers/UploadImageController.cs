@@ -44,12 +44,13 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                     this.TempData.Add("image", imageAsByteArray);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                var es = ex.Message;
                 this.TempData.Add(CommonConstants.UploadMessage, ImageUploadGeneralError);
             }
 
-            return Redirect("/Household/Create");
+            return RedirectToRoute("Household_create");
         }
 
         private byte[] ResizeImage(HttpPostedFileBase file)
