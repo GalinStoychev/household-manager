@@ -19,7 +19,6 @@ namespace HouseholdManager.Logic.Tests
                 var userRepoMock = new Mock<IRepository<User>>();
 
                 //Act
-
                 //Assert
                 Assert.Throws<ArgumentNullException>(() => new UserService(null, userRepoMock.Object));
             }
@@ -31,7 +30,6 @@ namespace HouseholdManager.Logic.Tests
                 var unitOfWorkMock = new Mock<IUnitOfWork>();
 
                 //Act
-
                 //Assert
                 Assert.Throws<ArgumentNullException>(() => new UserService(unitOfWorkMock.Object, null));
             }
