@@ -1,11 +1,7 @@
 ﻿@model HouseholdManager.Web.Areas.Household.Models.HouseholdViewModel
 
 @{
-    string image = "http://www.myiconfinder.com/uploads/iconsets/1b751226558e77b2a304882fe19bbdde.png";
-    if (Model.Image != null)
-    {
-        image = "data: image/jpeg; base64," + Convert.ToBase64String(Model.Image);
-    }
+    string image = "data: image/jpeg; base64," + Convert.ToBase64String(Model.Image);
 }
 
 <div class="row ">
@@ -14,10 +10,10 @@
 
         <div class="text-center">
 
-        <img src="@image" alt="household image" class="hh-image" />
+            <img src="@image" alt="household image" class="hh-image" />
 
-        @Html.Partial("_UploadImage")
-        @Model.ImageUploadMessage
+            @Html.Partial("_UploadImage")
+            @Model.ImageUploadMessage
         </div>
 
         @using (Html.BeginForm("Create", "Household", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
