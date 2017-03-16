@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private readonly IUserService userService;
@@ -38,7 +39,6 @@ namespace HouseholdManager.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult Index()
         {
             var user = this.userService.GetUserInfo(this.webHelper.GetUserId());

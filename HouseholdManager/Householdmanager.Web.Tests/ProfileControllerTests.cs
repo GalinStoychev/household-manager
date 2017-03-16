@@ -7,7 +7,9 @@ using HouseholdManager.Web.WebHelpers.Contracts;
 using Moq;
 using NUnit.Framework;
 using System;
+using System.Web.Mvc;
 using TestStack.FluentMVCTesting;
+using Microsoft.AspNet.Identity;
 
 namespace Householdmanager.Web.Tests
 {
@@ -185,6 +187,40 @@ namespace Householdmanager.Web.Tests
 
             // Assert
             Assert.That(profileUser.Households.Count == households);
+        }
+
+        [Test]
+        public void ProfileController_ShouldHaveOneAuthorizeAttribute()
+        {
+            // Arrange
+            var userServiceMock = new Mock<IUserService>();
+            var mappingServiceMock = new Mock<IMapingService>();
+            var webHelperMock = new Mock<IWebHelper>();
+
+            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            
+            // Act
+            var result = profileController.GetType().GetCustomAttributes(typeof(AuthorizeAttribute), false).Length;
+
+            // Assert
+            Assert.That(result == 1);
+        }
+
+        [Test]
+        public void Index_ShouldHaveHttptGetAttribute()
+        {
+            // Arrange
+            var userServiceMock = new Mock<IUserService>();
+            var mappingServiceMock = new Mock<IMapingService>();
+            var webHelperMock = new Mock<IWebHelper>();
+
+            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+
+            // Act
+            var result = profileController.GetType().GetMethod("Index").GetCustomAttributes(typeof(HttpGetAttribute), false).Length;
+
+            // Assert
+            Assert.That(result == 1);
         }
     }
 }
