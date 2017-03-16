@@ -2,6 +2,7 @@
 using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Household.Models;
+using HouseholdManager.Web.WebHelpers.Contracts;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Web;
@@ -15,8 +16,9 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         private readonly IHouseholdService householdService;
         private readonly IImageService imageService;
         private readonly IMapingService mappingService;
+        private readonly IWebHelper webHelper;
 
-        public HouseholdController(IUserService userService, IHouseholdService householdService, IImageService imageService, IMapingService mappingService)
+        public HouseholdController(IUserService userService, IHouseholdService householdService, IImageService imageService, IMapingService mappingService, IWebHelper webHelper)
         {
             if (userService == null)
             {
@@ -33,18 +35,28 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "imageService"));
             }
 
+            if (mappingService == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "mappingService"));
+            }
+
+            if (webHelper == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "webHelper"));
+            }
+
             this.userService = userService;
             this.householdService = householdService;
             this.imageService = imageService;
             this.mappingService = mappingService;
+            this.webHelper = webHelper;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var householdIdAsString = this.HttpContext.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdId];
-            var householdIdAsGuid = Guid.Parse(householdIdAsString);
-            var household = this.householdService.GetHousehold(householdIdAsGuid);
+            var householdId = this.webHelper.GetHouseholdIdFromCookie();
+            var household = this.householdService.GetHousehold(householdId);
 
             var model = new HouseholdViewModel();
             mappingService.Map<HouseholdManager.Models.Household, HouseholdViewModel>(household, model);
@@ -68,7 +80,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(HouseholdViewModel model)
         {
-            this.householdService.CreateHousehold(model.Name, model.Address, model.Image, this.User.Identity.GetUserId());
+            this.householdService.CreateHousehold(model.Name, model.Address, model.Image, this.webHelper.GetUserId());
 
             return RedirectToAction("SetCurrentHousehold", new { name = model.Name });
         }
@@ -76,25 +88,17 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [HttpGet]
         public ActionResult SetCurrentHousehold(string name)
         {
-            this.userService.SetCurrentHousehold(name, this.User.Identity.GetUserId());
+            this.userService.SetCurrentHousehold(name, this.webHelper.GetUserId());
 
             return this.RedirectToHousehold(name);
         }
 
         private ActionResult RedirectToHousehold(string name)
         {
-            var currentHousehold = this.userService.GetCurrentHousehold(this.User.Identity.GetUserId());
-            this.SetHouseholdCookie(currentHousehold?.Name, currentHousehold?.Id.ToString());
+            var currentHousehold = this.userService.GetCurrentHousehold(this.webHelper.GetUserId());
+            this.webHelper.SetHouseholdCookie(currentHousehold?.Name, currentHousehold?.Id.ToString());
 
             return this.RedirectToRoute("Household_single", new { name = name });
-        }
-
-        private void SetHouseholdCookie(string name, string id)
-        {
-            var cookie = new HttpCookie(CommonConstants.CurrentHousehold);
-            cookie.Values.Add(CommonConstants.CurrentHouseholdName, name);
-            cookie.Values.Add(CommonConstants.CurrentHouseholdId, id);
-            this.HttpContext.Response.Cookies.Set(cookie);
         }
     }
 }

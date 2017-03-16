@@ -64,7 +64,7 @@ namespace HouseholdManager.Web.App_Start
         {
             kernel.Load(new DataBindingModule());
             kernel.Load(new ServiceBindingModule());
-            kernel.Load(new IdentityBindingModule());
+            kernel.Load(new WebBindingModule());
             kernel.Load(new AutomapperBindingModule());
         }
     }

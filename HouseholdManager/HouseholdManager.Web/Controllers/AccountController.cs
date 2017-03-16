@@ -3,6 +3,7 @@ using HouseholdManager.Identity;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Models;
 using HouseholdManager.Web.Models;
+using HouseholdManager.Web.WebHelpers.Contracts;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -18,16 +19,23 @@ namespace HouseholdManager.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IUserService userService;
+        private readonly IUserService userService;
+        private readonly IWebHelper webHelper;
 
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, IWebHelper webHelper)
         {
             if (userService == null)
             {
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "userService"));
             }
 
+            if (webHelper == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "webHelper"));
+            }
+
             this.userService = userService;
+            this.webHelper = webHelper;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -322,8 +330,7 @@ namespace HouseholdManager.Web.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
-            var householdCookie = this.Response.Cookies.Get(CommonConstants.CurrentHousehold);
-            householdCookie.Expires = DateTime.Now.AddDays(-1);
+            this.webHelper.DeleteHouseholdCookie();
 
             return RedirectToAction("Index", "Home");
         }
@@ -388,11 +395,9 @@ namespace HouseholdManager.Web.Controllers
 
         public ActionResult SetCookies()
         {
-            var currentHousehold = this.userService.GetCurrentHousehold(this.User.Identity.GetUserId());
-            var cookie = new HttpCookie(CommonConstants.CurrentHousehold);
-            cookie.Values.Add(CommonConstants.CurrentHouseholdName, currentHousehold?.Name);
-            cookie.Values.Add(CommonConstants.CurrentHouseholdId, currentHousehold?.Id.ToString());
-            this.HttpContext.Response.Cookies.Set(cookie);
+            var userId = this.webHelper.GetUserId();
+            var currentHousehold = this.userService.GetCurrentHousehold(userId);
+            this.webHelper.SetHouseholdCookie(currentHousehold?.Name, currentHousehold?.Id.ToString());
 
             return RedirectToAction("Index", "Home");
         }

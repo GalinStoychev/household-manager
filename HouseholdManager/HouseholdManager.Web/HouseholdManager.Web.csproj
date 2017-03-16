@@ -221,7 +221,7 @@
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BindingModules\AutomapperBindingModule.cs" />
     <Compile Include="App_Start\BindingModules\DataBindingModule.cs" />
-    <Compile Include="App_Start\BindingModules\IdentityBindingModule.cs" />
+    <Compile Include="App_Start\BindingModules\WebBindingModule.cs" />
     <Compile Include="App_Start\BindingModules\ServiceBindingModule.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -252,6 +252,8 @@
     <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WebHelpers\Contracts\IWebHelper.cs" />
+    <Compile Include="WebHelpers\WebHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -608,8 +610,8 @@
     <Content Include="Areas\Household\Views\Household\Index.cshtml" />
     <Content Include="Areas\Household\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Household\Views\Expenses\Index.cshtml" />
-    <Content Include="Areas\Household\Views\Expenses\Create.cshtml" />
-    <Content Include="Areas\Household\Views\Expenses\_CreateExpenseFormPartial.cshtml" />
+    <Content Include="Areas\Household\Views\Expense\Create.cshtml" />
+    <Content Include="Areas\Household\Views\Expense\_CreateExpenseFormPartial.cshtml" />
     <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-Bold.ttf" />
     <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
     <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />

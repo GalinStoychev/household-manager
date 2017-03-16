@@ -32,6 +32,8 @@ namespace HouseholdManager.Web.Areas.Household
                defaults: new { action = "Index", controller = "Expense" }
          );
 
+            // TODO: Fix Script to click on on the EXPENSE and fix the redirection
+
         //    context.MapRoute(
         //      name: "Household_single_expense",
         //      url: "Household/{name}/Expenses/{id}/Edit",
@@ -41,7 +43,7 @@ namespace HouseholdManager.Web.Areas.Household
             context.MapRoute(
                 name: "Household_add_expense",
                 url: "Household/{name}/Add",
-                defaults: new { action = "Create", controller = "Expenses" }
+                defaults: new { action = "Create", controller = "Expense" }
           );
 
             context.MapRoute(
