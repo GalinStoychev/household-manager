@@ -5,7 +5,7 @@
     var categoryClass = "category-" + Model.Category;
 }
 
-<div class="expense-container" id=@Model.Id>
+<div class="expense-container">
     <div class="info-container @categoryClass ">
         <span class=color-grey>&bull; @Model.Category</span>
         <div class="name-container">
@@ -28,17 +28,17 @@
 
         <div class="text-right">
             <span class="color-grey exp-cost-label">Expected cost: </span>
-        <hr class="divider" />
+            <hr class="divider" />
             <p class="exp-cost">$ @Model.ExpectedCost</p>
         </div>
+
         <button type="button" class="btn btn-success btn-pay" data-toggle="modal" data-target=@modalTarget>PAY</button>
 
         <div id=@Model.Id class="modal fade" role="dialog">
-            @using (Html.BeginForm("Pay", "Expenses", FormMethod.Post, new { role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <div class="modal-dialog">
-
+            <div class="modal-dialog">
+                @using (Html.BeginForm("Pay", "Expenses", FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -59,10 +59,9 @@
                             <input type="submit" value="PAY" class="btn btn-success" />
                         </div>
                     </div>
-
-                </div>
-            }
+                }
+            </div>
         </div>
+
     </div>
 </div>
-
