@@ -5,8 +5,12 @@
 
 .expense-container {
     margin: 0 1em 5em 1em;
+    border: 2px solid #E3E3E5;
+    height: 22.5em;
     width: 18em;
     display: inline-block;
+    padding: 0.5em 1em 1em 1em;
+
 }
 
     .expense-container:hover {
@@ -15,10 +19,7 @@
     }
 
 .info-container {
-    height: 22.5em;
-    border: 2px solid #E3E3E5;
     margin: 0;
-    padding: 0.5em 1em 1em 1em;
 }
 
 .name-container {

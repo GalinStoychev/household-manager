@@ -43,11 +43,17 @@
 }
 
 <script>
-    $(".expense-container").on("click", function (ev) {
+    $(".info-container").on("click", function (ev) {
         $target = $(ev.target);
         var id = $target.parents(".expense-container").attr("id");
-        console.log(id);
-        console.log(window.location.href)
-        //window.location.href = window.location.href + "/id/" + id;
+        var currentUrl = window.location.href;
+        var expenses = "Expenses";
+        var finalUrl = "";
+        var len = len = currentUrl.indexOf(expenses) + expenses.length;
+        for (var i = 0; i < len; i++) {
+            finalUrl += currentUrl[i];
+        }
+
+        window.location.href = finalUrl + "/id/" + id;
     })
 </script>
