@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HouseholdManager.Tests.Logic")]
+[assembly: AssemblyTitle("HouseholdManager.Logic.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HouseholdManager.Tests.Logic")]
+[assembly: AssemblyProduct("HouseholdManager.Logic.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a7ddf576-064c-495c-9271-7d6e2e171ac7")]
+[assembly: Guid("650e1bc2-0f1c-43cf-967a-fc398268ab00")]
 
 // Version information for an assembly consists of the following four values:
 //

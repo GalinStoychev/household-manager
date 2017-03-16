@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseholdManager.Identity",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseholdManager.Models", "HouseholdManager.Models\HouseholdManager.Models.csproj", "{C3551296-337F-437F-B2B5-71E9E3FEF995}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseholdManager.Tests.Logic", "HouseholdManager.Tests.Logic\HouseholdManager.Tests.Logic.csproj", "{A7DDF576-064C-495C-9271-7D6E2E171AC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseholdManager.Logic.Tests", "HouseholdManager.Logic.Tests\HouseholdManager.Logic.Tests.csproj", "{650E1BC2-0F1C-43CF-967A-FC398268AB00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,10 +57,10 @@ Global
 		{C3551296-337F-437F-B2B5-71E9E3FEF995}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3551296-337F-437F-B2B5-71E9E3FEF995}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3551296-337F-437F-B2B5-71E9E3FEF995}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7DDF576-064C-495C-9271-7D6E2E171AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7DDF576-064C-495C-9271-7D6E2E171AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7DDF576-064C-495C-9271-7D6E2E171AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7DDF576-064C-495C-9271-7D6E2E171AC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650E1BC2-0F1C-43CF-967A-FC398268AB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650E1BC2-0F1C-43CF-967A-FC398268AB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650E1BC2-0F1C-43CF-967A-FC398268AB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650E1BC2-0F1C-43CF-967A-FC398268AB00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +72,6 @@ Global
 		{83C1C8AC-9F13-4584-A85A-AD5A3859B0B1} = {889F8AFD-75B6-4B59-A5F6-0DB49D168273}
 		{627AE11A-BE5F-4273-9E7A-B4367483B7F9} = {6AD65DCF-D90D-4E71-821A-D6DB5BF5D07F}
 		{C3551296-337F-437F-B2B5-71E9E3FEF995} = {889F8AFD-75B6-4B59-A5F6-0DB49D168273}
-		{A7DDF576-064C-495C-9271-7D6E2E171AC7} = {5356A0E1-42CB-424B-AB97-DEE4B5817A9C}
+		{650E1BC2-0F1C-43CF-967A-FC398268AB00} = {5356A0E1-42CB-424B-AB97-DEE4B5817A9C}
 	EndGlobalSection
 EndGlobal
