@@ -60,7 +60,7 @@ namespace HouseholdManager.Logic.Services
 
         public IEnumerable<User> GetHouseholdUsers(Guid id)
         {
-          var users = this.GetHousehold(id).Users;
+            var users = this.GetHousehold(id).Users;
             return users;
         }
     }

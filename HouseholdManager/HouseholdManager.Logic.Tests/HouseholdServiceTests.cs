@@ -167,22 +167,82 @@ namespace HouseholdManager.Logic.Tests
             Assert.That(expected == householdStub.Users.Count);
         }
 
-        //[Test]
-        //public void HouseholdRepository_ShouldCallGetFirstOnce_WhenGetHouseholdIsCalled()
-        //{
-        //    // Arrange
-        //    var unitOfWorkMock = new Mock<IUnitOfWork>();
-        //    var householdRepoMock = new Mock<IRepository<Household>>();
-        //    var userRepoMock = new Mock<IRepository<User>>();
-        //    var householdFactoryMock = new Mock<IHouseholdFactory>();
+        [Test]
+        public void HouseholdRepository_ShouldCallGetFirstOnce_WhenGetHouseholdIsCalled()
+        {
+            //Arrange
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var householdRepoMock = new Mock<IRepository<Household>>();
+            var userRepoMock = new Mock<IRepository<User>>();
+            var householdFactoryMock = new Mock<IHouseholdFactory>();
 
-        //    var householdService = new HouseholdService(unitOfWorkMock.Object, householdRepoMock.Object, userRepoMock.Object, householdFactoryMock.Object);
+            var householdService = new HouseholdService(unitOfWorkMock.Object, householdRepoMock.Object, userRepoMock.Object, householdFactoryMock.Object);
 
-        //    //Act
-        //    householdService.GetHousehold(new Guid());
+            //Act
+            householdService.GetHousehold(new Guid());
 
-        //    //Assert
-        //    householdRepoMock.Verify(x => x.GetFirst(It.IsAny<Expression<Func<Household, bool>>>(), null), Times.Once);
-        //}
+            //Assert
+            householdRepoMock.Verify(x => x.GetFirst(It.IsAny<Expression<Func<Household, bool>>>(), It.IsAny<Expression<Func<Household, object>>>()), Times.Once);
+        }
+
+        [Test]
+        public void GetHousehold_ShouldReturnInstanceOfHousehold_WhenCalled()
+        {
+            //Arrange
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var householdRepoMock = new Mock<IRepository<Household>>();
+            var userRepoMock = new Mock<IRepository<User>>();
+            var householdFactoryMock = new Mock<IHouseholdFactory>();
+            var householdStub = new Household("_", "_", new byte[0]);
+            householdRepoMock.Setup(x => x.GetFirst(It.IsAny<Expression<Func<Household, bool>>>(), It.IsAny<Expression<Func<Household, object>>>())).Returns(householdStub);
+
+            var householdService = new HouseholdService(unitOfWorkMock.Object, householdRepoMock.Object, userRepoMock.Object, householdFactoryMock.Object);
+
+            //Act
+            var result = householdService.GetHousehold(new Guid());
+
+            //Assert
+            Assert.IsInstanceOf<Household>(result);
+        }
+
+        [Test]
+        public void HouseholdRepository_ShouldCallGetFirstOnce_WhenGetHouseholdUsersIsCalled()
+        {
+            //Arrange
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var householdRepoMock = new Mock<IRepository<Household>>();
+            var userRepoMock = new Mock<IRepository<User>>();
+            var householdFactoryMock = new Mock<IHouseholdFactory>();
+            var householdStub = new Household("_", "_", new byte[0]);
+            householdRepoMock.Setup(x => x.GetFirst(It.IsAny<Expression<Func<Household, bool>>>(), It.IsAny<Expression<Func<Household, object>>>())).Returns(householdStub);
+
+            var householdService = new HouseholdService(unitOfWorkMock.Object, householdRepoMock.Object, userRepoMock.Object, householdFactoryMock.Object);
+
+            //Act
+            householdService.GetHouseholdUsers(new Guid());
+
+            //Assert
+            householdRepoMock.Verify(x => x.GetFirst(It.IsAny<Expression<Func<Household, bool>>>(), It.IsAny<Expression<Func<Household, object>>>()), Times.Once);
+        }
+
+        [Test]
+        public void GetHouseholdUsers_ShouldReturnIEnumerableOfUsers_WhenCalled()
+        {
+            //Arrange
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var householdRepoMock = new Mock<IRepository<Household>>();
+            var userRepoMock = new Mock<IRepository<User>>();
+            var householdFactoryMock = new Mock<IHouseholdFactory>();
+            var householdStub = new Household("_", "_", new byte[0]);
+            householdRepoMock.Setup(x => x.GetFirst(It.IsAny<Expression<Func<Household, bool>>>(), It.IsAny<Expression<Func<Household, object>>>())).Returns(householdStub);
+
+            var householdService = new HouseholdService(unitOfWorkMock.Object, householdRepoMock.Object, userRepoMock.Object, householdFactoryMock.Object);
+
+            //Act
+            var result = householdService.GetHouseholdUsers(new Guid());
+
+            //Assert
+            Assert.IsInstanceOf<IEnumerable<User>>(result);
+        }
     }
 }
