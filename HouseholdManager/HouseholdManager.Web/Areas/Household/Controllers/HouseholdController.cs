@@ -3,9 +3,7 @@ using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Household.Models;
 using HouseholdManager.Web.WebHelpers.Contracts;
-using Microsoft.AspNet.Identity;
 using System;
-using System.Web;
 using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers

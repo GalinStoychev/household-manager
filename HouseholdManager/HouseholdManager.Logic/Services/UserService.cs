@@ -49,10 +49,6 @@ namespace HouseholdManager.Logic.Services
         public User GetUserInfo(string id)
         {
             var user = this.userRepositoryEF.GetById(id);
-            if (user == null)
-            {
-                throw new ArgumentNullException(ExceptionConstants.UserWasNotFound);
-            }
 
             return user;
         }
@@ -79,7 +75,7 @@ namespace HouseholdManager.Logic.Services
             }
         }
 
-        public void UpdateUserInfo(string username, string firstName, string lastName, string phoneNumber)
+        public void UpdateUserInfo(string firstName, string lastName, string phoneNumber)
         {
             throw new NotImplementedException();
         }

@@ -34,6 +34,7 @@
       <HintPath>..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Moq, Version=4.7.1.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.7.1\lib\net45\Moq.dll</HintPath>
       <Private>True</Private>
@@ -60,6 +61,20 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HouseholdManager.Data\HouseholdManager.Data.csproj">
+      <Project>{83C1C8AC-9F13-4584-A85A-AD5A3859B0B1}</Project>
+      <Name>HouseholdManager.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HouseholdManager.Logic\HouseholdManager.Logic.csproj">
+      <Project>{4840147d-77b9-4e74-bb55-366e0c4d695b}</Project>
+      <Name>HouseholdManager.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HouseholdManager.Models\HouseholdManager.Models.csproj">
+      <Project>{c3551296-337f-437f-b2b5-71e9e3fef995}</Project>
+      <Name>HouseholdManager.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

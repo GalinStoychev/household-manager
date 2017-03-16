@@ -15,6 +15,6 @@ namespace HouseholdManager.Logic.Contracts
 
         void AddHousehold(Household household, string username);
 
-        void UpdateUserInfo(string username, string firstName, string lastName, string phoneNumber);
+        void UpdateUserInfo(string firstName, string lastName, string phoneNumber);
     }
 }
