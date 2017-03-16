@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
 {
+    [Authorize]
     public class HouseholdController : Controller
     {
         private readonly IUserService userService;

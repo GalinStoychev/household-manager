@@ -37,7 +37,8 @@ namespace HouseholdManager.Web.Controllers
             this.webHelper = webHelper;
         }
 
-        // GET: Profile
+        [HttpGet]
+        [Authorize]
         public ActionResult Index()
         {
             var user = this.userService.GetUserInfo(this.webHelper.GetUserId());

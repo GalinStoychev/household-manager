@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
 {
+    [Authorize]
     public class UploadImageController : Controller
     {
         private const int FourMb = 4 * 1000 * 1024;

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
 {
+    [Authorize]
     public class ExpensesController : Controller
     {
         private readonly IExpenseService expenseService;
@@ -41,7 +42,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [HttpGet]
         public ActionResult Index(string name, int page = 1)
         {
-            var expensesCount = this.expenseService.GetExpensesCount();
+            var expensesCount = this.expenseService.GetExpensesCount(this.webHelper.GetHouseholdIdFromCookie());
             this.ViewData["pagesCount"] = expensesCount / CommonConstants.DefaultPageSize;
             if (page < CommonConstants.DefaultStartingPage)
             {

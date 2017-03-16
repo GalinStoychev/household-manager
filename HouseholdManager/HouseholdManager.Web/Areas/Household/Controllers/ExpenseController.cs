@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
 {
+    [Authorize]
     public class ExpenseController : Controller
     {
         private readonly IHouseholdService householdService;
@@ -86,7 +87,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             var users = this.householdService.GetHouseholdUsers(householdid);
 
             this.expenseService.CreateExpense(this.webHelper.GetUserId(), model.Name, Guid.Parse(model.Category), householdid, model.ExpectedCost, model.DueDate, model.Comment, model.AssignedUser);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Expenses", new { name = this.webHelper.GetHouseholdNameFromCookie() });
         }
     }
 }

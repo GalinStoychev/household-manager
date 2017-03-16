@@ -118,9 +118,9 @@ namespace HouseholdManager.Logic.Services
             return expenses;
         }
 
-        public int GetExpensesCount()
+        public int GetExpensesCount(Guid householdId)
         {
-            var count = this.expenseRepositoryEF.All.Count();
+            var count = this.expenseRepositoryEF.GetAll<Expense>(x => x.HouseholdId == householdId, null).Count();
             return count;
         }
 
