@@ -1,11 +1,12 @@
 ﻿@model HouseholdManager.Web.Areas.Household.Models.ShowExpenseViewModel
 
 @{
-    var modalTarget = "#" + Model.Id;
+    var modalTarget = "#" + Model.Id + "modal";
+    var target = Model.Id + "modal";
     var categoryClass = "category-" + Model.Category;
 }
 
-<div class="expense-container">
+<div class="expense-container" id=@Model.Id>
     <div class="info-container @categoryClass ">
         <span class=color-grey>&bull; @Model.Category</span>
         <div class="name-container">
@@ -34,7 +35,7 @@
 
         <button type="button" class="btn btn-success btn-pay" data-toggle="modal" data-target=@modalTarget>PAY</button>
 
-        <div id=@Model.Id class="modal fade" role="dialog">
+        <div id=@target class="modal fade" role="dialog">
             <div class="modal-dialog">
                 @using (Html.BeginForm("Pay", "Expenses", FormMethod.Post, new { role = "form" }))
                 {

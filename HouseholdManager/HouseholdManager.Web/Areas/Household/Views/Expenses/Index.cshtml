@@ -42,7 +42,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-@*<script>
+<script>
     $(".expense-container").on("click", function (ev) {
         $target = $(ev.target);
         var id = $target.parents(".expense-container").attr("id");
@@ -50,4 +50,4 @@
         console.log(window.location.href)
         //window.location.href = window.location.href + "/id/" + id;
     })
-</script>*@
+</script>
