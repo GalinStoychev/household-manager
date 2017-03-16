@@ -34,8 +34,6 @@ namespace Householdmanager.Web.Tests
         [Test]
         public void HouseholdController_ShouldThrowArgumentNullException_WhenUserServiceIsNull()
         {
-            // Arrange
-            // Act
             // Assert
             Assert.Throws<ArgumentNullException>(() => new HouseholdController(null, householdServiceMock.Object, imageServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object));
         }
@@ -43,8 +41,6 @@ namespace Householdmanager.Web.Tests
         [Test]
         public void HouseholdController_ShouldThrowArgumentNullException_WhenHouseholdServiceIsNull()
         {
-            // Arrange
-            // Act
             // Assert
             Assert.Throws<ArgumentNullException>(() => new HouseholdController(userServiceMock.Object, null, imageServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object));
         }
@@ -52,8 +48,6 @@ namespace Householdmanager.Web.Tests
         [Test]
         public void HouseholdController_ShouldThrowArgumentNullException_WhenImageServiceIsNull()
         {
-            // Arrange
-            // Act
             // Assert
             Assert.Throws<ArgumentNullException>(() => new HouseholdController(userServiceMock.Object, householdServiceMock.Object, null, mappingServiceMock.Object, webHelperMock.Object));
         }
@@ -61,8 +55,6 @@ namespace Householdmanager.Web.Tests
         [Test]
         public void HouseholdController_ShouldThrowArgumentNullException_WhenMappingServiceIsNull()
         {
-            // Arrange
-            // Act
             // Assert
             Assert.Throws<ArgumentNullException>(() => new HouseholdController(userServiceMock.Object, householdServiceMock.Object, imageServiceMock.Object, null, webHelperMock.Object));
         }
@@ -70,8 +62,6 @@ namespace Householdmanager.Web.Tests
         [Test]
         public void HouseholdController_ShouldThrowArgumentNullException_WhenWebHelperIsNull()
         {
-            // Arrange
-            // Act
             // Assert
             Assert.Throws<ArgumentNullException>(() => new HouseholdController(userServiceMock.Object, householdServiceMock.Object, imageServiceMock.Object, mappingServiceMock.Object, null));
         }
