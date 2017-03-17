@@ -84,8 +84,8 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult Create(CreateExpenseViewModel model)
         {
             var householdid = this.webHelper.GetHouseholdIdFromCookie();
-
             this.expenseService.CreateExpense(this.webHelper.GetUserId(),  model.Name, Guid.Parse(model.Category), householdid, model.ExpectedCost, model.DueDate, model.Comment, model.AssignedUser);
+
             return RedirectToAction("Index", "Expenses", new { name = this.webHelper.GetHouseholdNameFromCookie() });
         }
     }
