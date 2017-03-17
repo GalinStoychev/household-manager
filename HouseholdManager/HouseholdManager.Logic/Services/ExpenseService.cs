@@ -5,7 +5,6 @@ using HouseholdManager.Models;
 using HouseholdManager.Data.Contracts;
 using HouseholdManager.Common.Constants;
 using HouseholdManager.Logic.Contracts.Factories;
-using System.Linq.Expressions;
 using System.Data.Entity;
 using System.Linq;
 
@@ -104,24 +103,61 @@ namespace HouseholdManager.Logic.Services
             return categories;
         }
 
-        public IEnumerable<Expense> GetExpenses(Guid householdId, int page)
+        public IEnumerable<Expense> GetExpenses(Guid householdId, int page, bool isPaid, string searchPattern)
         {
-            var expenses = this.expenseRepositoryEF.All
-                .Where(x => x.HouseholdId == householdId && x.IsPaid == false)
-                .Include(x => x.AssignedUser)
-                .Include(x => x.ExpenseCategory)
-                .OrderBy(x => x.DueDate)
-                .Skip((page - 1) * CommonConstants.DefaultPageSize)
-                .Take(CommonConstants.DefaultPageSize)
-                .ToList();
+            IEnumerable<Expense> expenses = null;
+            if (!String.IsNullOrEmpty(searchPattern))
+            {
+                var patternToLower = searchPattern.ToLower();
+                expenses = this.expenseRepositoryEF.All
+                   .Where(x => x.HouseholdId == householdId && x.IsPaid == isPaid &&
+                       (x.Name.ToLower().IndexOf(patternToLower) > -1 ||
+                           x.ExpenseCategory.Name.ToLower().IndexOf(patternToLower) > -1 ||
+                           x.AssignedUser.FirstName.ToLower().IndexOf(patternToLower) > -1 ||
+                           x.AssignedUser.LastName.ToLower().IndexOf(patternToLower) > -1))
+                   .Include(x => x.AssignedUser)
+                   .Include(x => x.ExpenseCategory)
+                   .OrderBy(x => x.DueDate)
+                   .Skip((page - 1) * CommonConstants.DefaultPageSize)
+                   .Take(CommonConstants.DefaultPageSize)
+                   .ToList();
+            }
+            else
+            {
+                expenses = this.expenseRepositoryEF.All
+                  .Where(x => x.HouseholdId == householdId && x.IsPaid == isPaid)
+                  .Include(x => x.AssignedUser)
+                  .Include(x => x.ExpenseCategory)
+                  .OrderBy(x => x.DueDate)
+                  .Skip((page - 1) * CommonConstants.DefaultPageSize)
+                  .Take(CommonConstants.DefaultPageSize)
+                  .ToList();
+            }
 
             return expenses;
         }
 
-        public int GetExpensesCount(Guid householdId)
+        public int GetExpensesCount(Guid householdId, bool isPaid, string pattern)
         {
-            var count = this.expenseRepositoryEF.GetAll<Expense>(
-                x => x.HouseholdId == householdId && x.IsPaid == false, null).Count();
+            int count = 0;
+            if (!String.IsNullOrEmpty(pattern))
+            {
+                var patternToLower = pattern.ToLower();
+                count = this.expenseRepositoryEF.GetAll<Expense>(
+                    x => x.HouseholdId == householdId &&
+                    x.IsPaid == isPaid &&
+                    (x.ExpenseCategory.Name.ToLower().IndexOf(patternToLower) > -1 ||
+                    x.Name.ToLower().IndexOf(patternToLower) > -1 ||
+                    x.AssignedUser.FirstName.ToLower().IndexOf(patternToLower) > -1 ||
+                    x.AssignedUser.LastName.ToLower().IndexOf(patternToLower) > -1)
+                    , null).Count();
+            }
+            else
+            {
+                count = this.expenseRepositoryEF.GetAll<Expense>(
+                    x => x.HouseholdId == householdId && x.IsPaid == isPaid, null).Count();
+            }
+
             return count;
         }
 

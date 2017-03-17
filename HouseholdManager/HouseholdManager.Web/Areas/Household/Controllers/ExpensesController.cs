@@ -3,7 +3,6 @@ using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Household.Models;
 using HouseholdManager.Web.WebHelpers.Contracts;
-using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -40,13 +39,13 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(string name, string pattern = "", bool isPaid = false, int page = 1)
+        public ActionResult Index(string name, string search = "", bool isPaid = false, int page = 1)
         {
             var model = new ShowExpensesViewModel();
-            model.SearchPattern = pattern;
+            model.SearchPattern = search;
 
             var householdId = this.webHelper.GetHouseholdIdFromCookie();
-            var expensesCount = this.expenseService.GetExpensesCount(householdId);
+            var expensesCount = this.expenseService.GetExpensesCount(householdId, isPaid, search);
             model.PagesCount = Math.Ceiling((double)expensesCount / CommonConstants.DefaultPageSize);
 
             if (page < CommonConstants.DefaultStartingPage)
@@ -60,7 +59,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 model.NextPage = page + 1;
             }
 
-            var expenses = this.expenseService.GetExpenses(householdId, page);
+            var expenses = this.expenseService.GetExpenses(householdId, page, isPaid, search);
             var modelExpenses = new List<ShowExpenseViewModel>();
             foreach (var expense in expenses)
             {
@@ -77,7 +76,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Search(SearchViewModel model)
         {
-            return RedirectToAction("Index", "Expenses", new {name = "Sofia", pattern = model.SearchPattern });
+            return RedirectToAction("Index", "Expenses", new {name = this.webHelper.GetHouseholdNameFromCookie(), search = model.SearchPattern });
         }
 
         [HttpPost]

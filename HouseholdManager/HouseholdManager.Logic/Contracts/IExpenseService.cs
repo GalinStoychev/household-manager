@@ -14,9 +14,9 @@ namespace HouseholdManager.Logic.Contracts
 
         Expense GetExpense(Guid expenseId);
 
-        IEnumerable<Expense> GetExpenses(Guid householdId, int page);
+        IEnumerable<Expense> GetExpenses(Guid householdId, int page, bool isPaid, string searchPattern);
 
-        int GetExpensesCount(Guid householdId);
+        int GetExpensesCount(Guid householdId, bool isPaid, string pattern);
 
         void Pay(Guid expenseId, string userId, string comment, decimal cost);
     }
