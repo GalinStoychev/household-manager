@@ -22,9 +22,16 @@ namespace HouseholdManager.Web.Areas.Household
 
             context.MapRoute(
                 name: "Household_expenses",
-                url: "Household/{name}/Expenses/{page}",
-                defaults: new { action = "Index", controller = "Expenses", page = UrlParameter.Optional }
+                url: "Household/{name}/Expenses",
+                defaults: new { action = "Index", controller = "Expenses" }
             );
+
+        //    context.MapRoute(
+        //    name: "Household_expenses_with_pattern",
+        //    url: "Household/{name}/Expenses/{pattern}/{page}",
+        //    defaults: new { action = "Index", controller = "Expenses", page = UrlParameter.Optional }
+        //);
+
 
             context.MapRoute(
                name: "Household_single_expense",
@@ -34,11 +41,11 @@ namespace HouseholdManager.Web.Areas.Household
 
             // TODO: Fix Script to click on on the EXPENSE and fix the redirection
 
-        //    context.MapRoute(
-        //      name: "Household_single_expense",
-        //      url: "Household/{name}/Expenses/{id}/Edit",
-        //      defaults: new { action = "Create", controller = "Expenses" }
-        //);
+            //    context.MapRoute(
+            //      name: "Household_single_expense",
+            //      url: "Household/{name}/Expenses/{id}/Edit",
+            //      defaults: new { action = "Create", controller = "Expenses" }
+            //);
 
             context.MapRoute(
                 name: "Household_add_expense",

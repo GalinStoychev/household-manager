@@ -238,6 +238,8 @@
     <Compile Include="Areas\Household\Models\ExpenseCategoryViewModel.cs" />
     <Compile Include="Areas\Household\Models\CreateExpenseViewModel.cs" />
     <Compile Include="Areas\Household\Models\HouseholdViewModel.cs" />
+    <Compile Include="Areas\Household\Models\SearchViewModel.cs" />
+    <Compile Include="Areas\Household\Models\ShowExpensesViewModel.cs" />
     <Compile Include="Areas\Household\Models\ShowExpenseViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -713,6 +715,7 @@
     <Content Include="Areas\Household\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Household\Views\Expense\Index.cshtml" />
     <Content Include="Areas\Household\Views\Expense\DisplayTemplates\ShowExpenseViewModel.cshtml" />
+    <Content Include="Areas\Household\Views\Shared\_SearchPartial.cshtml" />
     <None Include="Properties\PublishProfiles\householdmanager - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\householdmanager - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

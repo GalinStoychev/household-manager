@@ -40,20 +40,24 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(string name, int page = 1)
+        public ActionResult Index(string name, string pattern = "", bool isPaid = false, int page = 1)
         {
+            var model = new ShowExpensesViewModel();
+            model.SearchPattern = pattern;
+
             var householdId = this.webHelper.GetHouseholdIdFromCookie();
             var expensesCount = this.expenseService.GetExpensesCount(householdId);
-            this.ViewData["pagesCount"] = Math.Ceiling((double)expensesCount / CommonConstants.DefaultPageSize);
+            model.PagesCount = Math.Ceiling((double)expensesCount / CommonConstants.DefaultPageSize);
+
             if (page < CommonConstants.DefaultStartingPage)
             {
-                this.ViewData["previousPage"] = CommonConstants.DefaultStartingPage;
-                this.ViewData["nextPage"] = CommonConstants.DefaultStartingPage + 1;
+                model.PrevousPage = CommonConstants.DefaultStartingPage;
+                model.NextPage = CommonConstants.DefaultStartingPage + 1;
             }
             else
             {
-                this.ViewData["previousPage"] = page - 1;
-                this.ViewData["nextPage"] = page + 1;
+                model.PrevousPage = page - 1;
+                model.NextPage = page + 1;
             }
 
             var expenses = this.expenseService.GetExpenses(householdId, page);
@@ -64,7 +68,16 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 modelExpenses.Add(mapped);
             }
 
-            return View(modelExpenses);
+            model.Expenses = modelExpenses;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(SearchViewModel model)
+        {
+            return RedirectToAction("Index", "Expenses", new {name = "Sofia", pattern = model.SearchPattern });
         }
 
         [HttpPost]

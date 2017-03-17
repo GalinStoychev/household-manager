@@ -1,0 +1,17 @@
+﻿using System.Collections.Generic;
+
+namespace HouseholdManager.Web.Areas.Household.Models
+{
+    public class ShowExpensesViewModel
+    {
+        public IEnumerable<ShowExpenseViewModel> Expenses { get; set; }
+
+        public string SearchPattern { get; set; }
+
+        public int NextPage { get; set; }
+
+        public int PrevousPage { get; set; }
+
+        public double PagesCount { get; set; }
+    }
+}

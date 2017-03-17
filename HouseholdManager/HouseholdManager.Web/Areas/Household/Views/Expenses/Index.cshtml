@@ -1,47 +1,44 @@
 ﻿@using HouseholdManager.Common.Constants
-
-@model IEnumerable<HouseholdManager.Web.Areas.Household.Models.ShowExpenseViewModel>
+@model HouseholdManager.Web.Areas.Household.Models.ShowExpensesViewModel
 @{
     var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
     var name = householdName.ToString();
-    var nextPage = (int)this.ViewData["nextPage"];
-    var previousPage = (int)this.ViewData["previousPage"];
-    var pagesCount = (double)this.ViewData["pagesCount"];
 }
 
 <div class="row" id="expenses-container">
     <div class="col-md-12">
         <h2 class="header-page text-center">@householdName</h2>
+        @Html.Partial("_SearchPartial", new HouseholdManager.Web.Areas.Household.Models.SearchViewModel())
 
         <div class="row text-center">
-            @foreach (var expense in Model)
+            @foreach (var expense in Model.Expenses)
             {
                 @Html.Partial("_ExpensePartial", expense)
             }
         </div>
-
         <div class="row text-center">
             <div class="col-md-12">
-                @if (previousPage >= 1)
+                @if (Model.PrevousPage >= 1)
             {
-                    @Html.RouteLink("PREVIOUS PAGE", "Household_expenses", new { name = householdName, page = previousPage },
-                    new { @class = "btn btn-default" })
+                    @Html.RouteLink("PREVIOUS PAGE", "Household_expenses", new { name = householdName, pattern = Model.SearchPattern, page = Model.PrevousPage },
+                        new { @class = "btn btn-default" })
+                    @* @Html.ActionLink("PREVIOUS PAGE", "Index", "Expenses", new { name = householdName, page = previousPage },
+                        new { @class = "btn btn-default" })*@
                 }
-
-                @if (pagesCount >= nextPage)
+                @if (Model.PagesCount >= Model.NextPage)
             {
-                    @Html.RouteLink("NEXT PAGE", "Household_expenses", new { name = householdName, page = nextPage },
+                    @Html.RouteLink("NEXT PAGE", "Household_expenses", new { name = householdName, pattern = Model.SearchPattern, page = Model.NextPage },
                      new { @class = "btn btn-default" })
+                    @*@Html.ActionLink("NEXT PAGE", "Index", "Expenses", new { name = householdName, page = nextPage },
+                        new { @class = "btn btn-default" })*@
                 }
             </div>
         </div>
     </div>
 </div>
-
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
 <script>
     $(".info-container").on("click", function (ev) {
         $target = $(ev.target);
