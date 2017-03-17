@@ -120,7 +120,8 @@ namespace HouseholdManager.Logic.Services
 
         public int GetExpensesCount(Guid householdId)
         {
-            var count = this.expenseRepositoryEF.GetAll<Expense>(x => x.HouseholdId == householdId, null).Count();
+            var count = this.expenseRepositoryEF.GetAll<Expense>(
+                x => x.HouseholdId == householdId && x.IsPaid == false, null).Count();
             return count;
         }
 

@@ -44,7 +44,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         {
             var householdId = this.webHelper.GetHouseholdIdFromCookie();
             var expensesCount = this.expenseService.GetExpensesCount(householdId);
-            this.ViewData["pagesCount"] = expensesCount / CommonConstants.DefaultPageSize;
+            this.ViewData["pagesCount"] = Math.Ceiling((double)expensesCount / CommonConstants.DefaultPageSize);
             if (page < CommonConstants.DefaultStartingPage)
             {
                 this.ViewData["previousPage"] = CommonConstants.DefaultStartingPage;
