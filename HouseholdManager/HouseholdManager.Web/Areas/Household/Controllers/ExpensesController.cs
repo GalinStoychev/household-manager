@@ -42,7 +42,8 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [HttpGet]
         public ActionResult Index(string name, int page = 1)
         {
-            var expensesCount = this.expenseService.GetExpensesCount(this.webHelper.GetHouseholdIdFromCookie());
+            var householdId = this.webHelper.GetHouseholdIdFromCookie();
+            var expensesCount = this.expenseService.GetExpensesCount(householdId);
             this.ViewData["pagesCount"] = expensesCount / CommonConstants.DefaultPageSize;
             if (page < CommonConstants.DefaultStartingPage)
             {
@@ -55,7 +56,6 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 this.ViewData["nextPage"] = page + 1;
             }
 
-            var householdId = this.webHelper.GetHouseholdIdFromCookie();
             var expenses = this.expenseService.GetExpenses(householdId, page);
             var modelExpenses = new List<ShowExpenseViewModel>();
             foreach (var expense in expenses)
@@ -71,7 +71,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Pay([Bind(Include = "Cost, Id, Comment, Name")] ShowExpenseViewModel model)
         {
-            this.expenseService.Pay(model.Id, this.User.Identity.GetUserId(), model.Comment, (decimal)model.Cost);
+            this.expenseService.Pay(model.Id, this.webHelper.GetUserId(), model.Comment, (decimal)model.Cost);
             return RedirectToRoute("Household_expenses", new { name = model.Name });
         }
     }
