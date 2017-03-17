@@ -8,7 +8,8 @@
 <div class="row" id="expenses-container">
     <div class="col-md-12">
         <h2 class="header-page text-center">@householdName</h2>
-        @Html.Partial("_SearchPartial", new HouseholdManager.Web.Areas.Household.Models.SearchViewModel())
+
+        @Html.Action("LoadSearchForm")
 
         <div class="row text-center">
             @foreach (var expense in Model.Expenses)

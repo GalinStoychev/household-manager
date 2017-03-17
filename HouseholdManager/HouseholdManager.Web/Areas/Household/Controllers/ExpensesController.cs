@@ -76,7 +76,14 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Search(SearchViewModel model)
         {
-            return RedirectToAction("Index", "Expenses", new {name = this.webHelper.GetHouseholdNameFromCookie(), search = model.SearchPattern });
+            return RedirectToAction("Index", "Expenses", new { name = this.webHelper.GetHouseholdNameFromCookie(), search = model.SearchPattern });
+        }
+
+        [ChildActionOnly]
+        public ActionResult LoadSearchForm()
+        {
+            var model = new SearchViewModel() { ActionName = "Search", ControllerName = "Expenses" };
+            return View("_SearchPartial", model);
         }
 
         [HttpPost]

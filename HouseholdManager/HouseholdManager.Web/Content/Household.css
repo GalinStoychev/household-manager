@@ -1,5 +1,4 @@
 ﻿#expenses-container {
-    border: 1px solid black;
     width: 100%;
 }
 
@@ -10,7 +9,6 @@
     width: 18em;
     display: inline-block;
     padding: 0.5em 1em 1em 1em;
-
 }
 
     .expense-container:hover {
@@ -44,10 +42,23 @@
 }
 
 .divider {
-    margin-top:0.5em;
+    margin-top: 0.5em;
 }
 
+.input-search {
+    display: inline-block;
+    border-radius: 2px;
+}
 
+.btn-search {
+    border-radius: 2px;
+}
+
+.search-container {
+    margin-bottom: 3em;
+}
+
+/* Categories */
 .category-Utilities {
     border-top: 5px solid #0D80D9;
 }

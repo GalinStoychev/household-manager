@@ -1,18 +1,12 @@
 ﻿@model HouseholdManager.Web.Areas.Household.Models.SearchViewModel
 
-    @using (Html.BeginForm("Search", "Expenses", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        <div class="form-group">
-            @*@Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
-                @Html.ValidationMessageFor(m => m.Address)*@
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.SearchPattern, new { @class = "form-control" })
-            </div>
+@using (Html.BeginForm(Model.ActionName, Model.ControllerName, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group text-center search-container">
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.SearchPattern, new { @class = "form-control input-search" })
+            <input type="submit" value="SEARCH" class="btn btn-danger btn-search" />
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="SUBMIT" class="btn btn-default" />
-            </div>
-        </div>
-    }
+    </div>
+}
