@@ -1,11 +1,9 @@
 ﻿@model HouseholdManager.Web.Areas.Household.Models.ShowExpenseViewModel
-
 @{
     var modalTarget = "#" + Model.Id + "modal";
     var target = Model.Id + "modal";
     var categoryClass = "category-" + Model.Category;
 }
-
 <div class="expense-container @categoryClass" id=@Model.Id>
     <div class="info-container">
         <span class=color-grey>&bull; @Model.Category</span>
@@ -13,7 +11,6 @@
             <h3 class="text-center expense-name">@Model.Name</h3>
         </div>
         <p class="color-grey text-center">Due date: @Model.DueDate.ToShortDateString()</p>
-
         <p class="text-center">
             <span class="color-grey">User assigned: </span>
             <br />
@@ -26,43 +23,46 @@
                 <span>None</span>
             }
         </p>
-
         <div class="text-right">
             <span class="color-grey exp-cost-label">Expected cost: </span>
             <hr class="divider" />
             <p class="exp-cost">$ @Model.ExpectedCost</p>
         </div>
     </div>
+    @if (!Model.IsPaid)
+    {
+        <button type="button" class="btn btn-success btn-pay" data-toggle="modal" data-target=@modalTarget>PAY</button>
 
-    <button type="button" class="btn btn-success btn-pay" data-toggle="modal" data-target=@modalTarget>PAY</button>
-
-    <div id=@target class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            @using (Html.BeginForm("Pay", "Expenses", FormMethod.Post, new { role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title text-center page-header">@Model.Name</h4>
+        <div id=@target class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                @using (Html.BeginForm("Pay", "Expenses", FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center page-header">@Model.Name</h4>
+                        </div>
+                        <div class="modal-body">
+                            @Html.HiddenFor(m => m.Id)
+                            @Html.HiddenFor(m => m.Name)
+                            <h5>How much did you pay:</h5>
+                            @Html.ValidationMessageFor(m => m.Cost, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(m => m.Cost, new { @class = "form-control" })
+                            <h5>Do you have any comments?</h5>
+                            @Html.TextAreaFor(m => m.Comment, new { @class = "form-control" })
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="CANCEL" data-dismiss="modal" class="btn btn-danger" />
+                            <input type="submit" value="PAY" class="btn btn-success" />
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        @Html.HiddenFor(m => m.Id)
-                        @Html.HiddenFor(m => m.Name)
-
-                        <h5>How much did you pay:</h5>
-                        @Html.ValidationMessageFor(m => m.Cost, "", new { @class = "text-danger" })
-                        @Html.TextBoxFor(m => m.Cost, new { @class = "form-control" })
-                        <h5>Do you have any comments?</h5>
-                        @Html.TextAreaFor(m => m.Comment, new { @class = "form-control" })
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" value="CANCEL" data-dismiss="modal" class="btn btn-danger" />
-                        <input type="submit" value="PAY" class="btn btn-success" />
-                    </div>
-                </div>
-            }
+                }
+            </div>
         </div>
-    </div>
-
+    }
+    else
+    {
+        <span class="btn-paid">PAID</span>
+    }
 </div>

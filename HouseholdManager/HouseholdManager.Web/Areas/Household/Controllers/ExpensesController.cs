@@ -12,6 +12,8 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
     [Authorize]
     public class ExpensesController : Controller
     {
+        private const string IsHistory = "IsHistory";
+
         private readonly IExpenseService expenseService;
         private readonly IMapingService mappingService;
         private readonly IWebHelper webHelper;
@@ -41,13 +43,24 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [HttpGet]
         public ActionResult Index(string name, string search = "", bool isPaid = false, int page = 1)
         {
+            this.TempData[IsHistory] = false;
+            var model = this.GetExpenses(false, search, page);
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult History(string search = "", int page = 1)
+        {
+            this.TempData[IsHistory] = true;
+            var model = this.GetExpenses(true, search, page);
+            return View("Index", model);
+        }
+
+        private ShowExpensesViewModel GetExpenses(bool isPaid, string search, int page)
+        {
             var model = new ShowExpensesViewModel();
             model.SearchPattern = search;
-
-            this.TempData["isPaid"] = isPaid;
-
             model.IsPaid = isPaid;
-
 
             var householdId = this.webHelper.GetHouseholdIdFromCookie();
             var expensesCount = this.expenseService.GetExpensesCount(householdId, isPaid, search);
@@ -74,18 +87,23 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
             model.Expenses = modelExpenses;
 
-            return View(model);
+            return model;
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Search(SearchViewModel model)
         {
-            return RedirectToAction("Index", "Expenses", new
+            var action = "Index";
+            if ((bool)this.TempData[IsHistory] == true)
+            {
+                action = "History";
+            }
+
+            return RedirectToAction(action, "Expenses", new
             {
                 name = this.webHelper.GetHouseholdNameFromCookie(),
-                search = model.SearchPattern,
-                isPaid = this.TempData["isPaid"]
+                search = model.SearchPattern
             });
         }
 
@@ -102,16 +120,6 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         {
             this.expenseService.Pay(model.Id, this.webHelper.GetUserId(), model.Comment, (decimal)model.Cost);
             return RedirectToRoute("Household_expenses", new { name = model.Name });
-        }
-
-        [HttpGet]
-        public ActionResult History()
-        {
-            return this.RedirectToAction("Index", "Expenses", new
-            {
-                name = this.webHelper.GetHouseholdNameFromCookie(),
-                isPaid = true
-            });
         }
     }
 }

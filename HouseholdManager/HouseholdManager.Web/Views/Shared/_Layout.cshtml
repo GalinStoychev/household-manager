@@ -34,9 +34,9 @@
                     @if (householdName != null)
                     {
                         <li>@Html.RouteLink("Household", "Household_single", new { area = "", name = householdName }, null)</li>
-                        <li>@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName, isPaid = false }, null)</li>
+                        <li>@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName}, null)</li>
                         <li>@Html.ActionLink("Add item", "Create", "Expense", new { area = "Household", name = householdName }, null)</li>
-                        <li>@Html.ActionLink("History", "Index", "Expenses", new { area = "Household", name = householdName, isPaid = true}, null)</li>
+                        <li>@Html.ActionLink("History", "History", "Expenses", new { area = "Household", name = householdName}, null)</li>
                     }
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</li>

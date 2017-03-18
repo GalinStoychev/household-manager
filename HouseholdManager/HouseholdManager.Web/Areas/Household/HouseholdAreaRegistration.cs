@@ -26,11 +26,17 @@ namespace HouseholdManager.Web.Areas.Household
                 defaults: new { action = "Index", controller = "Expenses" }
             );
 
-        //    context.MapRoute(
-        //    name: "Household_expenses_with_pattern",
-        //    url: "Household/{name}/Expenses/{pattern}/{page}",
-        //    defaults: new { action = "Index", controller = "Expenses", page = UrlParameter.Optional }
-        //);
+            context.MapRoute(
+               name: "Household_expenses_history",
+               url: "Household/{name}/Expenses/History",
+               defaults: new { action = "History", controller = "Expenses" }
+           );
+
+            //    context.MapRoute(
+            //    name: "Household_expenses_with_pattern",
+            //    url: "Household/{name}/Expenses/{pattern}/{page}",
+            //    defaults: new { action = "Index", controller = "Expenses", page = UrlParameter.Optional }
+            //);
 
 
             context.MapRoute(

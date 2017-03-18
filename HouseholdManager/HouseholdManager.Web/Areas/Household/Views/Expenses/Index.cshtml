@@ -3,6 +3,11 @@
 @{
     var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
     var name = householdName.ToString();
+    var routeName = "Household_expenses";
+    if (Model.IsPaid)
+    {
+        routeName = "Household_expenses_history";
+    }
 }
 
 <div class="row" id="expenses-container">
@@ -18,18 +23,18 @@
             }
         </div>
         <div class="row text-center">
-            <div class="col-md-12">
-                @if (Model.PrevousPage >= 1)
-            {
-                    @Html.RouteLink("PREVIOUS PAGE", "Household_expenses", new { name = householdName, search = Model.SearchPattern, page = Model.PrevousPage, isPaid = Model.IsPaid },
+                <div class="col-md-12">
+                    @if (Model.PrevousPage >= 1)
+                    {
+                        @Html.RouteLink("PREVIOUS PAGE", routeName, new { name = householdName, search = Model.SearchPattern, page = Model.PrevousPage },
                         new { @class = "btn btn-default" })
-                }
-                @if (Model.PagesCount >= Model.NextPage)
-            {
-                    @Html.RouteLink("NEXT PAGE", "Household_expenses", new { name = householdName, search = Model.SearchPattern, page = Model.NextPage, isPaid = Model.IsPaid },
+                    }
+                    @if (Model.PagesCount >= Model.NextPage)
+                    {
+                        @Html.RouteLink("NEXT PAGE", routeName, new { name = householdName, search = Model.SearchPattern, page = Model.NextPage },
                      new { @class = "btn btn-default" })
-                }
-            </div>
+                    }
+                </div>
         </div>
     </div>
 </div>
