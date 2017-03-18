@@ -27,8 +27,6 @@ namespace HouseholdManager.Web.Areas.Household.Models
         [Display(Name = "Paid by")]
         public string PaidBy { get; set; }
 
-        public IEnumerable<CommentViewModel> Comments { get; set; }
-
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Expense, ShowExpenseViewModel>()

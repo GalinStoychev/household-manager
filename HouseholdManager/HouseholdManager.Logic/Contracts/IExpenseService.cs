@@ -18,6 +18,8 @@ namespace HouseholdManager.Logic.Contracts
 
         int GetExpensesCount(Guid householdId, bool isPaid, string pattern);
 
+        IEnumerable<Comment> GetExpenseComments(Guid expenseId);
+
         void Pay(Guid expenseId, string userId, string comment, decimal cost);
     }
 }

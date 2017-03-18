@@ -15,10 +15,16 @@ namespace HouseholdManager.Web.Areas.Household
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                name: "Household_create",
-                url: "Household/Create",
-                defaults: new { action = "Create", controller = "Household" }
-            );
+           name: "Comemnts_create",
+           url: "Household/Comments/Create",
+           defaults: new { action = "Create", controller = "Comments" }
+       );
+
+            context.MapRoute(
+              name: "Comemnts_show",
+              url: "Household/Comments/{expenseId}",
+              defaults: new { action = "Index", controller = "Comments" }
+          );
 
             context.MapRoute(
                 name: "Household_expenses",
@@ -31,13 +37,6 @@ namespace HouseholdManager.Web.Areas.Household
                url: "Household/{name}/Expenses/History",
                defaults: new { action = "History", controller = "Expenses" }
            );
-
-            //    context.MapRoute(
-            //    name: "Household_expenses_with_pattern",
-            //    url: "Household/{name}/Expenses/{pattern}/{page}",
-            //    defaults: new { action = "Index", controller = "Expenses", page = UrlParameter.Optional }
-            //);
-
 
             context.MapRoute(
                name: "Household_single_expense",
@@ -55,9 +54,16 @@ namespace HouseholdManager.Web.Areas.Household
 
             context.MapRoute(
                 name: "Household_add_expense",
-                url: "Household/{name}/Add",
+                url: "Household/{name}/Expenses/Add",
                 defaults: new { action = "Create", controller = "Expense" }
           );
+
+            context.MapRoute(
+                name: "Household_create",
+                url: "Household/Create",
+                defaults: new { action = "Create", controller = "Household" }
+            );
+
 
             context.MapRoute(
                name: "Household_single",

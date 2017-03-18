@@ -1,24 +1,37 @@
 ﻿@model HouseholdManager.Web.Areas.Household.Models.ShowExpenseViewModel
-
-<div class="row">
-    <div class="col-md-12">
+<div class="row text-center">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <h2>@Model.Name</h2>
-        <span class="color-grey">@Model.Category</span>
+        <p class="color-grey">&bull; @Model.Category</p>
+        <hr />
+    </div>
+
+</div>
+<div class="row expense-details">
+    <div class="col-md-3 col-md-offset-3 col-sm-4 col-sm-offset-2 col-xs-6">
         <ul>
             <li>
                 <strong>@Html.DisplayNameFor(m => m.CreatedBy): </strong><span>@Model.CreatedBy</span>
-            </li>
-            <li>
-                <strong>@Html.DisplayNameFor(m => m.CreatedOn): </strong><span>@Model.CreatedOn</span>
-            </li>
-            <li>
-                <strong>@Html.DisplayNameFor(m => m.DueDate): </strong><span>@Model.DueDate.ToShortDateString()</span>
             </li>
             <li>
                 <strong>@Html.DisplayNameFor(m => m.AssignedUser): </strong><span>@Model.AssignedUser</span>
             </li>
             <li>
                 <strong>@Html.DisplayNameFor(m => m.ExpectedCost): </strong><span>$@Model.ExpectedCost</span>
+            </li>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.PaidBy): </strong><span>@Model.PaidBy</span>
+            </li>
+
+        </ul>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-6">
+        <ul>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.CreatedOn): </strong><span>@Model.CreatedOn</span>
+            </li>
+            <li>
+                <strong>@Html.DisplayNameFor(m => m.DueDate): </strong><span>@Model.DueDate.ToShortDateString()</span>
             </li>
             <li>
                 <strong>@Html.DisplayNameFor(m => m.Cost): </strong>
@@ -30,22 +43,34 @@
             <li>
                 <strong>@Html.DisplayNameFor(m => m.PaidOnDate): </strong>
                 <span>@Model.PaidOnDate</span>
-                
-            </li>
-            <li>
-                <strong>@Html.DisplayNameFor(m => m.PaidBy): </strong><span>@Model.PaidBy</span>
-            </li>
-            <li>
-                <strong>@Html.DisplayNameFor(m => m.Comments)</strong>
-                @foreach (var comment in Model.Comments)
-                {
-                    <div class="single-comment">
-                        <strong>@comment.User</strong>
-                        <span>@comment.CreateOnDate.ToShortDateString()</span>
-                        <p>@comment.CommentContent</p>
-                    </div>
-                }
+
             </li>
         </ul>
     </div>
+    <div class="expense-btns">
+        @Html.ActionLink("EDIT", "Edit", "Expense", null, new { @class = "btn btn-info" })
+        @Html.ActionLink("DELETE", "Delete", "Expense", null, new { @class = "btn btn-danger" })
+    </div>
+
 </div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <hr />
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-12" id="comments-container">
+        @Ajax.ActionLink("SHOW COMMENTS", "Index", "Comments", new { expenseId = Model.Id }, new AjaxOptions
+   {
+       InsertionMode = InsertionMode.Replace,
+       UpdateTargetId = "comments-container"
+
+   }, new { @class = "btn btn-info" }
+       )
+    </div>
+</div>
+
+@section scriptss {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

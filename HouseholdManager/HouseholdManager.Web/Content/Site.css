@@ -45,6 +45,14 @@ textarea {
     border-radius: 0;
 }
 
+.btn-info {
+    background-color: #75DBFF;
+}
+
+.btn-info:hover {
+    background-color: #32CAFF;
+}
+
 .color-grey {
     color: #949494;
 }

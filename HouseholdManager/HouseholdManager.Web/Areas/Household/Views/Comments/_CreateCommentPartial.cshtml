@@ -1,0 +1,32 @@
+﻿@model HouseholdManager.Web.Areas.Household.Models.CommentViewModel
+@{
+    Layout = null;
+}
+
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-target">ADD COMMENT</button>
+
+<div id="modal-target" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        @using (Html.BeginForm("Create", "Comments", FormMethod.Post, new { role = "form", id = "comment-form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center page-header">What is your comment?</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.HiddenFor(m => m.ExpenceId)
+                    @Html.ValidationMessageFor(m => m.CommentContent, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(m => m.CommentContent, new { @class = "form-control" })
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="CANCEL" data-dismiss="modal" class="btn btn-danger" />
+                    <input type="submit" value="SUBMIT" class="btn btn-success" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>$.validator.unobtrusive.parse($("form"));</script>

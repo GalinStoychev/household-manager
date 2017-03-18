@@ -74,6 +74,19 @@
     margin-bottom: 3em;
 }
 
+.expense-details ul {
+    list-style-type: none;
+}
+
+    .expense-details ul li {
+        margin-bottom: 2em;
+    }
+
+.expense-btns {
+    float: right;
+    margin-right: 15px;
+}
+
 /* Categories */
 .category-Utilities {
     border-top: 5px solid #0D80D9;

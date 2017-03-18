@@ -91,7 +91,6 @@ namespace HouseholdManager.Logic.Services
                 x => x.CreatedBy,
                 x => x.AssignedUser,
                 x => x.PaidBy,
-                x => x.Comments,
                 x => x.ExpenseCategory);
 
             return expense;
@@ -169,6 +168,13 @@ namespace HouseholdManager.Logic.Services
 
             this.expenseRepositoryEF.Update(expense);
             this.unitOfWork.Commit();
+        }
+
+        public IEnumerable<Comment> GetExpenseComments(Guid expenseId)
+        {
+            // does not return users
+            var expense = this.expenseRepositoryEF.GetFirst(x => x.Id == expenseId, x => x.Comments);
+            return expense.Comments;
         }
     }
 }

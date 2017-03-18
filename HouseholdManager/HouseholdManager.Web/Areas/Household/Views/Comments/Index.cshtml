@@ -1,0 +1,17 @@
+﻿@model HouseholdManager.Web.Areas.Household.Models.CommentsViewModel
+@{
+    Layout = null;
+}
+
+@foreach (var comment in Model.Comments)
+            {
+    <div class="single-comment">
+        <strong>@comment.User</strong>
+        <span>@comment.CreatedOnDate.ToShortDateString()</span>
+        <p>@comment.CommentContent</p>
+    </div>
+}
+
+<div>
+    @Html.Action("Create", "Comments", new { expenceId = Model.ExpenseId })
+</div>

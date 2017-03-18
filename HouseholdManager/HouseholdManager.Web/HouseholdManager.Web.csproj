@@ -228,12 +228,14 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Household\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Household\Controllers\ExpenseController.cs" />
     <Compile Include="Areas\Household\Controllers\ExpensesController.cs" />
     <Compile Include="Areas\Household\Controllers\HouseholdController.cs" />
     <Compile Include="Areas\Household\Controllers\UploadImageController.cs" />
     <Compile Include="Areas\Household\HouseholdAreaRegistration.cs" />
     <Compile Include="Areas\Household\Models\BaseExpenseViewModel.cs" />
+    <Compile Include="Areas\Household\Models\CommentsViewModel.cs" />
     <Compile Include="Areas\Household\Models\CommentViewModel.cs" />
     <Compile Include="Areas\Household\Models\ExpenseCategoryViewModel.cs" />
     <Compile Include="Areas\Household\Models\CreateExpenseViewModel.cs" />
@@ -716,6 +718,9 @@
     <Content Include="Areas\Household\Views\Expense\Index.cshtml" />
     <Content Include="Areas\Household\Views\Expense\DisplayTemplates\ShowExpenseViewModel.cshtml" />
     <Content Include="Areas\Household\Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Areas\Household\Views\Expense\EditorTemplates\ShowExpenseViewModel.cshtml" />
+    <Content Include="Areas\Household\Views\Comments\Index.cshtml" />
+    <Content Include="Areas\Household\Views\Comments\_CreateCommentPartial.cshtml" />
     <None Include="Properties\PublishProfiles\householdmanager - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\householdmanager - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
@@ -1975,9 +1980,7 @@
     <Content Include="Scripts\kendo\messages\kendo.messages.zh-HK.min.js.map" />
     <Content Include="Scripts\kendo\messages\kendo.messages.zh-TW.min.js.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Household\Views\Expense\EditorTemplates\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

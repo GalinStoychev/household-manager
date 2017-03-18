@@ -23,36 +23,36 @@
             }
         </div>
         <div class="row text-center">
-                <div class="col-md-12">
-                    @if (Model.PrevousPage >= 1)
-                    {
-                        @Html.RouteLink("PREVIOUS PAGE", routeName, new { name = householdName, search = Model.SearchPattern, page = Model.PrevousPage },
+            <div class="col-md-12">
+                @if (Model.PrevousPage >= 1)
+                {
+                    @Html.RouteLink("PREVIOUS PAGE", routeName, new { name = householdName, search = Model.SearchPattern, page = Model.PrevousPage },
                         new { @class = "btn btn-default" })
-                    }
-                    @if (Model.PagesCount >= Model.NextPage)
-                    {
-                        @Html.RouteLink("NEXT PAGE", routeName, new { name = householdName, search = Model.SearchPattern, page = Model.NextPage },
+                }
+                @if (Model.PagesCount >= Model.NextPage)
+                {
+                    @Html.RouteLink("NEXT PAGE", routeName, new { name = householdName, search = Model.SearchPattern, page = Model.NextPage },
                      new { @class = "btn btn-default" })
-                    }
-                </div>
+                }
+            </div>
         </div>
     </div>
 </div>
-@section scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-<script>
-    $(".info-container").on("click", function (ev) {
-        $target = $(ev.target);
-        var id = $target.parents(".expense-container").attr("id");
-        var currentUrl = window.location.href;
-        var expenses = "Expenses";
-        var finalUrl = "";
-        var len = len = currentUrl.indexOf(expenses) + expenses.length;
-        for (var i = 0; i < len; i++) {
-            finalUrl += currentUrl[i];
-        }
 
-        window.location.href = finalUrl + "/id/" + id;
-    })
-</script>
+@section scripts {
+    <script>
+        $(".info-container").on("click", function (ev) {
+            $target = $(ev.target);
+            var id = $target.parents(".expense-container").attr("id");
+            var currentUrl = window.location.href;
+            var expenses = "Expenses";
+            var finalUrl = "";
+            var len = len = currentUrl.indexOf(expenses) + expenses.length;
+            for (var i = 0; i < len; i++) {
+                finalUrl += currentUrl[i];
+            }
+
+            window.location.href = finalUrl + "/id/" + id;
+        })
+    </script>
+}
