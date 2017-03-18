@@ -44,6 +44,11 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             var model = new ShowExpensesViewModel();
             model.SearchPattern = search;
 
+            this.TempData["isPaid"] = isPaid;
+
+            model.IsPaid = isPaid;
+
+
             var householdId = this.webHelper.GetHouseholdIdFromCookie();
             var expensesCount = this.expenseService.GetExpensesCount(householdId, isPaid, search);
             model.PagesCount = Math.Ceiling((double)expensesCount / CommonConstants.DefaultPageSize);
@@ -76,7 +81,12 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Search(SearchViewModel model)
         {
-            return RedirectToAction("Index", "Expenses", new { name = this.webHelper.GetHouseholdNameFromCookie(), search = model.SearchPattern });
+            return RedirectToAction("Index", "Expenses", new
+            {
+                name = this.webHelper.GetHouseholdNameFromCookie(),
+                search = model.SearchPattern,
+                isPaid = this.TempData["isPaid"]
+            });
         }
 
         [ChildActionOnly]
@@ -92,6 +102,16 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         {
             this.expenseService.Pay(model.Id, this.webHelper.GetUserId(), model.Comment, (decimal)model.Cost);
             return RedirectToRoute("Household_expenses", new { name = model.Name });
+        }
+
+        [HttpGet]
+        public ActionResult History()
+        {
+            return this.RedirectToAction("Index", "Expenses", new
+            {
+                name = this.webHelper.GetHouseholdNameFromCookie(),
+                isPaid = true
+            });
         }
     }
 }

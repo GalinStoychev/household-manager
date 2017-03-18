@@ -13,5 +13,7 @@ namespace HouseholdManager.Web.Areas.Household.Models
         public int PrevousPage { get; set; }
 
         public double PagesCount { get; set; }
+
+        public bool IsPaid { get; set; }
     }
 }
