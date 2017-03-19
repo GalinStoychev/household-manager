@@ -2,6 +2,7 @@
 using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Household.Models;
+using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using System;
 using System.Web.Mvc;
@@ -9,15 +10,14 @@ using System.Web.Mvc;
 namespace HouseholdManager.Web.Areas.Household.Controllers
 {
     [Authorize]
-    public class HouseholdController : Controller
+    public class HouseholdController : BaseController
     {
         private readonly IUserService userService;
         private readonly IHouseholdService householdService;
         private readonly IImageService imageService;
-        private readonly IMapingService mappingService;
-        private readonly IWebHelper webHelper;
 
         public HouseholdController(IUserService userService, IHouseholdService householdService, IImageService imageService, IMapingService mappingService, IWebHelper webHelper)
+            : base(mappingService, webHelper)
         {
             if (userService == null)
             {
@@ -33,22 +33,10 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             {
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "imageService"));
             }
-
-            if (mappingService == null)
-            {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "mappingService"));
-            }
-
-            if (webHelper == null)
-            {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "webHelper"));
-            }
-
+            
             this.userService = userService;
             this.householdService = householdService;
             this.imageService = imageService;
-            this.mappingService = mappingService;
-            this.webHelper = webHelper;
         }
 
         [HttpGet]

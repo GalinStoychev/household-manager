@@ -2,6 +2,7 @@
 using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Household.Models;
+using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using System;
 using System.Collections.Generic;
@@ -10,23 +11,17 @@ using System.Web.Mvc;
 namespace HouseholdManager.Web.Areas.Household.Controllers
 {
     [Authorize]
-    public class ExpenseController : Controller
+    public class ExpenseController : BaseController
     {
         private readonly IHouseholdService householdService;
         private readonly IExpenseService expenseService;
-        private readonly IMapingService mappingService;
-        private readonly IWebHelper webHelper;
 
         public ExpenseController(IExpenseService expenseService, IMapingService mappingService, IHouseholdService householdService, IWebHelper webHelper)
+            : base(mappingService, webHelper)
         {
             if (expenseService == null)
             {
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "expenseService"));
-            }
-
-            if (mappingService == null)
-            {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "mappingService"));
             }
 
             if (householdService == null)
@@ -34,17 +29,10 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "householdService"));
             }
 
-            if (webHelper == null)
-            {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "webHelper"));
-            }
-
             this.expenseService = expenseService;
-            this.mappingService = mappingService;
             this.householdService = householdService;
-            this.webHelper = webHelper;
         }
-      
+
         [HttpGet]
         public ActionResult Index(string id)
         {
@@ -54,7 +42,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             return View(mapped);
         }
 
-        
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -84,7 +72,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult Create(CreateExpenseViewModel model)
         {
             var householdid = this.webHelper.GetHouseholdIdFromCookie();
-            this.expenseService.CreateExpense(this.webHelper.GetUserId(),  model.Name, Guid.Parse(model.Category), householdid, model.ExpectedCost, model.DueDate, model.Comment, model.AssignedUser);
+            this.expenseService.CreateExpense(this.webHelper.GetUserId(), model.Name, Guid.Parse(model.Category), householdid, model.ExpectedCost, model.DueDate, model.Comment, model.AssignedUser);
 
             return RedirectToAction("Index", "Expenses", new { name = this.webHelper.GetHouseholdNameFromCookie() });
         }

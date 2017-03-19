@@ -245,6 +245,7 @@
     <Compile Include="Areas\Household\Models\ShowExpensesViewModel.cs" />
     <Compile Include="Areas\Household\Models\ShowExpenseViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -1985,6 +1986,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Comments\Views\Shared\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

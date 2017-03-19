@@ -60,7 +60,7 @@
 </div>
 <div class="row text-center">
     <div class="col-md-12" id="comments-container">
-        @Ajax.ActionLink("SHOW COMMENTS", "Index", "Comments", new { area="Comments", expenseId = Model.Id }, new AjaxOptions
+        @Ajax.ActionLink("SHOW COMMENTS", "Index", "Comments", new { area = "Comments", expenseId = Model.Id }, new AjaxOptions
    {
        InsertionMode = InsertionMode.Replace,
        UpdateTargetId = "comments-container",

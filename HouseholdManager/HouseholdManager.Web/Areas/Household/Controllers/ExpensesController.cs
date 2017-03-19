@@ -2,6 +2,7 @@
 using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Household.Models;
+using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using System;
 using System.Collections.Generic;
@@ -10,34 +11,21 @@ using System.Web.Mvc;
 namespace HouseholdManager.Web.Areas.Household.Controllers
 {
     [Authorize]
-    public class ExpensesController : Controller
+    public class ExpensesController : BaseController
     {
         private const string IsHistory = "IsHistory";
 
         private readonly IExpenseService expenseService;
-        private readonly IMapingService mappingService;
-        private readonly IWebHelper webHelper;
 
         public ExpensesController(IExpenseService expenseService, IMapingService mappingService, IWebHelper webHelper)
+            : base(mappingService, webHelper)
         {
             if (expenseService == null)
             {
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "expenseService"));
             }
 
-            if (mappingService == null)
-            {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "mappingService"));
-            }
-
-            if (webHelper == null)
-            {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "webHelper"));
-            }
-
             this.expenseService = expenseService;
-            this.mappingService = mappingService;
-            this.webHelper = webHelper;
         }
 
         [HttpGet]

@@ -86,6 +86,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentsControllerTests.cs" />
     <Compile Include="ExpenseControllerTests.cs" />
     <Compile Include="ExpensesControllerTests.cs" />
     <Compile Include="HouseholdControllerTests.cs" />
