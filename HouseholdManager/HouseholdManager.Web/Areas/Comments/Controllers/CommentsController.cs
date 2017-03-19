@@ -50,7 +50,7 @@ namespace HouseholdManager.Web.Areas.Comments.Controllers
         [ChildActionOnly]
         public ActionResult Create(Guid expenceId)
         {
-            return View("_CreateCommentPartial", new CommentViewModel() { ExpenceId = expenceId });
+            return PartialView("_CreateCommentPartial", new CommentViewModel() { ExpenceId = expenceId });
         }
 
         [HttpPost]
