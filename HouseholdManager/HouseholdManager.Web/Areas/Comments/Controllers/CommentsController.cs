@@ -29,7 +29,7 @@ namespace HouseholdManager.Web.Areas.Comments.Controllers
         [HttpGet]
         public ActionResult Index(Guid expenseId)
         {
-            if (!this.Request.IsAjaxRequest())
+            if (!this.webHelper.CheckIfAjaxCall(this.HttpContext))
             {
                 return this.Redirect("/");
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 
 namespace HouseholdManager.Web.WebHelpers.Contracts
 {
@@ -11,6 +12,8 @@ namespace HouseholdManager.Web.WebHelpers.Contracts
         void SetHouseholdCookie(string name, string id);
 
         void DeleteHouseholdCookie();
+
+        bool CheckIfAjaxCall(HttpContextBase context);
 
         string GetUserId();
 

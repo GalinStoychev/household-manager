@@ -15,14 +15,14 @@ namespace HouseholdManager.Web.Areas.Comments
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                name: "Comemnts_create",
-                url: "Comemnts/Create",
+                name: "Comments_create",
+                url: "Comments/Create",
                 defaults: new { action = "Create", controller = "Comments" }
             );
 
             context.MapRoute(
-                name: "Comemnts_show",
-                url: "Comemnts/{expenseId}",
+                name: "Comments_show",
+                url: "Comments/{expenseId}",
                 defaults: new { action = "Index", controller = "Comments" }
             );
 

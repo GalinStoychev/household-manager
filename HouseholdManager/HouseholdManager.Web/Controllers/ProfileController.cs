@@ -10,20 +10,19 @@ using System.Web.Mvc;
 namespace HouseholdManager.Web.Controllers
 {
     [Authorize]
-    public class ProfileController : Controller
+    public class ProfileController : BaseController
     {
         private readonly IUserService userService;
-        private readonly IMapingService mapingService;
-        private readonly IWebHelper webHelper;
 
-        public ProfileController(IUserService userService, IMapingService mapingService, IWebHelper webHelper)
+        public ProfileController(IUserService userService, IMapingService mappingService, IWebHelper webHelper)
+            : base(mappingService, webHelper)
         {
             if (userService == null)
             {
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "user service"));
             }
 
-            if (mapingService == null)
+            if (mappingService == null)
             {
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "mapingService"));
             }
@@ -34,15 +33,13 @@ namespace HouseholdManager.Web.Controllers
             }
 
             this.userService = userService;
-            this.mapingService = mapingService;
-            this.webHelper = webHelper;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
             var user = this.userService.GetUserInfo(this.webHelper.GetUserId());
-            var profileUser =  this.mapingService.Map<ProfileViewModel>(user);
+            var profileUser =  this.mappingService.Map<ProfileViewModel>(user);
             profileUser.Households = new List<string>();
             foreach (var household in user.Households)
             {

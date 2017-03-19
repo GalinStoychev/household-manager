@@ -36,20 +36,6 @@ namespace Householdmanager.Web.Tests
         }
 
         [Test]
-        public void ExpensesController_ShouldThrowArgumentNullException_WhenMappingServiceIsNull()
-        {
-            // Assert
-            Assert.Throws<ArgumentNullException>(() => new ExpensesController(expenseServiceMock.Object, null, webHelperMock.Object));
-        }
-
-        [Test]
-        public void ExpensesController_ShouldThrowArgumentNullException_WhenWebHelperIsNull()
-        {
-            // Assert
-            Assert.Throws<ArgumentNullException>(() => new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, null));
-        }
-
-        [Test]
         public void ExpensesController_ShouldHaveOneAuthorizeAttribute()
         {
             // Arrange

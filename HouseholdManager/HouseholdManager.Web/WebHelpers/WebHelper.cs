@@ -3,6 +3,7 @@ using HouseholdManager.Web.WebHelpers.Contracts;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Web;
+using System.Web.Mvc;
 
 namespace HouseholdManager.Web.WebHelpers
 {
@@ -54,6 +55,16 @@ namespace HouseholdManager.Web.WebHelpers
         public string GetUserName()
         {
             return HttpContext.Current.User.Identity.GetUserName();
+        }
+
+        public bool CheckIfAjaxCall(HttpContextBase context)
+        {
+            if (context.Request.IsAjaxRequest())
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

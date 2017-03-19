@@ -53,20 +53,6 @@ namespace Householdmanager.Web.Tests
         }
 
         [Test]
-        public void HouseholdController_ShouldThrowArgumentNullException_WhenMappingServiceIsNull()
-        {
-            // Assert
-            Assert.Throws<ArgumentNullException>(() => new HouseholdController(userServiceMock.Object, householdServiceMock.Object, imageServiceMock.Object, null, webHelperMock.Object));
-        }
-
-        [Test]
-        public void HouseholdController_ShouldThrowArgumentNullException_WhenWebHelperIsNull()
-        {
-            // Assert
-            Assert.Throws<ArgumentNullException>(() => new HouseholdController(userServiceMock.Object, householdServiceMock.Object, imageServiceMock.Object, mappingServiceMock.Object, null));
-        }
-
-        [Test]
         public void HouseholdController_ShouldHaveOneAuthorizeAttribute()
         {
             // Arrange

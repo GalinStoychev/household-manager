@@ -28,30 +28,6 @@ namespace Householdmanager.Web.Tests
         }
 
         [Test]
-        public void ProfileController_ShouldThrowArgumentNullException_WhenMappingServiceIsNull()
-        {
-            // Arrange
-            var userServiceMock = new Mock<IUserService>();
-            var webHelperMock = new Mock<IWebHelper>();
-
-            // Act
-            // Assert
-            Assert.Throws<ArgumentNullException>(() => new ProfileController(userServiceMock.Object, null, webHelperMock.Object));
-        }
-
-        [Test]
-        public void ProfileController_ShouldThrowArgumentNullException_WhenWebHelperServiceIsNull()
-        {
-            // Arrange
-            var userServiceMock = new Mock<IUserService>();
-            var mappingServiceMock = new Mock<IMapingService>();
-
-            // Act
-            // Assert
-            Assert.Throws<ArgumentNullException>(() => new ProfileController(userServiceMock.Object, mappingServiceMock.Object, null));
-        }
-
-        [Test]
         public void ProfileController_SholdReturnInstanceOfProfileController_WhenInitialized()
         {
             // Arrange
