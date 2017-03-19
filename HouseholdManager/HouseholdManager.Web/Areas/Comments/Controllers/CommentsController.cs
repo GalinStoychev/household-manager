@@ -1,13 +1,13 @@
 ﻿using HouseholdManager.Common.Constants;
 using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
-using HouseholdManager.Web.Areas.Household.Models;
+using HouseholdManager.Web.Areas.Comments.Models;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace HouseholdManager.Web.Areas.Household.Controllers
+namespace HouseholdManager.Web.Areas.Comments.Controllers
 {
     public class CommentsController : Controller
     {

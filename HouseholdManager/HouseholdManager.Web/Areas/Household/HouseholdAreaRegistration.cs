@@ -14,17 +14,7 @@ namespace HouseholdManager.Web.Areas.Household
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            context.MapRoute(
-           name: "Comemnts_create",
-           url: "Household/Comments/Create",
-           defaults: new { action = "Create", controller = "Comments" }
-       );
-
-            context.MapRoute(
-              name: "Comemnts_show",
-              url: "Household/Comments/{expenseId}",
-              defaults: new { action = "Index", controller = "Comments" }
-          );
+           
 
             context.MapRoute(
                 name: "Household_expenses",

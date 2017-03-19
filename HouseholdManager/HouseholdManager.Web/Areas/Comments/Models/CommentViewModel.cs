@@ -4,7 +4,7 @@ using HouseholdManager.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HouseholdManager.Web.Areas.Household.Models
+namespace HouseholdManager.Web.Areas.Comments.Models
 {
     public class CommentViewModel :IMapFrom<Comment>, IHaveCustomMappings
     {

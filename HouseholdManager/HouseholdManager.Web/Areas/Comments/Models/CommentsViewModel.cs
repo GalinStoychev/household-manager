@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HouseholdManager.Web.Areas.Household.Models
+namespace HouseholdManager.Web.Areas.Comments.Models
 {
     public class CommentsViewModel
     {
