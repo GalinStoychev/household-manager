@@ -56,6 +56,7 @@
     <Compile Include="Contracts\Factories\ICommentFactory.cs" />
     <Compile Include="Contracts\Factories\IExpenseFactory.cs" />
     <Compile Include="Contracts\Factories\IHouseholdFactory.cs" />
+    <Compile Include="Contracts\ICommentService.cs" />
     <Compile Include="Contracts\IExpenseService.cs" />
     <Compile Include="Contracts\IHouseholdService.cs" />
     <Compile Include="Contracts\IImageLoader.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Contracts\IImageService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CommentService.cs" />
     <Compile Include="Services\ExpenseService.cs" />
     <Compile Include="Services\HouseholdService.cs" />
     <Compile Include="Services\ImageService.cs" />

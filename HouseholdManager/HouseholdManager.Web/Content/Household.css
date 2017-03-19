@@ -87,6 +87,10 @@
     margin-right: 15px;
 }
 
+#loading-element img {
+    width: 50px;
+}
+
 /* Categories */
 .category-Utilities {
     border-top: 5px solid #0D80D9;

@@ -63,14 +63,19 @@
         @Ajax.ActionLink("SHOW COMMENTS", "Index", "Comments", new { expenseId = Model.Id }, new AjaxOptions
    {
        InsertionMode = InsertionMode.Replace,
-       UpdateTargetId = "comments-container"
+       UpdateTargetId = "comments-container",
+       LoadingElementId = "loading-element",
 
    }, new { @class = "btn btn-info" }
        )
+
+        <div id="loading-element" style="display:none">
+            <img src="http://happywheelsez.com/themes/game_gamesgames/resources/css/images/loading.gif" alt="Loading" />
+        </div>
     </div>
 </div>
+
 
 @section scriptss {
     @Scripts.Render("~/bundles/jqueryval")
 }
-

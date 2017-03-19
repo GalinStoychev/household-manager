@@ -9,18 +9,17 @@ using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
 {
-    [Authorize]
     public class CommentsController : Controller
     {
-        private readonly IExpenseService expenseService;
+        private readonly ICommentService commentService;
         private readonly IMapingService mappingService;
         private readonly IWebHelper webHelper;
 
-        public CommentsController(IExpenseService expenseService, IMapingService mappingService, IWebHelper webHelper)
+        public CommentsController(ICommentService commentService, IMapingService mappingService, IWebHelper webHelper)
         {
-            if (expenseService == null)
+            if (commentService == null)
             {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "expenseService"));
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "commentService"));
             }
 
             if (mappingService == null)
@@ -33,7 +32,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "webHelper"));
             }
 
-            this.expenseService = expenseService;
+            this.commentService = commentService;
             this.mappingService = mappingService;
             this.webHelper = webHelper;
         }
@@ -46,7 +45,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 return this.Redirect("/");
             }
 
-            var comments = this.expenseService.GetExpenseComments(expenseId);
+            var comments = this.commentService.GetExpenseComments(expenseId);
             var model = new CommentsViewModel();
             model.ExpenseId = expenseId;
             model.Comments = new List<CommentViewModel>();
@@ -67,9 +66,9 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CommentViewModel model)
+        public ActionResult Create([Bind(Exclude = "User, CreatedOnDate")] CommentViewModel model)
         {
-            // add comment to db
+            this.commentService.AddComment(model.ExpenceId, this.webHelper.GetUserId(), model.CommentContent);
           
             return RedirectToRoute("Household_single_expense", new { name = this.webHelper.GetHouseholdNameFromCookie(), id = model.ExpenceId });
         }

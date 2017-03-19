@@ -10,10 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jquery.unobtrusive")
     @RenderSection("kendoScripts", required: false)
-    @RenderSection("styles", required: false)
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
 
@@ -27,30 +28,36 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand trigger-loading" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (householdName != null)
                     {
-                        <li>@Html.RouteLink("Household", "Household_single", new { area = "", name = householdName }, null)</li>
-                        <li>@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName}, null)</li>
-                        <li>@Html.ActionLink("Add item", "Create", "Expense", new { area = "Household", name = householdName }, null)</li>
-                        <li>@Html.ActionLink("History", "History", "Expenses", new { area = "Household", name = householdName}, null)</li>
+                        <li>@Html.RouteLink("Household", "Household_single", new { area = "", name = householdName }, new { @class="trigger-loading"})</li>
+                        <li>@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName}, new { @class = "trigger-loading" })</li>
+                        <li>@Html.ActionLink("Add item", "Create", "Expense", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
+                        <li>@Html.ActionLink("History", "History", "Expenses", new { area = "Household", name = householdName}, new { @class = "trigger-loading" })</li>
                     }
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "trigger-loading" })</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "trigger-loading" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
+        <div class="row text-center">
+        <div class="col-md-12 hide loading-main" >
+            <img src="http://happywheelsez.com/themes/game_gamesgames/resources/css/images/loading.gif" alt="Loading" />
+        </div>
+        </div>
         @RenderBody()
     </div>
 
 
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/loading")
     @RenderSection("scripts", required: false)
 </body>
 </html>

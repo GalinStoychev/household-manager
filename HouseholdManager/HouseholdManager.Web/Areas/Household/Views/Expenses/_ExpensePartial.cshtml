@@ -5,7 +5,7 @@
     var categoryClass = "category-" + Model.Category;
 }
 <div class="expense-container @categoryClass" id=@Model.Id>
-    <div class="info-container">
+    <div class="info-container trigger-loading">
         <span class=color-grey>&bull; @Model.Category</span>
         <div class="name-container">
             <h3 class="text-center expense-name">@Model.Name</h3>

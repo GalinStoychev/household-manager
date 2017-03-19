@@ -1,4 +1,8 @@
 ﻿@model HouseholdManager.Web.Areas.Household.Models.SearchViewModel
+@{ 
+    Layout = null;
+}
+
 
 @using (Html.BeginForm(Model.ActionName, Model.ControllerName, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {

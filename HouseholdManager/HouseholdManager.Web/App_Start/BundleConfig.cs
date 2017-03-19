@@ -10,6 +10,9 @@ namespace HouseholdManager.Web
         {
             bundles.IgnoreList.Clear();
 
+            bundles.Add(new ScriptBundle("~/bundles/loading").Include(
+                       "~/Scripts/loading.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                        "~/Scripts/kendo/kendo.all.min.js",
                        "~/Scripts/kendo/kendo.aspnetmvc.min.js"));

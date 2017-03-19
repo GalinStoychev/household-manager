@@ -36,6 +36,9 @@ namespace HouseholdManager.Web.App_Start.BindingModules
 
             this.Bind<IRepository<ExpenseCategory>>()
                 .To<GenericRepositoryEF<ExpenseCategory>>();
+
+            this.Bind<IRepository<Comment>>()
+                .To<GenericRepositoryEF<Comment>>();
         }
     }
 }

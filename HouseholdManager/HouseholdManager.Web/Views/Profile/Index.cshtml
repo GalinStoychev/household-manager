@@ -21,12 +21,12 @@
             @foreach (var household in Model.Households)
             {
                 <div class="hh-container">
-                    @Html.ActionLink(household, "SetCurrentHousehold", "Household", new { area = "Household", name = household }, new { })
+                    @Html.ActionLink(household, "SetCurrentHousehold", "Household", new { area = "Household", name = household }, new { @class = "trigger-loading" })
                 </div>
             }
         </div>
         <div>
-            @Html.ActionLink("ADD HOUSEHOLD", "Create", "Household", new { }, new { @class = "btn btn-success" })
+            @Html.ActionLink("ADD HOUSEHOLD", "Create", "Household", new { }, new { @class = "btn btn-success loading-trigger" })
         </div>
     </div>
 </div>

@@ -9,7 +9,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    background-color:white;
+    background-color: white;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -49,10 +49,22 @@ textarea {
     background-color: #75DBFF;
 }
 
-.btn-info:hover {
-    background-color: #32CAFF;
-}
+    .btn-info:hover {
+        background-color: #32CAFF;
+    }
 
 .color-grey {
     color: #949494;
+}
+
+.loading-main {
+    margin-top: 2em;
+}
+
+.loading-main > img {
+     width: 100px;
+}
+
+.hide {
+ display: none;
 }
