@@ -1,4 +1,9 @@
-﻿@model HouseholdManager.Web.Areas.Household.Models.ShowExpenseViewModel
+﻿@using HouseholdManager.Common.Constants
+@model HouseholdManager.Web.Areas.Household.Models.ExpenseViewModel
+@{
+    var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
+}
+
 <div class="row text-center">
     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <h2>@Model.Name</h2>
@@ -48,7 +53,7 @@
         </ul>
     </div>
     <div class="expense-btns">
-        @Html.ActionLink("EDIT", "Edit", "Expense", null, new { @class = "btn btn-info" })
+        @Html.ActionLink("EDIT", "Edit", "Expense", new {name = householdName, id = Model.Id }, new { @class = "btn btn-info" })
         @Html.ActionLink("DELETE", "Delete", "Expense", null, new { @class = "btn btn-danger" })
     </div>
 

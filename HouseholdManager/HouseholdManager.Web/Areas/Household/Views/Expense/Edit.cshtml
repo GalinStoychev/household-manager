@@ -1,14 +1,13 @@
 ﻿@using HouseholdManager.Common.Constants
-
 @model HouseholdManager.Web.Areas.Household.Models.ExpenseViewModel
-@{ 
+@{
     var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
 }
+
 <h2 class="header-page text-center">@householdName</h2>
-@Html.DisplayForModel(Model)
+@Html.EditorForModel(Model)
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
 

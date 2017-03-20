@@ -4,7 +4,7 @@ namespace HouseholdManager.Web.Areas.Household.Models
 {
     public class ShowExpensesViewModel
     {
-        public IEnumerable<ShowExpenseViewModel> Expenses { get; set; }
+        public IEnumerable<ExpenseViewModel> Expenses { get; set; }
 
         public string SearchPattern { get; set; }
 

@@ -4,12 +4,35 @@ using HouseholdManager.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Models
 {
-    public class ShowExpenseViewModel : BaseExpenseViewModel, IMapFrom<Expense>, IHaveCustomMappings
+    public class ExpenseViewModel: IMapFrom<Expense>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "The {0} must be between {2} and 30 characters long.", MinimumLength = 2)]
+        public string Name { get; set; }
+
+        public string Category { get; set; }
+
+        [Display(Name = "Assigned user")]
+        public string AssignedUser { get; set; }
+
+        [Display(Name = "Created by")]
+        public string CreatedBy { get; set; }
+
+        [Display(Name = "Due date")]
+        public DateTime DueDate { get; set; }
+
+        [Required(ErrorMessage = " Expected cost is required.")]
+        [Display(Name = "Expected cost")]
+        public decimal ExpectedCost { get; set; }
+
+        [StringLength(100, ErrorMessage = "The {0} must be maximum 100 characters long.")]
+        public string Comment { get; set; }
 
         [Required]
         [Range(0, double.MaxValue, ErrorMessage = "The cost cannot be a negative number.")]
@@ -27,9 +50,13 @@ namespace HouseholdManager.Web.Areas.Household.Models
         [Display(Name = "Paid by")]
         public string PaidBy { get; set; }
 
+        public IList<SelectListItem> Categories { get; set; }
+
+        public IList<SelectListItem> Users { get; set; }
+
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
-            configuration.CreateMap<Expense, ShowExpenseViewModel>()
+            configuration.CreateMap<Expense, ExpenseViewModel>()
                 .ForMember(d => d.Category, opt => opt.MapFrom(s => s.ExpenseCategory.Name))
                 .ForMember(d => d.AssignedUser, opt => opt.MapFrom(s => s.AssignedUser.FirstName + " " + s.AssignedUser.LastName))
                 .ForMember(d => d.CreatedBy, opt => opt.MapFrom(s => s.CreatedBy.FirstName + " " + s.CreatedBy.LastName))

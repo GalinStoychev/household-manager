@@ -1,0 +1,75 @@
+﻿@model HouseholdManager.Web.Areas.Household.Models.ExpenseViewModel
+<div class="row text-center">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <h2>@Model.Name</h2>
+        <p class="color-grey">&bull; @Model.Category</p>
+        <hr />
+    </div>
+
+</div>
+@using (Html.BeginForm("Edit", "Expense", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row expense-details">
+        <div class="col-md-3 col-md-offset-3 col-sm-4 col-sm-offset-2 col-xs-6">
+            <ul>
+                <li>
+                    <strong>@Html.DisplayNameFor(m => m.CreatedBy): </strong><span>@Model.CreatedBy</span>
+                </li>
+                <li>
+                    <strong>@Html.LabelFor(m => m.AssignedUser): </strong>
+                    @Html.ValidationMessageFor(m => m.AssignedUser, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(m => m.AssignedUser, new { @class = "form-control" })
+                </li>
+                <li>
+                    <strong>@Html.LabelFor(m => m.ExpectedCost): </strong>
+                    @Html.ValidationMessageFor(m => m.ExpectedCost, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(m => m.ExpectedCost, new { @class = "form-control" })
+                </li>
+                <li>
+                    <strong>@Html.DisplayNameFor(m => m.PaidBy): </strong><span>@Model.PaidBy</span>
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <ul>
+                <li>
+                    <strong>@Html.DisplayNameFor(m => m.CreatedOn): </strong><span>@Model.CreatedOn</span>
+                </li>
+                <li>
+                    <strong>@Html.LabelFor(m => m.DueDate): </strong>
+                    @Html.ValidationMessageFor(m => m.DueDate, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(m => m.DueDate, new { @class = "form-control" })
+                </li>
+                <li>
+                    <strong>@Html.DisplayNameFor(m => m.Cost): </strong>
+                    @if (Model.Cost.ToString() != "0.00")
+                {
+                        <span>$@Model.Cost</span>
+                    }
+                </li>
+                <li>
+                    <strong>@Html.DisplayNameFor(m => m.PaidOnDate): </strong>
+                    <span>@Model.PaidOnDate</span>
+
+                </li>
+            </ul>
+        </div>
+        <div class="expense-btns">
+            @Html.ActionLink("SAVE", "Edit", "Expense", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("CANCEL", "Index", "Expense", null, new { @class = "btn btn-danger"})
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <hr />
+    </div>
+</div>
+
+
+@section scriptss {
+    @Scripts.Render("~/bundles/jqueryval")
+}

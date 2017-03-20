@@ -66,10 +66,10 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             }
 
             var expenses = this.expenseService.GetExpenses(householdId, page, isPaid, search);
-            var modelExpenses = new List<ShowExpenseViewModel>();
+            var modelExpenses = new List<ExpenseViewModel>();
             foreach (var expense in expenses)
             {
-                var mapped = this.mappingService.Map<ShowExpenseViewModel>(expense);
+                var mapped = this.mappingService.Map<ExpenseViewModel>(expense);
                 modelExpenses.Add(mapped);
             }
 
@@ -104,7 +104,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Pay([Bind(Include = "Cost, Id, Comment, Name")] ShowExpenseViewModel model)
+        public ActionResult Pay([Bind(Include = "Cost, Id, Comment, Name")] ExpenseViewModel model)
         {
             this.expenseService.Pay(model.Id, this.webHelper.GetUserId(), model.Comment, (decimal)model.Cost);
             return RedirectToRoute("Household_expenses", new { name = model.Name });

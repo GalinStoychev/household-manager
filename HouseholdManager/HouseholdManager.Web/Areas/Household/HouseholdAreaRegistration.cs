@@ -14,8 +14,6 @@ namespace HouseholdManager.Web.Areas.Household
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-           
-
             context.MapRoute(
                 name: "Household_expenses",
                 url: "Household/{name}/Expenses",
@@ -26,27 +24,25 @@ namespace HouseholdManager.Web.Areas.Household
                name: "Household_expenses_history",
                url: "Household/{name}/Expenses/History",
                defaults: new { action = "History", controller = "Expenses" }
-           );
+            );
 
             context.MapRoute(
-               name: "Household_single_expense",
-               url: "Household/{name}/Expenses/id/{id}",
-               defaults: new { action = "Index", controller = "Expense" }
-         );
+                name: "Household_single_expense",
+                url: "Household/{name}/Expenses/id/{id}",
+                defaults: new { action = "Index", controller = "Expense" }
+            );
 
-            // TODO: Fix Script to click on on the EXPENSE and fix the redirection
-
-            //    context.MapRoute(
-            //      name: "Household_single_expense",
-            //      url: "Household/{name}/Expenses/{id}/Edit",
-            //      defaults: new { action = "Create", controller = "Expenses" }
-            //);
+            context.MapRoute(
+                name: "Household_edit_expense",
+                url: "Household/{name}/Expenses/Edit/{id}",
+                defaults: new { action = "Edit", controller = "Expense" }
+            );
 
             context.MapRoute(
                 name: "Household_add_expense",
                 url: "Household/{name}/Expenses/Add",
                 defaults: new { action = "Create", controller = "Expense" }
-          );
+            );
 
             context.MapRoute(
                 name: "Household_create",
@@ -54,12 +50,11 @@ namespace HouseholdManager.Web.Areas.Household
                 defaults: new { action = "Create", controller = "Household" }
             );
 
-
             context.MapRoute(
-               name: "Household_single",
-               url: "Household/{name}",
-               defaults: new { action = "Index", controller = "Household" }
-           );
+                name: "Household_single",
+                url: "Household/{name}",
+                defaults: new { action = "Index", controller = "Household" }
+            );
 
             context.MapRoute(
                 name: "Household_default",

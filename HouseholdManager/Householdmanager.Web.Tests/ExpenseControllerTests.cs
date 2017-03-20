@@ -72,13 +72,13 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
-            this.mappingServiceMock.Setup(x => x.Map<ShowExpenseViewModel>(It.IsAny<object>())).Returns(new ShowExpenseViewModel());
+            this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(new ExpenseViewModel());
 
             // Act
             // Assert
             expenseController.WithCallTo(x => x.Index(new Guid().ToString()))
                 .ShouldRenderDefaultView()
-                .WithModel<ShowExpenseViewModel>();
+                .WithModel<ExpenseViewModel>();
         }
 
         [Test]
@@ -86,8 +86,8 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
-            var viewModelToReturn = new ShowExpenseViewModel();
-            this.mappingServiceMock.Setup(x => x.Map<ShowExpenseViewModel>(It.IsAny<object>())).Returns(viewModelToReturn);
+            var viewModelToReturn = new ExpenseViewModel();
+            this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(viewModelToReturn);
 
             // Act
             // Assert
@@ -119,7 +119,7 @@ namespace Householdmanager.Web.Tests
             expenseController.Index(new Guid().ToString());
 
             // Assert
-            mappingServiceMock.Verify(x => x.Map<ShowExpenseViewModel>(It.IsAny<Expense>()), Times.Once);
+            mappingServiceMock.Verify(x => x.Map<ExpenseViewModel>(It.IsAny<Expense>()), Times.Once);
         }
 
         [Test]
@@ -143,7 +143,7 @@ namespace Householdmanager.Web.Tests
             // Assert
             expenseController.WithCallTo(x => x.Create())
                 .ShouldRenderDefaultView()
-                .WithModel<CreateExpenseViewModel>();
+                .WithModel<ExpenseViewModel>();
         }
 
         [Test]
@@ -192,7 +192,7 @@ namespace Householdmanager.Web.Tests
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
 
             // Act
-            var result = expenseController.GetType().GetMethod("Create", new Type[] { typeof(CreateExpenseViewModel) })
+            var result = expenseController.GetType().GetMethod("Create", new Type[] { typeof(ExpenseViewModel) })
                 .GetCustomAttributes(typeof(ValidateAntiForgeryTokenAttribute), false).Length;
 
             // Assert
@@ -204,7 +204,7 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
-            var model = new CreateExpenseViewModel()
+            var model = new ExpenseViewModel()
             {
                 Name = "_",
                 AssignedUser = "_",
@@ -224,7 +224,7 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
-            var model = new CreateExpenseViewModel()
+            var model = new ExpenseViewModel()
             {
                 Name = "_",
                 AssignedUser = "_",
@@ -245,7 +245,7 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
-            var model = new CreateExpenseViewModel()
+            var model = new ExpenseViewModel()
             {
                 Name = "_",
                 AssignedUser = "_",
@@ -275,7 +275,7 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
-            var model = new CreateExpenseViewModel()
+            var model = new ExpenseViewModel()
             {
                 Name = "_",
                 AssignedUser = "_",
@@ -296,7 +296,7 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
-            var model = new CreateExpenseViewModel()
+            var model = new ExpenseViewModel()
             {
                 Name = "_",
                 AssignedUser = "_",

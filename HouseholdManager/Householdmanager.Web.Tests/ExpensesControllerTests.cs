@@ -130,7 +130,7 @@ namespace Householdmanager.Web.Tests
             expensesController.Index("_", "_", false, 1);
 
             // Assert
-            mappingServiceMock.Verify(x => x.Map<ShowExpenseViewModel>(It.IsAny<Expense>()), Times.Exactly(numberOfExpenses));
+            mappingServiceMock.Verify(x => x.Map<ExpenseViewModel>(It.IsAny<Expense>()), Times.Exactly(numberOfExpenses));
         }
 
         [Test]
@@ -140,7 +140,7 @@ namespace Householdmanager.Web.Tests
             var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
-            var result = expensesController.GetType().GetMethod("Pay", new Type[] { typeof(ShowExpenseViewModel) })
+            var result = expensesController.GetType().GetMethod("Pay", new Type[] { typeof(ExpenseViewModel) })
                 .GetCustomAttributes(typeof(ValidateAntiForgeryTokenAttribute), false).Length;
 
             // Assert
@@ -152,7 +152,7 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
-            var model = new ShowExpenseViewModel() { Cost = 1M };
+            var model = new ExpenseViewModel() { Cost = 1M };
 
             // Act
             // Assert
@@ -164,7 +164,7 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
-            var model = new ShowExpenseViewModel() { Cost = 1M };
+            var model = new ExpenseViewModel() { Cost = 1M };
 
             // Act
             expensesController.Pay(model);
@@ -178,7 +178,7 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
-            var model = new ShowExpenseViewModel() { Cost = 1M };
+            var model = new ExpenseViewModel() { Cost = 1M };
 
             // Act
             expensesController.Pay(model);

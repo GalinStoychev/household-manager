@@ -37,7 +37,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult Index(string id)
         {
             var expense = this.expenseService.GetExpense(Guid.Parse(id));
-            var mapped = this.mappingService.Map<ShowExpenseViewModel>(expense);
+            var mapped = this.mappingService.Map<ExpenseViewModel>(expense);
 
             return View(mapped);
         }
@@ -53,7 +53,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
                 modelCategories.Add(new SelectListItem() { Value = category.Id.ToString(), Text = category.Name });
             }
 
-            var model = new CreateExpenseViewModel() { Categories = modelCategories };
+            var model = new ExpenseViewModel() { Categories = modelCategories };
 
             var householdid = this.webHelper.GetHouseholdIdFromCookie();
             var users = this.householdService.GetHouseholdUsers(householdid);
@@ -69,12 +69,21 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateExpenseViewModel model)
+        public ActionResult Create([Bind(Exclude = "Cost, PaidOnDate, CreatedOn, IsPaid, PaidBy")] ExpenseViewModel model)
         {
             var householdid = this.webHelper.GetHouseholdIdFromCookie();
             this.expenseService.CreateExpense(this.webHelper.GetUserId(), model.Name, Guid.Parse(model.Category), householdid, model.ExpectedCost, model.DueDate, model.Comment, model.AssignedUser);
 
             return RedirectToAction("Index", "Expenses", new { name = this.webHelper.GetHouseholdNameFromCookie() });
+        }
+
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            var expense = this.expenseService.GetExpense(Guid.Parse(id));
+            var mapped = this.mappingService.Map<ExpenseViewModel>(expense);
+
+            return View(mapped);
         }
     }
 }
