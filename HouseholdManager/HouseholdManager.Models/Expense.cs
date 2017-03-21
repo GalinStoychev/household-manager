@@ -126,5 +126,10 @@ namespace HouseholdManager.Models
             this.DueDate = DueDate;
             this.AssignedUserId = assignedUserId;
         }
+
+        public void Delete(bool isDeleted)
+        {
+            this.IsDeleted = isDeleted;
+        }
     }
 }

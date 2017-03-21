@@ -109,11 +109,13 @@ namespace HouseholdManager.Logic.Services
             {
                 var patternToLower = searchPattern.ToLower();
                 expenses = this.expenseRepositoryEF.All
-                   .Where(x => x.HouseholdId == householdId && x.IsPaid == isPaid &&
-                       (x.Name.ToLower().IndexOf(patternToLower) > -1 ||
-                           x.ExpenseCategory.Name.ToLower().IndexOf(patternToLower) > -1 ||
-                           x.AssignedUser.FirstName.ToLower().IndexOf(patternToLower) > -1 ||
-                           x.AssignedUser.LastName.ToLower().IndexOf(patternToLower) > -1))
+                   .Where(x => x.HouseholdId == householdId &&
+                   x.IsPaid == isPaid &&
+                   x.IsDeleted == false &&
+                   (x.Name.ToLower().IndexOf(patternToLower) > -1 ||
+                       x.ExpenseCategory.Name.ToLower().IndexOf(patternToLower) > -1 ||
+                       x.AssignedUser.FirstName.ToLower().IndexOf(patternToLower) > -1 ||
+                       x.AssignedUser.LastName.ToLower().IndexOf(patternToLower) > -1))
                    .Include(x => x.AssignedUser)
                    .Include(x => x.ExpenseCategory)
                    .OrderBy(x => x.DueDate)
@@ -124,7 +126,7 @@ namespace HouseholdManager.Logic.Services
             else
             {
                 expenses = this.expenseRepositoryEF.All
-                  .Where(x => x.HouseholdId == householdId && x.IsPaid == isPaid)
+                  .Where(x => x.HouseholdId == householdId && x.IsPaid == isPaid && x.IsDeleted == false)
                   .Include(x => x.AssignedUser)
                   .Include(x => x.ExpenseCategory)
                   .OrderBy(x => x.DueDate)
@@ -145,6 +147,7 @@ namespace HouseholdManager.Logic.Services
                 count = this.expenseRepositoryEF.GetAll<Expense>(
                     x => x.HouseholdId == householdId &&
                     x.IsPaid == isPaid &&
+                    x.IsDeleted == false &&
                     (x.ExpenseCategory.Name.ToLower().IndexOf(patternToLower) > -1 ||
                     x.Name.ToLower().IndexOf(patternToLower) > -1 ||
                     x.AssignedUser.FirstName.ToLower().IndexOf(patternToLower) > -1 ||
@@ -154,7 +157,7 @@ namespace HouseholdManager.Logic.Services
             else
             {
                 count = this.expenseRepositoryEF.GetAll<Expense>(
-                    x => x.HouseholdId == householdId && x.IsPaid == isPaid, null).Count();
+                    x => x.HouseholdId == householdId && x.IsPaid == isPaid && x.IsDeleted == false, null).Count();
             }
 
             return count;
@@ -170,10 +173,19 @@ namespace HouseholdManager.Logic.Services
             this.unitOfWork.Commit();
         }
 
-        public void UpdateExpense(Guid expenseId, string name, Guid categoryId, decimal expectedCost,  DateTime dueDate, string assignedUserId)
+        public void UpdateExpense(Guid expenseId, string name, Guid categoryId, decimal expectedCost, DateTime dueDate, string assignedUserId)
         {
             var expense = this.expenseRepositoryEF.GetById(expenseId);
             expense.Update(name, categoryId, expectedCost, dueDate, assignedUserId);
+
+            this.expenseRepositoryEF.Update(expense);
+            this.unitOfWork.Commit();
+        }
+
+        public void Delete(Guid expenseId, bool isDeleted)
+        {
+            var expense = this.expenseRepositoryEF.GetById(expenseId);
+            expense.Delete(isDeleted);
 
             this.expenseRepositoryEF.Update(expense);
             this.unitOfWork.Commit();

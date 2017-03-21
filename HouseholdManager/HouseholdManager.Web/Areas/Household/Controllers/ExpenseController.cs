@@ -79,9 +79,16 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ExpenseViewModel model)
+        public ActionResult Edit([Bind(Include = "Id, Name, Category, AssignedUser, DueDate, ExpectedCost")] ExpenseViewModel model)
         {
             this.expenseService.UpdateExpense(model.Id, model.Name, Guid.Parse(model.Category), model.ExpectedCost, model.DueDate, model.AssignedUser);
+            return RedirectToAction("Index", new { id = model.Id });
+        }
+
+        [HttpPost]
+        public ActionResult Delete([Bind(Include = "Id")] ExpenseViewModel model)
+        {
+            this.expenseService.Delete(model.Id, true);
             return RedirectToAction("Index", new { id = model.Id });
         }
 
