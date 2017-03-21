@@ -117,5 +117,14 @@ namespace HouseholdManager.Models
 
             this.AssignedUserId = userId;
         }
+
+        public void Update(string name, Guid categoryId, decimal expectedCost, DateTime dueDate, string assignedUserId)
+        {
+            this.Name = name;
+            this.CategoryId = categoryId;
+            this.ExpectedCost = expectedCost;
+            this.DueDate = DueDate;
+            this.AssignedUserId = assignedUserId;
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace HouseholdManager.Web.Areas.Household.Models
         [Display(Name = "Paid by")]
         public string PaidBy { get; set; }
 
-        public IList<SelectListItem> Categories { get; set; }
+        public IList<SelectListItem> CategoriesList { get; set; }
 
         public IList<SelectListItem> Users { get; set; }
 

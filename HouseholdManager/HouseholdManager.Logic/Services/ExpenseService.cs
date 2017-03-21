@@ -169,5 +169,14 @@ namespace HouseholdManager.Logic.Services
             this.expenseRepositoryEF.Update(expense);
             this.unitOfWork.Commit();
         }
+
+        public void UpdateExpense(Guid expenseId, string name, Guid categoryId, decimal expectedCost,  DateTime dueDate, string assignedUserId)
+        {
+            var expense = this.expenseRepositoryEF.GetById(expenseId);
+            expense.Update(name, categoryId, expectedCost, dueDate, assignedUserId);
+
+            this.expenseRepositoryEF.Update(expense);
+            this.unitOfWork.Commit();
+        }
     }
 }

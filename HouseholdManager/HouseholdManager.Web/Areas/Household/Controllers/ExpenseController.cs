@@ -1,6 +1,7 @@
 ﻿using HouseholdManager.Common.Constants;
 using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
+using HouseholdManager.Models;
 using HouseholdManager.Web.Areas.Household.Models;
 using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
@@ -34,9 +35,9 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(string id)
+        public ActionResult Index(Guid id)
         {
-            var expense = this.expenseService.GetExpense(Guid.Parse(id));
+            var expense = this.expenseService.GetExpense(id);
             var mapped = this.mappingService.Map<ExpenseViewModel>(expense);
 
             return View(mapped);
@@ -46,23 +47,9 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var expenseCateogries = this.expenseService.GetExpenseCategories();
-            var modelCategories = new List<SelectListItem>();
-            foreach (var category in expenseCateogries)
-            {
-                modelCategories.Add(new SelectListItem() { Value = category.Id.ToString(), Text = category.Name });
-            }
-
-            var model = new ExpenseViewModel() { Categories = modelCategories };
-
-            var householdid = this.webHelper.GetHouseholdIdFromCookie();
-            var users = this.householdService.GetHouseholdUsers(householdid);
-            model.Users = new List<SelectListItem>();
-            model.Users.Add(new SelectListItem());
-            foreach (var user in users)
-            {
-                model.Users.Add(new SelectListItem() { Value = user.Id, Text = user.FirstName + " " + user.LastName });
-            }
+            var modelCategories = this.PrepareModelCategories();
+            var model = new ExpenseViewModel() { CategoriesList = modelCategories };
+            model.Users = this.PrepareModelUsers();
 
             return View(model);
         }
@@ -81,9 +68,46 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult Edit(string id)
         {
             var expense = this.expenseService.GetExpense(Guid.Parse(id));
-            var mapped = this.mappingService.Map<ExpenseViewModel>(expense);
+            var model = this.mappingService.Map<ExpenseViewModel>(expense);
+            model.CategoriesList = this.PrepareModelCategories();
+            model.Users = this.PrepareModelUsers();
+            model.AssignedUser = expense.AssignedUserId;
+            model.Category = expense.CategoryId.ToString();
 
-            return View(mapped);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ExpenseViewModel model)
+        {
+            this.expenseService.UpdateExpense(model.Id, model.Name, Guid.Parse(model.Category), model.ExpectedCost, model.DueDate, model.AssignedUser);
+            return RedirectToAction("Index", new { id = model.Id });
+        }
+
+        private IList<SelectListItem> PrepareModelCategories()
+        {
+            var expenseCateogries = this.expenseService.GetExpenseCategories();
+            var modelCategories = new List<SelectListItem>();
+            foreach (var category in expenseCateogries)
+            {
+                modelCategories.Add(new SelectListItem() { Value = category.Id.ToString(), Text = category.Name });
+            }
+
+            return modelCategories;
+        }
+
+        private IList<SelectListItem> PrepareModelUsers()
+        {
+            var householdid = this.webHelper.GetHouseholdIdFromCookie();
+            var users = this.householdService.GetHouseholdUsers(householdid);
+            var modelUsers = new List<SelectListItem>();
+            foreach (var user in users)
+            {
+                modelUsers.Add(new SelectListItem() { Value = user.Id, Text = user.FirstName + " " + user.LastName });
+            }
+
+            return modelUsers;
         }
     }
 }

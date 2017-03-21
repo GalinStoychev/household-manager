@@ -4,6 +4,14 @@
     var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
 }
 
+@section styles {
+    @Styles.Render("~/Content/kendo/css")
+}
+
+@section kendoScripts {
+    @Scripts.Render("~/bundles/kendo")
+}
+
 <h2 class="header-page text-center">@householdName</h2>
 @Html.EditorForModel(Model)
 

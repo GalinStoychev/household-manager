@@ -64,7 +64,7 @@ namespace Householdmanager.Web.Tests
 
             // Act
             // Assert
-            expenseController.WithCallTo(x => x.Index(new Guid().ToString())).ShouldRenderDefaultView();
+            expenseController.WithCallTo(x => x.Index(new Guid())).ShouldRenderDefaultView();
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace Householdmanager.Web.Tests
 
             // Act
             // Assert
-            expenseController.WithCallTo(x => x.Index(new Guid().ToString()))
+            expenseController.WithCallTo(x => x.Index(new Guid()))
                 .ShouldRenderDefaultView()
                 .WithModel<ExpenseViewModel>();
         }
@@ -91,7 +91,7 @@ namespace Householdmanager.Web.Tests
 
             // Act
             // Assert
-            expenseController.WithCallTo(x => x.Index(new Guid().ToString()))
+            expenseController.WithCallTo(x => x.Index(new Guid()))
                 .ShouldRenderDefaultView()
                 .WithModel(viewModelToReturn);
         }
@@ -103,7 +103,7 @@ namespace Householdmanager.Web.Tests
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
 
             // Act
-            expenseController.Index(new Guid().ToString());
+            expenseController.Index(new Guid());
 
             // Assert
             expenseServiceMock.Verify(x => x.GetExpense(It.IsAny<Guid>()), Times.Once);
@@ -116,7 +116,7 @@ namespace Householdmanager.Web.Tests
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
 
             // Act
-            expenseController.Index(new Guid().ToString());
+            expenseController.Index(new Guid());
 
             // Assert
             mappingServiceMock.Verify(x => x.Map<ExpenseViewModel>(It.IsAny<Expense>()), Times.Once);

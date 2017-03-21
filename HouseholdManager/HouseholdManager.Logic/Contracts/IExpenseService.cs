@@ -8,6 +8,8 @@ namespace HouseholdManager.Logic.Contracts
     {
         void CreateExpense(string userId, string name, Guid categoryId, Guid householdId, decimal expectedCost, DateTime dueDate, string comment, string assignedUserId);
 
+        void UpdateExpense(Guid expenseId, string name, Guid categoryId, decimal expectedCost, DateTime dueDate, string assignedUserId);
+
         IEnumerable<ExpenseCategory> GetExpenseCategories();
 
         void AssignUserToExpense(string userId, Guid expenseId);

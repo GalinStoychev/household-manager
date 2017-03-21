@@ -91,6 +91,20 @@
     width: 50px;
 }
 
+.exp-name, .exp-category {
+    display: inline-block;
+}
+
+.exp-name {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.hl-edit-exp {
+    width: 40em;
+}
+
 /* Categories */
 .category-Utilities {
     border-top: 5px solid #0D80D9;
