@@ -84,8 +84,11 @@
 
 .expense-btns {
     float: right;
-    margin-right: 15px;
 }
+
+    .expense-btns > a, .expense-btns input {
+        width: 100px;
+    }
 
 #loading-element img {
     width: 50px;
@@ -103,6 +106,10 @@
 
 .hl-edit-exp {
     width: 40em;
+}
+
+.exp-delete {
+    display: inline-block;
 }
 
 /* Categories */

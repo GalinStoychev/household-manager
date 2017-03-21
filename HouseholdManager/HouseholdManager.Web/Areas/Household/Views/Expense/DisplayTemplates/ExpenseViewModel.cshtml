@@ -10,7 +10,16 @@
         <p class="color-grey">&bull; @Model.Category</p>
         <hr />
     </div>
-
+    <div class="col-md-3 col-sm-2 col-xs-8">
+        <div class="expense-btns">
+            @Html.ActionLink("EDIT", "Edit", "Expense", new { name = householdName, id = Model.Id }, new { @class = "btn btn-info" })
+            @using (Html.BeginForm("Delete", "Expense", FormMethod.Post, new { @class = "form-horizontal exp-delete", role = "form" }))
+            {
+                @Html.HiddenFor(m => m.Id);
+                <input type="submit" value="DELETE" class="btn btn-danger" />
+            }
+        </div>
+    </div>
 </div>
 <div class="row expense-details">
     <div class="col-md-3 col-md-offset-3 col-sm-4 col-sm-offset-2 col-xs-6">
@@ -52,15 +61,7 @@
             </li>
         </ul>
     </div>
-    <div class="expense-btns">
-        @Html.ActionLink("EDIT", "Edit", "Expense", new { name = householdName, id = Model.Id }, new { @class = "btn btn-info" })
-        @using (Html.BeginForm("Delete", "Expense", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            @Html.HiddenFor(m => m.Id);
-            <input type="submit" value="DELETE" class="btn btn-danger" />
-        }
-        @*@Html.ActionLink("DELETE", "Delete", "Expense", null, new { @class = "btn btn-danger" })*@
-    </div>
+   
 
 </div>
 <div class="row">

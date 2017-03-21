@@ -8,12 +8,18 @@
 {
     @Html.AntiForgeryToken()
     <div class="row form-group text-center">
-        <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
             @Html.TextBoxFor(m => m.Name, new { @class = "form-control exp-name" })
             <br />
             @Html.DropDownListFor(m => m.Category, Model.CategoriesList, new { @class = "form-control exp-category" })
             <hr class="hl-edit-exp" />
+        </div>
+        <div class="col-md-3 col-sm-2 col-xs-8">
+            <div class="expense-btns">
+                <input type="submit" value="SAVE" class="btn btn-success" />
+                @Html.ActionLink("CANCEL", "Index", "Expense", null, new { @class = "btn btn-danger" })
+            </div>
         </div>
     </div>
 
@@ -51,11 +57,6 @@
                 </li>
             </ul>
         </div>
-
-    </div>
-    <div class="expense-btns">
-        <input type="submit" value="SAVE" class="btn btn-success" />
-        @Html.ActionLink("CANCEL", "Index", "Expense", null, new { @class = "btn btn-danger" })
     </div>
 }
 
@@ -64,7 +65,6 @@
         <hr />
     </div>
 </div>
-
 
 @section scriptss {
     @Scripts.Render("~/bundles/jqueryval")
