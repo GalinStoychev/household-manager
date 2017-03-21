@@ -311,5 +311,163 @@ namespace Householdmanager.Web.Tests
             // Assert
             this.webHelperMock.Verify(x => x.GetUserId(), Times.Once);
         }
+
+        [Test]
+        public void ExpenseService_ShouldCallGetExpenseCategoriesOnce_WhenEditGetIsCalled()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
+            this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(new ExpenseViewModel());
+            // Act
+            expenseController.Edit(new Guid().ToString());
+
+            // Assert
+            expenseServiceMock.Verify(x => x.GetExpenseCategories(), Times.Once);
+        }
+
+        [Test]
+        public void WebHelper_ShouldCallGetHouseholdIdFromCookieOnce_WhenEditGetIsCalled()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
+            this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(new ExpenseViewModel());
+
+            // Act
+            expenseController.Edit(new Guid().ToString());
+
+            // Assert
+            webHelperMock.Verify(x => x.GetHouseholdIdFromCookie(), Times.Once);
+        }
+
+        [Test]
+        public void HouseholdService_ShouldCallGetHouseholdUsersOnce_WhenEditGetIsCalled()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
+            this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(new ExpenseViewModel());
+
+            // Act
+            expenseController.Edit(new Guid().ToString());
+
+            // Assert
+            householdServiceMock.Verify(x => x.GetHouseholdUsers(It.IsAny<Guid>()), Times.Once);
+        }
+
+        [Test]
+        public void ExpenseService_ShouldCallGetExpenseOnce_WhenEditGetIsCalled()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
+            this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(new ExpenseViewModel());
+
+            // Act
+            expenseController.Edit(new Guid().ToString());
+
+            // Assert
+            expenseServiceMock.Verify(x => x.GetExpense(It.IsAny<Guid>()), Times.Once);
+        }
+
+        [Test]
+        public void EditGet_ShouldReturnDefaultView_WhenCalled()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
+            this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(new ExpenseViewModel());
+
+            // Act
+            // Assert
+            expenseController.WithCallTo(x => x.Edit(new Guid().ToString())).ShouldRenderDefaultView();
+        }
+
+
+        [Test]
+        public void EditGet_ShouldReturnDefaultViewWithExpenseViewModel_WhenCalled()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
+            this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(new ExpenseViewModel());
+
+            // Act
+            // Assert
+            expenseController.WithCallTo(x => x.Edit(new Guid().ToString()))
+                .ShouldRenderDefaultView()
+                .WithModel<ExpenseViewModel>();
+        }
+
+        [Test]
+        public void ExpenseService_ShouldCallUpdateExpenseOnce_WhenEditPostIsCalled()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+
+            // Act
+            expenseController.Edit(new ExpenseViewModel() { Category = new Guid().ToString() });
+
+            // Assert
+            expenseServiceMock.Verify(x => x.UpdateExpense(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<Guid>(), It.IsAny<decimal>(), It.IsAny<DateTime>(), It.IsAny<string>()), Times.Once);
+        }
+
+        [Test]
+        public void EditPost_ShouldRedirectToAction_WhenIsCalled()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+
+            // Act
+            // Assert
+            expenseController.WithCallTo(x => x.Edit(new ExpenseViewModel() { Category = new Guid().ToString() }))
+                .ShouldRedirectTo<ExpenseController>(x => x.Index(new Guid()));
+        }
+
+        [Test]
+        public void EditPost_ShouldHaveValidateAntiForgeryTokenAttribute()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+
+            // Act
+            var result = expenseController.GetType().GetMethod("Edit", new Type[] { typeof(ExpenseViewModel) })
+                .GetCustomAttributes(typeof(ValidateAntiForgeryTokenAttribute), false).Length;
+
+            // Assert
+            Assert.That(result == 1);
+        }
+
+        [Test]
+        public void DeletePost_ShouldRedirectToAction_WhenIsCalled()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+
+            // Act
+            // Assert
+            expenseController.WithCallTo(x => x.Delete(new ExpenseViewModel()))
+                .ShouldRedirectTo<ExpenseController>(x => x.Index(new Guid()));
+        }
+
+        [Test]
+        public void ExpenseService_ShouldCallDeleteOnce_WhenDeletePostIsCalled()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+
+            // Act
+            expenseController.Delete(new ExpenseViewModel());
+
+            // Assert
+            this.expenseServiceMock.Verify(x => x.Delete(It.IsAny<Guid>(), It.IsAny<bool>()), Times.Once);
+        }
     }
 }
