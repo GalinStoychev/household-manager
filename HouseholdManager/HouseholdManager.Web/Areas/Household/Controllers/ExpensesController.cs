@@ -6,6 +6,7 @@ using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
@@ -29,7 +30,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(string name, string search = "", bool isPaid = false, int page = 1)
+        public ActionResult Index(string name, string search = "", int page = 1)
         {
             this.TempData[IsHistory] = false;
             var model = this.GetExpenses(false, search, page);
