@@ -8,12 +8,13 @@ using Kendo.Mvc.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace HouseholdManager.Web.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class HouseholdsController : BaseController
     {
         private readonly IHouseholdService householdService;

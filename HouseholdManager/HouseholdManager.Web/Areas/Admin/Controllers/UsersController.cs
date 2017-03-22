@@ -2,7 +2,6 @@
 using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Admin.Models;
-using HouseholdManager.Web.Areas.Household.Models;
 using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using Kendo.Mvc.Extensions;
@@ -15,7 +14,7 @@ using System.Web.Routing;
 namespace HouseholdManager.Web.Areas.Admin.Controllers
 {
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UsersController : BaseController
     {
         private readonly IUserService userService;
