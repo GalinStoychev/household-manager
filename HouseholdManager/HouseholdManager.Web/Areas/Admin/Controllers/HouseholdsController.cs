@@ -8,12 +8,12 @@ using Kendo.Mvc.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace HouseholdManager.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     public class HouseholdsController : BaseController
     {
         private readonly IHouseholdService householdService;
@@ -40,7 +40,7 @@ namespace HouseholdManager.Web.Areas.Admin.Controllers
                 model.Add(householdModel);
             }
 
-            return View(model);
+            return View("HouseholdsGrid", model);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -54,10 +54,29 @@ namespace HouseholdManager.Web.Areas.Admin.Controllers
 
                 RouteValueDictionary routeValues = this.GridRouteValues();
 
-                return RedirectToAction("Index", routeValues);
+                return RedirectToAction("HouseholdsGrid", routeValues);
             }
 
-            return View("Index");
+            return View("HouseholdsGrid");
+        }
+
+        [HttpGet]
+        public ActionResult ShowUsers(HouseholdsViewModel model)
+        {
+            var users = this.householdService.GetHouseholdUsers(model.Id);
+            var modelUsers = new List<UsersViewModel>();
+            foreach (var user in users)
+            {
+                var modelUser = this.mappingService.Map<UsersViewModel>(user);
+                if (user.Roles.Any(x => x.RoleId == "2"))
+                {
+                    modelUser.Admin = true;
+                }
+
+                modelUsers.Add(modelUser);
+            }
+
+            return this.View("UsersGrid", modelUsers);
         }
     }
 }

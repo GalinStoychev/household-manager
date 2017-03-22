@@ -22,16 +22,6 @@ namespace HouseholdManager.Web.Controllers
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "user service"));
             }
 
-            if (mappingService == null)
-            {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "mapingService"));
-            }
-
-            if (webHelper == null)
-            {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "webHelper"));
-            }
-
             this.userService = userService;
         }
 

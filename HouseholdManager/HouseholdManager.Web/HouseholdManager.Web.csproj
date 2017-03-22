@@ -731,8 +731,8 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Households\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\HouseholdsGrid.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\UsersGrid.cshtml" />
     <None Include="Properties\PublishProfiles\householdmanager - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\householdmanager - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
@@ -1994,6 +1994,8 @@
     <Content Include="Scripts\kendo\messages\kendo.messages.zh-TW.min.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Households\" />
+    <Folder Include="Areas\Admin\Views\Users\" />
     <Folder Include="Areas\Comments\Views\Shared\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

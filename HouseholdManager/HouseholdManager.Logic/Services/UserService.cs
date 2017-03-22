@@ -43,7 +43,7 @@ namespace HouseholdManager.Logic.Services
 
         public IEnumerable<User> GetAll()
         {
-            var users = this.userRepositoryEF.GetAll<User>(null, null, x => x.Households, x => x.Roles);
+            var users = this.userRepositoryEF.GetAll<User>(null, null, x => x.Roles);
             return users;
         }
 

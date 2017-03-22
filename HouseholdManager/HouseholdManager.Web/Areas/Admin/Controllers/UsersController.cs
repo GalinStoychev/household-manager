@@ -1,24 +1,21 @@
-﻿using HouseholdManager.Common;
-using HouseholdManager.Common.Constants;
+﻿using HouseholdManager.Common.Constants;
 using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Web.Areas.Admin.Models;
+using HouseholdManager.Web.Areas.Household.Models;
 using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Microsoft.AspNet.Identity;
-using HouseholdManager.Identity;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace HouseholdManager.Web.Areas.Admin.Controllers
 {
+
+    [Authorize]
     public class UsersController : BaseController
     {
         private readonly IUserService userService;
@@ -50,7 +47,7 @@ namespace HouseholdManager.Web.Areas.Admin.Controllers
                 model.Add(modelUser);
             }
 
-            return View(model);
+            return View("UsersGrid", model);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -66,10 +63,24 @@ namespace HouseholdManager.Web.Areas.Admin.Controllers
 
                 RouteValueDictionary routeValues = this.GridRouteValues();
 
-                return RedirectToAction("Index", routeValues);
+                return RedirectToAction("UsersGrid", routeValues);
             }
 
-            return View("Index");
+            return View("UsersGrid");
+        }
+
+        [HttpGet]
+        public ActionResult ShowHouseholds(UsersViewModel model)
+        {
+            var users = this.userService.GetUserInfo(model.Id);
+            var modelHouseholds = new List<HouseholdsViewModel>();
+            foreach (var household in users.Households)
+            {
+                var modelHousehold = this.mappingService.Map<HouseholdsViewModel>(household);
+                modelHouseholds.Add(modelHousehold);
+            }
+
+            return this.View("HouseholdsGrid", modelHouseholds);
         }
     }
 }

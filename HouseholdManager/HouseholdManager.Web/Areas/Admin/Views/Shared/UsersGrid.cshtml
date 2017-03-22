@@ -18,6 +18,7 @@
             columns.Bound(c => c.PhoneNumber);
             columns.Bound(c => c.Admin);
             columns.Bound(c => c.IsDeleted);
+            columns.Command(command => command.Custom("Households").Action("ShowHouseholds", "Users")).Width(130);
             columns.Command(command => { command.Edit(); });
         })
         .HtmlAttributes(new { style = "height: 550px;" })
