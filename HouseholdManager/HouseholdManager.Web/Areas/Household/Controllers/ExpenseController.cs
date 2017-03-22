@@ -1,7 +1,6 @@
 ﻿using HouseholdManager.Common.Constants;
 using HouseholdManager.Common.Contracts;
 using HouseholdManager.Logic.Contracts;
-using HouseholdManager.Models;
 using HouseholdManager.Web.Areas.Household.Models;
 using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;

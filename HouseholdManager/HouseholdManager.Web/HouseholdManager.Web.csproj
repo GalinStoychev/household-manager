@@ -228,6 +228,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Comments\CommentsAreaRegistration.cs" />
     <Compile Include="Areas\Comments\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Household\Controllers\ExpenseController.cs" />
@@ -722,6 +723,7 @@
     <Content Include="Areas\Comments\Views\Comments\_CreateCommentPartial.cshtml" />
     <Content Include="Areas\Comments\Views\web.config" />
     <Content Include="Areas\Household\Views\Expense\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Properties\PublishProfiles\householdmanager - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\householdmanager - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
@@ -1983,6 +1985,9 @@
     <Content Include="Scripts\kendo\messages\kendo.messages.zh-TW.min.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Comments\Views\Shared\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
