@@ -18,5 +18,7 @@ namespace HouseholdManager.Web.WebHelpers.Contracts
         string GetUserId();
 
         string GetUserName();
+
+        void ChangeAdminRole(string userId, bool isAdmin);
     }
 }

@@ -45,5 +45,16 @@ namespace HouseholdManager.Models
             get { return this.expenses; }
             protected set { this.expenses = value; }
         }
+
+        public void Update(string name, string address)
+        {
+            this.Name = name;
+            this.Address = address;
+        }
+
+        public void Delete(bool isDeleted)
+        {
+            this.IsDeleted = isDeleted;
+        }
     }
 }

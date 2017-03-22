@@ -1,0 +1,38 @@
+﻿@model IEnumerable<HouseholdManager.Web.Areas.Admin.Models.HouseholdsViewModel>
+@section styles {
+    @Styles.Render("~/Content/kendo/css")
+}
+
+@section kendoScripts {
+    @Scripts.Render("~/bundles/kendo")
+}
+
+@(Html.Kendo().Grid(Model)
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.Id);
+            columns.Bound(c => c.Name);
+            columns.Bound(c => c.Address);
+            columns.Bound(c => c.IsDeleted);
+            columns.Command(command => { command.Edit(); });
+        })
+        .HtmlAttributes(new { style = "height: 550px;" })
+        .Scrollable()
+        .Groupable()
+        .Selectable()
+        .Sortable()
+        .Filterable()
+        .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5)
+        )
+        .DataSource(dataSource => dataSource
+        .Server()
+        .Model(model => model.Id(p => p.Id))
+        .Read("Index", "Households")
+        .Update("Update", "Households")
+    )
+)

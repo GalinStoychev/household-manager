@@ -1,10 +1,13 @@
 ﻿using HouseholdManager.Models;
 using System;
+using System.Collections.Generic;
 
 namespace HouseholdManager.Logic.Contracts
 {
     public interface IUserService
     {
+        IEnumerable<User> GetAll();
+
         User GetUserInfo(string id);
 
         Household GetCurrentHousehold(string email);
@@ -15,6 +18,8 @@ namespace HouseholdManager.Logic.Contracts
 
         void AddHousehold(Household household, string username);
 
-        void UpdateUserInfo(string firstName, string lastName, string phoneNumber);
+        void UpdateUserInfo(string id, string firstName, string lastName, string phoneNumber);
+
+        void Delete(string id, bool isDeleted);
     }
 }

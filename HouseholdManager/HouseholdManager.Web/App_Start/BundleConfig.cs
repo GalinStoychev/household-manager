@@ -48,6 +48,9 @@ namespace HouseholdManager.Web
             bundles.Add(new StyleBundle("~/Content/household-css").Include(
                      "~/Content/Household.css"));
 
+            bundles.Add(new StyleBundle("~/Content/admin-css").Include(
+                    "~/Content/Admin.css"));
+
             //BundleTable.EnableOptimizations = true;
         }
     }

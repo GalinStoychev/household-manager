@@ -1,6 +1,8 @@
 ﻿using HouseholdManager.Common.Constants;
+using HouseholdManager.Identity;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -65,6 +67,20 @@ namespace HouseholdManager.Web.WebHelpers
             }
 
             return false;
+        }
+
+        public void ChangeAdminRole(string userId, bool isAdmin)
+        {
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            if (isAdmin)
+            {
+                userManager.AddToRole(userId, "Admin");
+            }
+            else
+            {
+                userManager.RemoveFromRole(userId, "Admin");
+            }
         }
     }
 }

@@ -63,5 +63,29 @@ namespace HouseholdManager.Logic.Services
             var users = this.GetHousehold(id).Users;
             return users;
         }
+
+        public IEnumerable<Household> GetAll()
+        {
+            var households = this.householdRepositoryEF.GetAll();
+            return households;
+        }
+
+        public void UpdateHouseholdInfo(Guid id, string name, string address)
+        {
+            var household = this.householdRepositoryEF.GetById(id);
+            household.Update(name, address);
+
+            this.householdRepositoryEF.Update(household);
+            this.unitOfWork.Commit();
+        }
+
+        public void Delete(Guid id, bool isDeleted)
+        {
+            var household = this.householdRepositoryEF.GetById(id);
+            household.Delete(isDeleted);
+
+            this.householdRepositoryEF.Update(household);
+            this.unitOfWork.Commit();
+        }
     }
 }

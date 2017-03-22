@@ -76,6 +76,18 @@ namespace HouseholdManager.Models
             protected set { this.households = value; }
         }
 
+        public void Update(string firstName, string lastName, string phoneNumber)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.PhoneNumber = phoneNumber;
+        }
+
+        public void Delete(bool isDeleted)
+        {
+            this.IsDeleted = isDeleted;
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

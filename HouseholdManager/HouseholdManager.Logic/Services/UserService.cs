@@ -4,6 +4,7 @@ using HouseholdManager.Logic.Contracts;
 using HouseholdManager.Models;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace HouseholdManager.Logic.Services
 {
@@ -38,6 +39,12 @@ namespace HouseholdManager.Logic.Services
             }
 
             this.unitOfWork.Commit();
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            var users = this.userRepositoryEF.GetAll<User>(null, null, x => x.Households, x => x.Roles);
+            return users;
         }
 
         public Household GetCurrentHousehold(string email)
@@ -75,9 +82,22 @@ namespace HouseholdManager.Logic.Services
             }
         }
 
-        public void UpdateUserInfo(string firstName, string lastName, string phoneNumber)
+        public void UpdateUserInfo(string id, string firstName, string lastName, string phoneNumber)
         {
-            throw new NotImplementedException();
+            var user = this.userRepositoryEF.GetById(id);
+            user.Update(firstName, lastName, phoneNumber);
+
+            this.userRepositoryEF.Update(user);
+            this.unitOfWork.Commit();
+        }
+
+        public void Delete(string id, bool isDeleted)
+        {
+            var user = this.userRepositoryEF.GetById(id);
+            user.Delete(isDeleted);
+
+            this.userRepositoryEF.Update(user);
+            this.unitOfWork.Commit();
         }
     }
 }

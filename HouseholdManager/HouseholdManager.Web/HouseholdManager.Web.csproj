@@ -229,6 +229,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HouseholdsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Models\HouseholdsViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\UsersViewModel.cs" />
     <Compile Include="Areas\Comments\CommentsAreaRegistration.cs" />
     <Compile Include="Areas\Comments\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Household\Controllers\ExpenseController.cs" />
@@ -261,6 +265,7 @@
     <Compile Include="WebHelpers\WebHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Admin.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Household.css" />
@@ -724,6 +729,10 @@
     <Content Include="Areas\Comments\Views\web.config" />
     <Content Include="Areas\Household\Views\Expense\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Households\Index.cshtml" />
     <None Include="Properties\PublishProfiles\householdmanager - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\householdmanager - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
@@ -1985,9 +1994,6 @@
     <Content Include="Scripts\kendo\messages\kendo.messages.zh-TW.min.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Comments\Views\Shared\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

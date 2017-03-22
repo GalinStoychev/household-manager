@@ -1,11 +1,8 @@
 ﻿using HouseholdManager.Common.Contracts;
 using HouseholdManager.Web.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 using AutoMapper;
-using HouseholdManager.Models;
 
 namespace HouseholdManager.Web.Areas.Household.Models
 {
