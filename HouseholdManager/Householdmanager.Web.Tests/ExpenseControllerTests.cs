@@ -216,7 +216,7 @@ namespace Householdmanager.Web.Tests
             // Act
             // Assert
             expenseController.WithCallTo(x => x.Create(model))
-                .ShouldRedirectTo<ExpensesController>(x => x.Index("_", "_", false, 1));
+                .ShouldRedirectTo<ExpensesController>(x => x.Index("_", "_", 1));
         }
 
         [Test]

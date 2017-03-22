@@ -6,6 +6,7 @@ using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
@@ -80,6 +81,12 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id, Name, Category, AssignedUser, DueDate, ExpectedCost")] ExpenseViewModel model)
         {
+            //if (!ModelState.IsValid)
+            //{
+            //    var errors = ModelState.Select(x => x.Value.Errors);
+            //    return Redirect("/Error/BadRequest");
+            //}
+
             this.expenseService.UpdateExpense(model.Id, model.Name, Guid.Parse(model.Category), model.ExpectedCost, model.DueDate, model.AssignedUser);
             return RedirectToAction("Index", new { id = model.Id });
         }

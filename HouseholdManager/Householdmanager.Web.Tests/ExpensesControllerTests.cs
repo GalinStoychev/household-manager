@@ -56,7 +56,7 @@ namespace Householdmanager.Web.Tests
 
             // Act
             // Assert
-            expensesController.WithCallTo(c => c.Index("_", "_", false, 1)).ShouldRenderDefaultView();
+            expensesController.WithCallTo(c => c.Index("_", "_", 1)).ShouldRenderDefaultView();
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace Householdmanager.Web.Tests
 
             // Act
             // Assert
-            expensesController.WithCallTo(c => c.Index("_", "_", false, 1))
+            expensesController.WithCallTo(c => c.Index("_", "_", 1))
                 .ShouldRenderDefaultView()
                  .WithModel<ShowExpensesViewModel>();
         }
@@ -79,7 +79,7 @@ namespace Householdmanager.Web.Tests
             var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
-            expensesController.Index("_", "_", false, 1);
+            expensesController.Index("_", "_", 1);
 
             // Assert
             expenseServiceMock.Verify(x => x.GetExpensesCount(It.IsAny<Guid>(), It.IsAny<bool>(), It.IsAny<string>()), Times.Once);
@@ -92,7 +92,7 @@ namespace Householdmanager.Web.Tests
             var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
-            expensesController.Index("_", "_", false, 1);
+            expensesController.Index("_", "_", 1);
 
             // Assert
             webHelperMock.Verify(x => x.GetHouseholdIdFromCookie(), Times.Once);
@@ -105,7 +105,7 @@ namespace Householdmanager.Web.Tests
             var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
-            expensesController.Index("_", "_", false, 1);
+            expensesController.Index("_", "_", 1);
 
             // Assert
             expenseServiceMock.Verify(x => x.GetExpenses(It.IsAny<Guid>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<string>()), Times.Once);
@@ -127,7 +127,7 @@ namespace Householdmanager.Web.Tests
             expenseServiceMock.Setup(x => x.GetExpenses(It.IsAny<Guid>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<string>())).Returns(expenses);
 
             // Act
-            expensesController.Index("_", "_", false, 1);
+            expensesController.Index("_", "_", 1);
 
             // Assert
             mappingServiceMock.Verify(x => x.Map<ExpenseViewModel>(It.IsAny<Expense>()), Times.Exactly(numberOfExpenses));
