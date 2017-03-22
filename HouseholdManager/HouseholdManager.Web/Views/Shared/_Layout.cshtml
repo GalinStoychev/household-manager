@@ -1,8 +1,8 @@
 ﻿@using HouseholdManager.Common.Constants
 @{
     var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
+    var isAdmin = User.IsInRole("Admin");
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +11,10 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @RenderSection("styles", required: false)
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jquery.unobtrusive")
     @RenderSection("kendoScripts", required: false)
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -34,13 +31,24 @@
                 <ul class="nav navbar-nav">
                     @if (householdName != null)
                     {
-                        <li>@Html.RouteLink("Household", "Household_single", new { area = "", name = householdName }, new { @class="trigger-loading"})</li>
-                        <li>@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName}, new { @class = "trigger-loading" })</li>
+                        <li>@Html.RouteLink("Household", "Household_single", new { area = "", name = householdName }, new { @class = "trigger-loading" })</li>
+                        <li>@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
                         <li>@Html.ActionLink("Add item", "Create", "Expense", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
-                        <li>@Html.ActionLink("History", "History", "Expenses", new { area = "Household", name = householdName}, new { @class = "trigger-loading" })</li>
+                        <li>@Html.ActionLink("History", "History", "Expenses", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
+                        if (@isAdmin)
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Admin
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Users", "Index", "Users", new { area = "Admin" }, new { @class = "trigger-loading" })</li>
+                                    <li>@Html.ActionLink("Households", "Index", "Households", new { area = "Admin" }, new { @class = "trigger-loading" })</li>
+                                </ul>
+                            </li>
+                        }
                     }
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "trigger-loading" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "trigger-loading" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -48,13 +56,12 @@
     </div>
     <div class="container body-content">
         <div class="row text-center">
-        <div class="col-md-12 hide loading-main" >
-            <img src="http://happywheelsez.com/themes/game_gamesgames/resources/css/images/loading.gif" alt="Loading" />
-        </div>
+            <div class="col-md-12 hide loading-main">
+                <img src="http://happywheelsez.com/themes/game_gamesgames/resources/css/images/loading.gif" alt="Loading" />
+            </div>
         </div>
         @RenderBody()
     </div>
-
 
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/loading")
