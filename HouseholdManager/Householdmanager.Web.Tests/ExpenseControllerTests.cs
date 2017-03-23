@@ -61,6 +61,8 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
 
             // Act
             // Assert
@@ -72,6 +74,8 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
             this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(new ExpenseViewModel());
 
             // Act
@@ -86,6 +90,8 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
             var viewModelToReturn = new ExpenseViewModel();
             this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(viewModelToReturn);
 
@@ -115,6 +121,8 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
 
             // Act
             expenseController.Index(new Guid());
@@ -128,6 +136,8 @@ namespace Householdmanager.Web.Tests
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
 
             // Act
             expenseController.Index(new Guid());
