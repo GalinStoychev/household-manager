@@ -13,6 +13,9 @@ namespace HouseholdManager.Web
             bundles.Add(new ScriptBundle("~/bundles/main").Include(
                        "~/Scripts/main.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/home-page").Include(
+                      "~/Scripts/home-page.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                        "~/Scripts/kendo/kendo.all.min.js",
                        "~/Scripts/kendo/kendo.aspnetmvc.min.js"));

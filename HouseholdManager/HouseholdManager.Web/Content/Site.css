@@ -9,6 +9,7 @@
 .body-content {
     padding-left: 0;
     padding-right: 0;
+    padding-bottom: 2em;
     background-color: white;
 }
 
@@ -81,6 +82,10 @@ textarea {
     text-indent: -9999px; /* hides the link text */
 }
 
+.navbar-inverse .navbar-toggle {
+    border: 1px solid #0D83DD;
+}
+
 .header-page {
     margin-bottom: 1em;
     margin-top: 1em;
@@ -122,7 +127,7 @@ textarea {
 }
 
 .loading-main {
-    margin-top: 2em;
+    float:right;
 }
 
     .loading-main > img {
@@ -149,7 +154,7 @@ textarea {
 
 
 .totals {
-    margin: 2em 0 2em 0;
+    margin: 3em 0 0 0;
 }
 
     .totals > div {
@@ -160,4 +165,5 @@ textarea {
         border: 7px solid #B5516F;
         padding-top: 20px;
         margin: 0 5em 1em 5em;
+        box-shadow: 3px 2px 15px #888888;
     }

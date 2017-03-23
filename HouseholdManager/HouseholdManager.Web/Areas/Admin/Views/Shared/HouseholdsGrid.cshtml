@@ -7,7 +7,11 @@
     @Scripts.Render("~/bundles/kendo")
 }
 
-@(Html.Kendo().Grid(Model)
+<div class="row text-center">
+    <div class="col-md-12">
+        <h2 class="header-page">Households</h2>
+
+        @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Columns(columns =>
         {
@@ -36,4 +40,6 @@
         .Read("Index", "Households")
         .Update("Update", "Households")
     )
-)
+        )
+    </div>
+</div>
