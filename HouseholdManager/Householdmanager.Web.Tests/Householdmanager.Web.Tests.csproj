@@ -91,6 +91,7 @@
     <Compile Include="ExpenseControllerTests.cs" />
     <Compile Include="ExpensesControllerTests.cs" />
     <Compile Include="HouseholdControllerTests.cs" />
+    <Compile Include="HouseholdsControllerTests.cs" />
     <Compile Include="ProfileControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UploadImageControllerTests.cs" />

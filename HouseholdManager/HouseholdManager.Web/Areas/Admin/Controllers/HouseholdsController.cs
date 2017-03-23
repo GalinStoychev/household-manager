@@ -8,7 +8,6 @@ using Kendo.Mvc.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -47,18 +46,10 @@ namespace HouseholdManager.Web.Areas.Admin.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Update(HouseholdsViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                this.householdService.Delete(model.Id, model.IsDeleted);
+            this.householdService.Delete(model.Id, model.IsDeleted);
+            this.householdService.UpdateHouseholdInfo(model.Id, model.Name, model.Address);
 
-                this.householdService.UpdateHouseholdInfo(model.Id, model.Name, model.Address);
-
-                RouteValueDictionary routeValues = this.GridRouteValues();
-
-                return RedirectToAction("HouseholdsGrid", routeValues);
-            }
-
-            return View("HouseholdsGrid");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
