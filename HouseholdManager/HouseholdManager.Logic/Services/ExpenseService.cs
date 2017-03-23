@@ -190,5 +190,11 @@ namespace HouseholdManager.Logic.Services
             this.expenseRepositoryEF.Update(expense);
             this.unitOfWork.Commit();
         }
+
+        public int GetExpensesCount()
+        {
+            var count = this.expenseRepositoryEF.GetAll().Count();
+            return count;
+        }
     }
 }

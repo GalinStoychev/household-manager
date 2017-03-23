@@ -10,6 +10,8 @@ namespace HouseholdManager.Logic.Contracts
 
         User GetUserInfo(string id);
 
+        int GetUsersCount();
+
         Household GetCurrentHousehold(string email);
 
         void SetCurrentHousehold(string householdName, string userId);

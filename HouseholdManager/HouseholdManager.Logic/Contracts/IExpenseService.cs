@@ -23,5 +23,7 @@ namespace HouseholdManager.Logic.Contracts
         int GetExpensesCount(Guid householdId, bool isPaid, string pattern);
 
         void Pay(Guid expenseId, string userId, string comment, decimal cost);
+
+        int GetExpensesCount();
     }
 }

@@ -5,6 +5,7 @@ using HouseholdManager.Common.Constants;
 using HouseholdManager.Models;
 using HouseholdManager.Logic.Contracts.Factories;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HouseholdManager.Logic.Services
 {
@@ -86,6 +87,12 @@ namespace HouseholdManager.Logic.Services
 
             this.householdRepositoryEF.Update(household);
             this.unitOfWork.Commit();
+        }
+
+        public int GetHouseholdsCount()
+        {
+            var count = this.householdRepositoryEF.GetAll().Count();
+            return count;
         }
     }
 }

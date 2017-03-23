@@ -10,6 +10,8 @@ namespace HouseholdManager.Logic.Contracts
 
         IEnumerable<Household> GetAll();
 
+        int GetHouseholdsCount();
+
         IEnumerable<User> GetHouseholdUsers(Guid id);
 
         void CreateHousehold(string name, string address, byte[] image, string userId);

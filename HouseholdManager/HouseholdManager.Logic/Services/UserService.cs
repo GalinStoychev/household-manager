@@ -99,5 +99,11 @@ namespace HouseholdManager.Logic.Services
             this.userRepositoryEF.Update(user);
             this.unitOfWork.Commit();
         }
+
+        public int GetUsersCount()
+        {
+            var count = this.userRepositoryEF.GetAll().Count();
+            return count;
+        }
     }
 }

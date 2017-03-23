@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HouseholdManager.Web.Models.HomeViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -52,18 +53,18 @@
         </div>
     </div>
 </div>
-<br />
-<div class="row text-center">
-    <div class="col-md-4">
-        <h3>Total Users</h3>
-        <span class="count">1233</span>
+
+<div class="row text-center totals">
+    <div class="circle">
+        <h3>Users</h3>
+        <span class="count">@Model.TotalUsers</span>
     </div>
-    <div class="col-md-4">
-        <h3>Total Households</h3>
-        <span class="count">321</span>
+    <div class="circle">
+        <h3>Households</h3>
+        <span class="count">@Model.TotalHouseholds</span>
     </div>
-    <div class="col-md-4">
-        <h3>Total Expenses</h3>
-        <span class="count">33112</span>
+    <div class="circle">
+        <h3>Expenses</h3>
+        <span class="count">@Model.TotalExpenses</span>
     </div>
 </div>
