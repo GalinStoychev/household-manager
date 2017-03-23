@@ -94,6 +94,7 @@
     <Compile Include="ProfileControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UploadImageControllerTests.cs" />
+    <Compile Include="UsersControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

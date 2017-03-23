@@ -52,20 +52,11 @@ namespace HouseholdManager.Web.Areas.Admin.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Update([Bind(Exclude = "Email")] UsersViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                this.webHelper.ChangeAdminRole(model.Id, model.Admin);
+            this.webHelper.ChangeAdminRole(model.Id, model.Admin);
+            this.userService.Delete(model.Id, model.IsDeleted);
+            this.userService.UpdateUserInfo(model.Id, model.FirstName, model.LastName, model.PhoneNumber);
 
-                this.userService.Delete(model.Id, model.IsDeleted);
-
-                this.userService.UpdateUserInfo(model.Id, model.FirstName, model.LastName, model.PhoneNumber);
-
-                RouteValueDictionary routeValues = this.GridRouteValues();
-
-                return RedirectToAction("UsersGrid", routeValues);
-            }
-
-            return View("UsersGrid");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -79,7 +70,7 @@ namespace HouseholdManager.Web.Areas.Admin.Controllers
                 modelHouseholds.Add(modelHousehold);
             }
 
-            return this.View("HouseholdsGrid", modelHouseholds);
+            return View("HouseholdsGrid", modelHouseholds);
         }
     }
 }
