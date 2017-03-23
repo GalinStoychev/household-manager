@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - HouseholdManager</title>
     @Styles.Render("~/Content/css")
     @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/jquery")
@@ -18,26 +18,26 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand trigger-loading" })
+                @Html.ActionLink("HouseholdManager", "Index", "Home", new { area = "" }, new { @class = "navbar-brand trigger-loading" })
             </div>
+        <div class="container">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (householdName != null)
                     {
-                        <li>@Html.RouteLink("Household", "Household_single", new { area = "", name = householdName }, new { @class = "trigger-loading" })</li>
-                        <li>@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
-                        <li>@Html.ActionLink("Add item", "Create", "Expense", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
-                        <li>@Html.ActionLink("History", "History", "Expenses", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
+                        <li class="nav-link">@Html.RouteLink("Household", "Household_single", new { area = "", name = householdName }, new { @class = "trigger-loading" })</li>
+                        <li class="nav-link">@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
+                        <li class="nav-link">@Html.ActionLink("Add item", "Create", "Expense", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
+                        <li class="nav-link">@Html.ActionLink("History", "History", "Expenses", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
                         if (@isAdmin)
                         {
-                            <li class="dropdown">
+                            <li class="dropdown nav-link">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     Admin
                                     <span class="caret"></span>
@@ -64,7 +64,7 @@
     </div>
 
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/loading")
+    @Scripts.Render("~/bundles/main")
     @RenderSection("scripts", required: false)
 </body>
 </html>

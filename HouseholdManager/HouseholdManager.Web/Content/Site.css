@@ -7,8 +7,8 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 0;
+    padding-right: 0;
     background-color: white;
 }
 
@@ -24,6 +24,64 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.navbar-nav > li > a, .navbar-brand {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 55px;
+}
+
+.navbar-fixed-top {
+    min-height: 55px;
+}
+
+.navbar {
+    background-color: #0EBFFF;
+    border-bottom: 3px solid #0D83DD;
+}
+
+.navbar-inverse .navbar-main > li > a,
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+    font-size: 1.1em;
+}
+
+    .navbar-inverse .navbar-main > li > a:hover,
+    .navbar-inverse .navbar-nav > li > a:hover {
+        background-color: #0D83DD;
+    }
+
+.navbar-inverse .navbar-brand {
+    font-size: 2em;
+    color: black;
+}
+
+.nav-active {
+    background-color: #0D83DD;
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color: white;
+    border-bottom-color: white;
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #0D83DD;
+}
+
+.navbar-header a.navbar-brand {
+    /*color:  blueviolet;
+    font-size: 2.2em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif*/
+    background: url(Images/logo.png) top no-repeat;
+    margin-top: 10px;
+    margin-left: 40px;
+    width: 300px;
+    height: 40px;
+    text-indent: -9999px; /* hides the link text */
 }
 
 .header-page {
@@ -61,10 +119,24 @@ textarea {
     margin-top: 2em;
 }
 
-.loading-main > img {
-     width: 100px;
-}
+    .loading-main > img {
+        width: 100px;
+    }
 
 .hide {
- display: none;
+    display: none;
+}
+
+.item {
+    max-height: 500px;
+}
+
+.hp-header {
+    margin-top: 1em;
+    color: #0D83DD;
+}
+
+.count {
+    font-size: 3em;
+    color: #0D83DD;
 }
