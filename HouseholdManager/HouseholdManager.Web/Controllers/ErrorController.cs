@@ -11,6 +11,12 @@ namespace HouseholdManager.Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult Unauthorized()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult NotFound()
         {
             return View();

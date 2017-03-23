@@ -166,6 +166,19 @@ namespace Householdmanager.Web.Tests
         }
 
         [Test]
+        public void CreatePost_ShouldRedirectErrorBadRequest_WhenModelStateIsNotValid()
+        {
+            // Arrange
+            var householdController = new HouseholdController(userServiceMock.Object, householdServiceMock.Object, imageServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            householdController.ModelState.AddModelError("key", "error message");
+
+            // Act
+            // Assert
+            householdController.WithCallTo(x => x.Create(new HouseholdViewModel()))
+                .ShouldRedirectTo("/Error/BadRequest");
+        }
+
+        [Test]
         public void HouseholdController_SholdRedirectToAction_WhenCreatePostIsCalled()
         {
             // Arrange

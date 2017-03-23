@@ -97,6 +97,20 @@ namespace Householdmanager.Web.Tests
         }
 
         [Test]
+        public void ExpenseController_ShouldRedirectToErrorUnauthorizedPage_WhenHouseholdIdIsNotEqualToExpenseHouseholdId()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
+            this.webHelperMock.Setup(x => x.GetHouseholdIdFromCookie()).Returns(Guid.NewGuid());
+
+            // Act
+            // Assert
+            expenseController.WithCallTo(x => x.Index(new Guid())).ShouldRedirectTo("/Error/Unauthorized");
+        }
+
+        [Test]
         public void ExpenseService_ShouldCallGetExpenseOnce_WhenIndexIsCalled()
         {
             // Arrange
@@ -197,6 +211,19 @@ namespace Householdmanager.Web.Tests
 
             // Assert
             Assert.That(result == 1);
+        }
+
+        [Test]
+        public void CreatePost_ShouldRedirectErrorBadRequest_WhenModelStateIsNotValid()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            expenseController.ModelState.AddModelError("key", "error message");
+
+            // Act
+            // Assert
+            expenseController.WithCallTo(x => x.Create(new ExpenseViewModel()))
+                .ShouldRedirectTo("/Error/BadRequest");
         }
 
         [Test]
@@ -328,7 +355,7 @@ namespace Householdmanager.Web.Tests
         }
 
         [Test]
-        public void WebHelper_ShouldCallGetHouseholdIdFromCookieOnce_WhenEditGetIsCalled()
+        public void WebHelper_ShouldCallGetHouseholdIdFromCookieTwice_WhenEditGetIsCalled()
         {
             // Arrange
             var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
@@ -340,7 +367,7 @@ namespace Householdmanager.Web.Tests
             expenseController.Edit(new Guid().ToString());
 
             // Assert
-            webHelperMock.Verify(x => x.GetHouseholdIdFromCookie(), Times.Once);
+            webHelperMock.Verify(x => x.GetHouseholdIdFromCookie(), Times.Exactly(2));
         }
 
         [Test]
@@ -407,6 +434,21 @@ namespace Householdmanager.Web.Tests
         }
 
         [Test]
+        public void EditGet_ShouldRedirectToErrorUnauthorizedPage_WhenHouseholdIdIsNotEqualToExpenseHouseholdId()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            var expense = new Expense("_", new Guid(), "_", new Guid(), 1M, DateTime.Now, DateTime.Now);
+            this.expenseServiceMock.Setup(x => x.GetExpense(It.IsAny<Guid>())).Returns(expense);
+            this.mappingServiceMock.Setup(x => x.Map<ExpenseViewModel>(It.IsAny<object>())).Returns(new ExpenseViewModel());
+            this.webHelperMock.Setup(x => x.GetHouseholdIdFromCookie()).Returns(Guid.NewGuid());
+
+            // Act
+            // Assert
+            expenseController.WithCallTo(x => x.Edit(new Guid().ToString())).ShouldRedirectTo("/Error/Unauthorized");
+        }
+
+        [Test]
         public void ExpenseService_ShouldCallUpdateExpenseOnce_WhenEditPostIsCalled()
         {
             // Arrange
@@ -429,6 +471,19 @@ namespace Householdmanager.Web.Tests
             // Assert
             expenseController.WithCallTo(x => x.Edit(new ExpenseViewModel() { Category = new Guid().ToString() }))
                 .ShouldRedirectTo<ExpenseController>(x => x.Index(new Guid()));
+        }
+
+        [Test]
+        public void EditPost_ShouldRedirectErrorBadRequest_WhenModelStateIsNotValid()
+        {
+            // Arrange
+            var expenseController = new ExpenseController(expenseServiceMock.Object, mappingServiceMock.Object, householdServiceMock.Object, webHelperMock.Object);
+            expenseController.ModelState.AddModelError("key", "error message");
+
+            // Act
+            // Assert
+            expenseController.WithCallTo(x => x.Edit(new ExpenseViewModel() { Category = new Guid().ToString() }))
+                .ShouldRedirectTo("/Error/BadRequest");
         }
 
         [Test]

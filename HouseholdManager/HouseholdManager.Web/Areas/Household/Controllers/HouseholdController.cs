@@ -67,6 +67,11 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(HouseholdViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return Redirect("/Error/BadRequest");
+            }
+
             this.householdService.CreateHousehold(model.Name, model.Address, model.Image, this.webHelper.GetUserId());
 
             return RedirectToAction("SetCurrentHousehold", new { name = model.Name });

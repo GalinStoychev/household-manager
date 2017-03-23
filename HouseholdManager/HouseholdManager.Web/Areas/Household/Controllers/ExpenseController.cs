@@ -6,7 +6,6 @@ using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
@@ -38,6 +37,11 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult Index(Guid id)
         {
             var expense = this.expenseService.GetExpense(id);
+            if (expense.HouseholdId != this.webHelper.GetHouseholdIdFromCookie())
+            {
+                return Redirect("/Error/Unauthorized");
+            }
+
             var mapped = this.mappingService.Map<ExpenseViewModel>(expense);
 
             return View(mapped);
@@ -58,6 +62,11 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "Cost, PaidOnDate, CreatedOn, IsPaid, PaidBy")] ExpenseViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return Redirect("/Error/BadRequest");
+            }
+
             var householdid = this.webHelper.GetHouseholdIdFromCookie();
             this.expenseService.CreateExpense(this.webHelper.GetUserId(), model.Name, Guid.Parse(model.Category), householdid, model.ExpectedCost, model.DueDate, model.Comment, model.AssignedUser);
 
@@ -68,6 +77,11 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult Edit(string id)
         {
             var expense = this.expenseService.GetExpense(Guid.Parse(id));
+            if (expense.HouseholdId != this.webHelper.GetHouseholdIdFromCookie())
+            {
+                return Redirect("/Error/Unauthorized");
+            }
+
             var model = this.mappingService.Map<ExpenseViewModel>(expense);
             model.CategoriesList = this.PrepareModelCategories();
             model.Users = this.PrepareModelUsers();
@@ -81,11 +95,10 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id, Name, Category, AssignedUser, DueDate, ExpectedCost")] ExpenseViewModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    var errors = ModelState.Select(x => x.Value.Errors);
-            //    return Redirect("/Error/BadRequest");
-            //}
+            if (!ModelState.IsValid)
+            {
+                return Redirect("/Error/BadRequest");
+            }
 
             this.expenseService.UpdateExpense(model.Id, model.Name, Guid.Parse(model.Category), model.ExpectedCost, model.DueDate, model.AssignedUser);
             return RedirectToAction("Index", new { id = model.Id });
