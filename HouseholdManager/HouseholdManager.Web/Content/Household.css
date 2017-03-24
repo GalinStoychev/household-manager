@@ -1,6 +1,6 @@
 ﻿#expenses-container {
     width: 100%;
-    margin-left: -5px;
+    margin-left: 0;
 }
 
 .expense-container {
@@ -140,10 +140,6 @@
 }
 
 .modal-textarea {
-    display: inline-block;
-}
-
-.form-control {
     display: inline-block;
 }
 

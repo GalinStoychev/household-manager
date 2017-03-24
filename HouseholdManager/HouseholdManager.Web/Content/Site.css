@@ -127,7 +127,9 @@ textarea {
 }
 
 .loading-main {
-    float:right;
+    position: absolute;
+    top: 5em;
+    z-index: 9999;
 }
 
     .loading-main > img {

@@ -5,9 +5,10 @@
 @section kendoScripts {
     @Scripts.Render("~/bundles/kendo")
 }
-<h2 class="header-page text-center">Add expense</h2>
+
 <div class="row">
-    <div class="col-md-6 col-md-offset-4 col-sm-6 col-sm-offset-4">
+    <div class="col-md-8 col-md-offset-4 col-sm-6 col-sm-offset-4 col-xs-offset-2">
+        <h2 class="header-page">Add expense</h2>
 
         @using (Html.BeginForm("Create", "Expense", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
@@ -21,21 +22,21 @@
                 </div>
             </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Category, new { @class = "col-md-2 control-label" })
-                    @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.Category, Model.CategoriesList, new { @class = "form-control" })
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Category, new { @class = "col-md-2 control-label" })
+                @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Category, Model.CategoriesList, new { @class = "form-control" })
                 </div>
+            </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.ExpectedCost, new { @class = "col-md-2 control-label" })
-                    @Html.ValidationMessageFor(m => m.ExpectedCost, "", new { @class = "text-danger" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.ExpectedCost, new { @class = "form-control" })
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ExpectedCost, new { @class = "col-md-2 control-label" })
+                @Html.ValidationMessageFor(m => m.ExpectedCost, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ExpectedCost, new { @class = "form-control" })
                 </div>
+            </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.DueDate, new { @class = "col-md-2 control-label" })
