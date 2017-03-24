@@ -33,12 +33,13 @@ namespace HouseholdManager.Models
             this.Email = email;
         }
 
-        public User(string username, string email, string firstName, string lastName)
+        public User(string username, string email, string firstName, string lastName, string phoneNumber)
         {
             this.UserName = username;
             this.Email = email;
             this.FirstName = firstName;
             this.LastName = lastName;
+            this.PhoneNumber = phoneNumber;
         }
 
         public string FirstName { get; protected set; }

@@ -123,7 +123,7 @@ namespace HouseholdManager.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User(model.Email, model.Email, model.FirstName, model.LastName);
+                var user = new User(model.Email, model.Email, model.FirstName, model.LastName, model.PhoneNumber);
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
