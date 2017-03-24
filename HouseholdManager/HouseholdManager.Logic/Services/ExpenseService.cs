@@ -1,13 +1,13 @@
-﻿using HouseholdManager.Logic.Contracts;
+﻿using HouseholdManager.Common.Constants;
+using HouseholdManager.Data.Contracts;
+using HouseholdManager.Logic.Contracts;
+using HouseholdManager.Logic.Contracts.Factories;
+using HouseholdManager.Logic.Dtos;
+using HouseholdManager.Models;
 using System;
 using System.Collections.Generic;
-using HouseholdManager.Models;
-using HouseholdManager.Data.Contracts;
-using HouseholdManager.Common.Constants;
-using HouseholdManager.Logic.Contracts.Factories;
 using System.Data.Entity;
 using System.Linq;
-using HouseholdManager.Logic.Dtos;
 
 namespace HouseholdManager.Logic.Services
 {
