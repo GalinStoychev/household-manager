@@ -199,3 +199,8 @@
     display: inline-block;
     max-width: 110px;
 }
+
+.overdue {
+    background-color: #B5516F;
+    color: white;
+}

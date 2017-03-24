@@ -2,15 +2,17 @@
 @{
     var modalTarget = "#" + Model.Id + "modal";
     var target = Model.Id + "modal";
-    var categoryClass = "category-" + Model.Category;
+    var categoryClass = "category-" + Model.Category; 
+    var dueDateClass = DateTime.Compare(Model.DueDate, DateTime.Now) < 0 ? "overdue" : "color-gray";
 }
+
 <div class="expense-container @categoryClass" id=@Model.Id>
     <div class="info-container trigger-loading">
         <span class=color-grey>&bull; @Model.Category</span>
         <div class="name-container">
             <h3 class="text-center expense-name">@Model.Name</h3>
         </div>
-        <p class="color-grey text-center">Due date: @Model.DueDate.ToShortDateString()</p>
+        <p class="@dueDateClass text-center">Due date: @Model.DueDate.ToShortDateString()</p>
         <p class="text-center">
             <span class="color-grey">User assigned: </span>
             <br />
@@ -29,6 +31,7 @@
             <p class="exp-cost">$ @Model.ExpectedCost</p>
         </div>
     </div>
+
     @if (!Model.IsPaid)
     {
         <button type="button" class="btn btn-success btn-pay" data-toggle="modal" data-target=@modalTarget>PAY</button>
