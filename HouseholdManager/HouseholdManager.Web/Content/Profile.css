@@ -1,3 +1,10 @@
 ﻿.profile-container > div {
-    margin-bottom: 20px;
+    margin-bottom: 1em;
+}
+
+.hh-container {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+     border-bottom: 2.5px solid #B5516F;
+    padding: 1em;
 }

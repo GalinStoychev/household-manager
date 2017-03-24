@@ -8,26 +8,27 @@
     <div class="col-md-12 profile-container">
         <h2 class="header-page">@Model.FullName</h2>
         <div>
-            <strong>Name: <span>@Model.FullName</span></strong>
+            Name <br /><strong>@Model.FullName</strong>
         </div>
         <div>
-            <strong>Email: <span>@Model.Email</span></strong>
+            Email <br /><strong>@Model.Email</strong>
         </div>
         <div>
-            <strong>Phone number: <span>@Model.PhoneNumber</span></strong>
+            Phone number <br /><strong>@Model.PhoneNumber</strong>
         </div>
-        <div>
-            <h4>Your Households: @Model.Households.Count</h4>
-            @foreach (var household in Model.Households)
-            {
-                <div class="hh-container">
-                    @Html.ActionLink(household, "SetCurrentHousehold", "Household", new { area = "Household", name = household }, new { @class = "trigger-loading" })
-                </div>
-            }
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h3>Your Households: @Model.Households.Count</h3>
+                @foreach (var household in Model.Households)
+                {
+                    <div class="hh-container">
+                        @Html.ActionLink(household, "SetCurrentHousehold", "Household", new { area = "Household", name = household }, new { @class = "trigger-loading" })
+                    </div>
+                }
+            </div>
         </div>
         <div>
             @Html.ActionLink("ADD HOUSEHOLD", "Create", "Household", new { }, new { @class = "btn btn-success loading-trigger" })
         </div>
     </div>
 </div>
-

@@ -1,27 +1,25 @@
 ﻿@model HouseholdManager.Web.Areas.Household.Models.ExpenseViewModel
-
 @section styles {
     @Styles.Render("~/Content/kendo/css")
 }
-
 @section kendoScripts {
     @Scripts.Render("~/bundles/kendo")
 }
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="header-page text-center">Add item or bill</h2>
+<h2 class="header-page text-center">Add expense</h2>
+<div class="row">
+    <div class="col-md-6 col-md-offset-4 col-sm-6 col-sm-offset-4">
 
-            @using (Html.BeginForm("Create", "Expense", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("Create", "Expense", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
-                @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                 </div>
+            </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.Category, new { @class = "col-md-2 control-label" })
@@ -71,10 +69,9 @@
                         <input type="submit" value="SUBMIT" class="btn btn-default" />
                     </div>
                 </div>
-            }
-        </div>
+        }
     </div>
-
+</div>
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")

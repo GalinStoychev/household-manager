@@ -49,16 +49,5 @@ namespace HouseholdManager.Web.Controllers
 
             return View(model);
         }
-
-        public ActionResult About()
-        {
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-            return View();
-        }
     }
 }

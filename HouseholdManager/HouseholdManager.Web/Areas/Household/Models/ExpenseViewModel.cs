@@ -32,7 +32,7 @@ namespace HouseholdManager.Web.Areas.Household.Models
         [Display(Name = "Expected cost")]
         public decimal ExpectedCost { get; set; }
 
-        [StringLength(100, ErrorMessage = "The {0} must be maximum 100 characters long.")]
+        [StringLength(200, ErrorMessage = "The {0} must be maximum 200 characters long.")]
         public string Comment { get; set; }
 
         [Range(0, double.MaxValue, ErrorMessage = "The cost cannot be a negative number.")]

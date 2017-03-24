@@ -1,5 +1,6 @@
 ﻿#expenses-container {
     width: 100%;
+    margin-left: -5px;
 }
 
 .expense-container {
@@ -74,6 +75,10 @@
     margin-bottom: 3em;
 }
 
+.hr-bot {
+    margin-top: 0;
+}
+
 .expense-details ul {
     list-style-type: none;
 }
@@ -82,13 +87,10 @@
         margin-bottom: 2em;
     }
 
-.expense-btns {
-    float: right;
-}
 
-    .expense-btns > a, .expense-btns input {
-        width: 100px;
-    }
+.expense-btns > a, .expense-btns input {
+    width: 100px;
+}
 
 #loading-element img {
     width: 50px;
@@ -109,6 +111,39 @@
 }
 
 .exp-delete {
+    display: inline-block;
+}
+
+.single-comment {
+    margin: 0 2em 1em 2em;
+}
+
+.cmt-header {
+    background-color: #0EBFFF;
+    padding: 0.5em 1em 0.5em 1em;
+    color: white;
+}
+
+    .cmt-header > strong {
+        font-size: 1.1em;
+    }
+
+    .cmt-header > span {
+        float: right;
+    }
+
+.cmt-body {
+    background-color: #C0F2FF;
+    min-height: 5em;
+    padding: 1em;
+    color: #2991E1;
+}
+
+.modal-textarea {
+    display: inline-block;
+}
+
+.form-control {
     display: inline-block;
 }
 

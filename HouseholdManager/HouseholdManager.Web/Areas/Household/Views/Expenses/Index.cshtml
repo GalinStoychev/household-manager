@@ -40,6 +40,7 @@
 </div>
 
 @section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(".info-container").on("click", function (ev) {
             $target = $(ev.target);

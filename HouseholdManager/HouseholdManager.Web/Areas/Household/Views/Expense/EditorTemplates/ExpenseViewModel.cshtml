@@ -15,12 +15,6 @@
             @Html.DropDownListFor(m => m.Category, Model.CategoriesList, new { @class = "form-control exp-category" })
             <hr class="hl-edit-exp" />
         </div>
-        <div class="col-md-3 col-sm-2 col-xs-8">
-            <div class="expense-btns">
-                <input type="submit" value="SAVE" class="btn btn-success" />
-                @Html.ActionLink("CANCEL", "Index", "Expense", null, new { @class = "btn btn-danger" })
-            </div>
-        </div>
     </div>
 
     <div class="row expense-details">
@@ -58,10 +52,19 @@
             </ul>
         </div>
     </div>
-}
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <hr />
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <hr class="hr-bot" />
+        </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 text-center">
+            <div class="expense-btns">
+                <input type="submit" value="SAVE" class="btn btn-success" />
+                @Html.ActionLink("CANCEL", "Index", "Expense", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}

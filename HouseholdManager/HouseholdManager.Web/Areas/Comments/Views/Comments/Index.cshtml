@@ -6,12 +6,18 @@
 @foreach (var comment in Model.Comments)
             {
     <div class="single-comment">
-        <strong>@comment.User</strong>
-        <span>@comment.CreatedOnDate.ToShortDateString()</span>
-        <p>@comment.CommentContent</p>
+        <div class="cmt-header text-left">
+            <strong>@comment.User</strong>
+            <span>Created on: @comment.CreatedOnDate.ToShortDateString()</span>
+        </div>
+        <div class="cmt-body">
+            <p>@comment.CommentContent</p>
+        </div>
     </div>
 }
 
-<div>
-    @Html.Action("Create", "Comments", new { expenceId = Model.ExpenseId })
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("Create", "Comments", new { expenceId = Model.ExpenseId })
+    </div>
 </div>

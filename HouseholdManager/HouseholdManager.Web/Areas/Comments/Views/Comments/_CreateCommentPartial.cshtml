@@ -18,7 +18,8 @@
                 <div class="modal-body">
                     @Html.HiddenFor(m => m.ExpenceId)
                     @Html.ValidationMessageFor(m => m.CommentContent, "", new { @class = "text-danger" })
-                    @Html.TextAreaFor(m => m.CommentContent, new { @class = "form-control" })
+                    <br />
+                    @Html.TextAreaFor(m => m.CommentContent, new { @class = "form-control modal-textarea", rows = "5" })
                 </div>
                 <div class="modal-footer">
                     <input type="submit" value="CANCEL" data-dismiss="modal" class="btn btn-danger" />

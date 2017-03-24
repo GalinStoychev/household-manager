@@ -12,7 +12,7 @@ namespace HouseholdManager.Web.Areas.Comments.Models
 
         [Required]
         [Display(Name ="Content")]
-        [StringLength(100, ErrorMessage = "The comment must be between {0} and 100 characters long", MinimumLength = 2)]
+        [StringLength(200, ErrorMessage = "The comment must be between {0} and 200 characters long", MinimumLength = 2)]
         public string CommentContent { get; set; }
 
         public string User { get; set; }

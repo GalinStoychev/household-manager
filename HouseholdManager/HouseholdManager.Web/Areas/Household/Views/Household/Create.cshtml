@@ -1,52 +1,47 @@
 ﻿@model HouseholdManager.Web.Areas.Household.Models.HouseholdViewModel
-
 @{
     string image = "data: image/jpeg; base64," + Convert.ToBase64String(Model.Image);
 }
-
-<div class="row ">
-    <div class="col-md-offset-4 col-md-5">
-        <h2 class="header-page text-center">Create household</h2>
-
-        <div class="text-center">
-
+<h2 class="header-page text-center">Create household</h2>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 text-center">
+        <div class="">
             <img src="@image" alt="household image" class="hh-image" />
-
             @Html.Partial("_UploadImage")
             @Model.ImageUploadMessage
         </div>
-
+        <br />
         @using (Html.BeginForm("Create", "Household", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
+            {
             @Html.AntiForgeryToken()
             <div class="form-group">
-                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-                @Html.ValidationMessageFor(m => m.Name)
-                <div class="col-md-10">
+                @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                <br />
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                <div>
                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                 </div>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
-                @Html.ValidationMessageFor(m => m.Address)
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Address, new { @class = "control-label" })
+                    <br/>
+                    @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                    <div>
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.HiddenFor(m => m.Image, new { @class = "form-control" })
+                <div class="form-group">
+                    <div>
+                        @Html.HiddenFor(m => m.Image, new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
 
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="SUBMIT" class="btn btn-default" />
+                <div class="form-group">
+                    <div>
+                        <input type="submit" value="SUBMIT" class="btn btn-default" />
+                    </div>
                 </div>
-            </div>
         }
-
     </div>
 </div>
 
