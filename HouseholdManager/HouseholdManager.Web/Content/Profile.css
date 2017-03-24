@@ -4,7 +4,7 @@
 
 .hh-container {
     font-size: 1.5em;
-    margin-bottom: 1em;
-     border-bottom: 2.5px solid #B5516F;
+    margin: 0 1em 1em 1em;
+    border-bottom: 2.5px solid #B5516F;
     padding: 1em;
 }

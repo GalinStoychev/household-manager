@@ -36,6 +36,7 @@ namespace HouseholdManager.Web.Areas.Household.Models
         public string Comment { get; set; }
 
         [Range(0, double.MaxValue, ErrorMessage = "The cost cannot be a negative number.")]
+        [Display(Name = "Paid cost")]
         public decimal? Cost { get; set; }
 
         [Display(Name = "Paid on date")]

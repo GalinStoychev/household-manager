@@ -93,7 +93,7 @@ textarea {
 }
 
 .hh-image {
-    width: 100px;
+    width: 200px;
 }
 
 #btn-upload {
@@ -124,6 +124,14 @@ textarea {
 
 .color-grey {
     color: #949494;
+}
+
+.color-blue {
+    color: #0D83DD;
+}
+
+.color-purple {
+    color: #B5516F;
 }
 
 .loading-main {

@@ -1,4 +1,5 @@
-﻿using HouseholdManager.Models;
+﻿using HouseholdManager.Logic.Dtos;
+using HouseholdManager.Models;
 using System;
 using System.Collections.Generic;
 
@@ -25,5 +26,7 @@ namespace HouseholdManager.Logic.Contracts
         void Pay(Guid expenseId, string userId, string comment, decimal cost);
 
         int GetExpensesCount();
+
+        TotalMonthlyExpenses GetTotalExpenses(Guid householdId, int year, int month);
     }
 }

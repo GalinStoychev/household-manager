@@ -5,6 +5,7 @@ using HouseholdManager.Web.Areas.Household.Models;
 using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
@@ -84,7 +85,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
             return this.RedirectToHousehold(name);
         }
-
+        
         private ActionResult RedirectToHousehold(string name)
         {
             var currentHousehold = this.userService.GetCurrentHousehold(this.webHelper.GetUserName());

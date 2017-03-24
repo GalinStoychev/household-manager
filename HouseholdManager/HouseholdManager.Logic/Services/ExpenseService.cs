@@ -7,6 +7,7 @@ using HouseholdManager.Common.Constants;
 using HouseholdManager.Logic.Contracts.Factories;
 using System.Data.Entity;
 using System.Linq;
+using HouseholdManager.Logic.Dtos;
 
 namespace HouseholdManager.Logic.Services
 {
@@ -167,7 +168,10 @@ namespace HouseholdManager.Logic.Services
         {
             var expense = this.GetExpense(expenseId);
             expense.Pay(userId, DateTime.Now, cost);
-            expense.AddComment(this.commentFactory.CreateComment(userId, comment, DateTime.Now, expense.Id));
+            if (!String.IsNullOrEmpty(comment))
+            {
+                expense.AddComment(this.commentFactory.CreateComment(userId, comment, DateTime.Now, expense.Id));
+            }
 
             this.expenseRepositoryEF.Update(expense);
             this.unitOfWork.Commit();
@@ -195,6 +199,47 @@ namespace HouseholdManager.Logic.Services
         {
             var count = this.expenseRepositoryEF.GetAll().Count();
             return count;
+        }
+
+        public TotalMonthlyExpenses GetTotalExpenses(Guid householdId, int year, int month)
+        {
+            var totalExpenses = new TotalMonthlyExpenses();
+
+            var allExpences = this.expenseRepositoryEF.GetAll<Expense>(
+                x => x.PaidOnDate.Value.Year == year &&
+                x.PaidOnDate.Value.Month == month &&
+                x.HouseholdId == householdId,
+                null, 
+                x => x.PaidBy);
+
+            if (allExpences.Count() != 0)
+            {
+                foreach (Expense exp in allExpences)
+                {
+                    totalExpenses.Total += exp.Cost;
+                    var user = $"{exp.PaidBy.FirstName} {exp.PaidBy.LastName}";
+                    if (!totalExpenses.MoneyPaid.ContainsKey(user))
+                    {
+                        totalExpenses.MoneyPaid.Add(user, 0);
+                    }
+
+                    totalExpenses.MoneyPaid[user] += exp.Cost;
+                }
+
+                var averageMoneyPerUser = totalExpenses.Total / totalExpenses.MoneyPaid.Count;
+                foreach (var user in totalExpenses.MoneyPaid.Keys)
+                {
+                    var amountPaid = totalExpenses.MoneyPaid[user];
+                    if (!totalExpenses.MoneyResult.ContainsKey(user))
+                    {
+                        totalExpenses.MoneyResult.Add(user, 0);
+                    }
+
+                    totalExpenses.MoneyResult[user] = averageMoneyPerUser - amountPaid;
+                }
+            }
+
+            return totalExpenses;
         }
     }
 }

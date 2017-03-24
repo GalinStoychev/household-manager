@@ -1,4 +1,7 @@
-﻿namespace HouseholdManager.Common.Constants
+﻿using System;
+using System.Collections.Generic;
+
+namespace HouseholdManager.Common.Constants
 {
     public static class CommonConstants
     {

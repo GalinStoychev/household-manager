@@ -63,6 +63,7 @@
     <Compile Include="Contracts\IImagePathResolver.cs" />
     <Compile Include="Contracts\IImageService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="Dtos\TotalMonthlyExpenses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CommentService.cs" />
     <Compile Include="Services\ExpenseService.cs" />

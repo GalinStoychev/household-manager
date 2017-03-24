@@ -256,6 +256,7 @@
     <Compile Include="Areas\Household\Models\HouseholdViewModel.cs" />
     <Compile Include="Areas\Household\Models\SearchViewModel.cs" />
     <Compile Include="Areas\Household\Models\ShowExpensesViewModel.cs" />
+    <Compile Include="Areas\Household\Models\TotalMonthlyExpencesViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -749,6 +750,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\HouseholdsGrid.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\UsersGrid.cshtml" />
+    <Content Include="Areas\Household\Views\Expenses\TotalMonthlyExpences.cshtml" />
     <None Include="Properties\PublishProfiles\householdmanager - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\householdmanager - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

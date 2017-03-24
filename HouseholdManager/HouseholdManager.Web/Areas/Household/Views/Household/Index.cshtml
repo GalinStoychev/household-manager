@@ -9,23 +9,29 @@
 
 
 <div class="row">
-    <div class="col-md-12  text-center">
-        <h2 class="header-page">@householdName</h2>
+    <h1 class="header-page text-center">@householdName</h1>
+    <div class="col-md-5 text-center hh-info-container">
         <img src="@image" alt="household image" class="hh-image" />
-        <br />
-        <span>@Model.Address</span>
+        <p>Address: <b>@Model.Address</b></p>
 
-        <h4 class="header-page">People in this household</h4>
+        <h3 class="color-purple">People in this household</h3>
         @foreach (var person in Model.Users)
         {
             <div class="person-container">
-                <strong>Name: </strong><span>@person.FullName</span>
-                <strong>Email: </strong><span>@person.Email</span>
-                <strong>Phone number: </strong><span>@person.PhoneNumber</span>
+                <div>
+                    Name: <strong>@person.FullName</strong>
+                </div>
+                <div>
+                    Email: <strong>@person.Email</strong>
+                </div>
+                <div>
+                    Phone number: <strong>@person.PhoneNumber</strong>
+                </div>
             </div>
         }
-
-
+    </div>
+    <div class="col-md-6 ">
+        @Html.Action("TotalMonthlyExpences", "Expenses", new { year = DateTime.Now.Year, month = DateTime.Now.Month})
     </div>
 </div>
 

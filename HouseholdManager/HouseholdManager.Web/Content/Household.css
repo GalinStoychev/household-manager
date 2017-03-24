@@ -179,3 +179,23 @@
 .category-Kitchen {
     border-top: 5px solid #1caf1a;
 }
+
+.hh-info-container {
+    margin-left: 1em;
+}
+
+    .hh-info-container img {
+        margin-bottom: 1em;
+    }
+
+.person-container {
+    font-size: 1.1em;
+    margin: 0 1em 1em 1em;
+    border-bottom: 2.5px solid #B5516F;
+    padding: 1em;
+}
+
+.totals-btns select, .totals-btns input {
+    display: inline-block;
+    max-width: 110px;
+}

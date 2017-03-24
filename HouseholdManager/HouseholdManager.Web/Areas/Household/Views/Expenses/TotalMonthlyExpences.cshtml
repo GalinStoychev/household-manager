@@ -1,0 +1,55 @@
+﻿@model HouseholdManager.Web.Areas.Household.Models.TotalMonthlyExpencesViewModel
+@{
+    Layout = null;
+}
+
+<div id="totals-container">
+    <h3 class="text-center color-purple">TotalMonthlyExpences</h3>
+    <br />
+
+    @using (Ajax.BeginForm("TotalMonthlyExpences", "Expenses", new { }, new AjaxOptions
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "totals-container",
+        InsertionMode = InsertionMode.Replace
+
+    }, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="totals-btns">
+            @Html.DropDownListFor(x => x.Month, Model.Months, new { @class = "form-control" })
+            @Html.DropDownListFor(x => x.Year, Model.Years, new { @class = "form-control" })
+            <input type="submit" value="SEARCH" class="form-control" />
+        </div>
+    }
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Has paid</th>
+                <th>Must pay</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.MoneyPaid)
+            {
+                <tr>
+                    <td>@user.Key</td>
+                    <td>@(Math.Round(user.Value, 2))</td>
+                    @if (Model.MoneyResult[user.Key] < 0)
+                    {
+                        <td class="text-danger">@(Math.Round(Model.MoneyResult[user.Key], 2))</td>
+                    }
+                    else
+                    {
+                        <td>@(Math.Round(Model.MoneyResult[user.Key], 2))</td>
+                    }
+                </tr>
+            }
+            <tr class="color-blue">
+                <td>Total</td>
+                <td>@Model.Total</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

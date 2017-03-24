@@ -1,4 +1,5 @@
-﻿using HouseholdManager.Models;
+﻿using HouseholdManager.Logic.Dtos;
+using HouseholdManager.Models;
 using System;
 using System.Collections.Generic;
 

@@ -6,7 +6,6 @@ using HouseholdManager.Web.Controllers;
 using HouseholdManager.Web.WebHelpers.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Web;
 using System.Web.Mvc;
 
 namespace HouseholdManager.Web.Areas.Household.Controllers
@@ -15,7 +14,9 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
     public class ExpensesController : BaseController
     {
         private const string IsHistory = "IsHistory";
+        private const int StartYear = 2016;
 
+        private readonly string[] allMonths = new string[] { "January", "February", "Mart", "April", "May", "June", "July", "August", "September", "Octomber", "November", "December" };
         private readonly IExpenseService expenseService;
 
         public ExpensesController(IExpenseService expenseService, IMapingService mappingService, IWebHelper webHelper)
@@ -109,6 +110,35 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         {
             this.expenseService.Pay(model.Id, this.webHelper.GetUserId(), model.Comment, (decimal)model.Cost);
             return RedirectToRoute("Household_expenses", new { name = model.Name });
+        }
+
+        [HttpGet]
+        public ActionResult TotalMonthlyExpences(int year, int month)
+        {
+            var years = new List<SelectListItem>();
+            for (int i = StartYear; i <= DateTime.Now.Year; i++)
+            {
+                years.Add(new SelectListItem() { Value = i.ToString(), Text = i.ToString() });
+            }
+
+            var months = new List<SelectListItem>();
+            for (int i = 1; i <= this.allMonths.Length; i++)
+            {
+                months.Add(new SelectListItem() { Value = i.ToString(), Text = this.allMonths[i - 1] });
+            }
+
+            months.Find(x => x.Value == month.ToString()).Selected = true;
+
+            var model = new TotalMonthlyExpencesViewModel();
+            model.Years = years;
+            model.Months = months;
+
+            var result = this.expenseService.GetTotalExpenses(this.webHelper.GetHouseholdIdFromCookie(), year, month);
+            model.Total = result.Total;
+            model.MoneyPaid = result.MoneyPaid;
+            model.MoneyResult = result.MoneyResult;
+
+            return View(model);
         }
     }
 }

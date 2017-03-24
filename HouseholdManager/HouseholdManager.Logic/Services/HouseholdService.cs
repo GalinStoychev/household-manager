@@ -6,6 +6,7 @@ using HouseholdManager.Models;
 using HouseholdManager.Logic.Contracts.Factories;
 using System.Collections.Generic;
 using System.Linq;
+using HouseholdManager.Logic.Dtos;
 
 namespace HouseholdManager.Logic.Services
 {

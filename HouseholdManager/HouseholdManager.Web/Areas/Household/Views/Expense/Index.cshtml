@@ -4,7 +4,7 @@
 @{ 
     var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
 }
-<h2 class="header-page text-center">@householdName</h2>
+<h1 class="color-blue text-center">@householdName</h1>
 @Html.DisplayForModel(Model)
 
 @section scripts {
