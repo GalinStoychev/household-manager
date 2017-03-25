@@ -26,7 +26,7 @@ namespace HouseholdManager.Web
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/kendo/jquery.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jquery.unobtrusive").Include(
+            bundles.Add(new ScriptBundle("~/bundles/jquery-unobtrusive").Include(
                         "~/Scripts/jquery.unobtrusive-ajax.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
