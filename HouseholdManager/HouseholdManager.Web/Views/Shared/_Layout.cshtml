@@ -29,7 +29,7 @@
         <div class="container">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (householdName != null)
+                    @if (!String.IsNullOrEmpty(householdName))
                     {
                         <li class="nav-link">@Html.RouteLink("Household", "Household_single", new { area = "", name = householdName }, new { @class = "trigger-loading" })</li>
                         <li class="nav-link">@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
