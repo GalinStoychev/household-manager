@@ -119,7 +119,7 @@ namespace HouseholdManager.Logic.Services
                        x.AssignedUser.LastName.ToLower().IndexOf(patternToLower) > -1))
                    .Include(x => x.AssignedUser)
                    .Include(x => x.ExpenseCategory)
-                   .OrderBy(x => x.DueDate)
+                   .OrderByDescending(x => x.CreatedOn)
                    .Skip((page - 1) * CommonConstants.DefaultPageSize)
                    .Take(CommonConstants.DefaultPageSize)
                    .ToList();
@@ -130,7 +130,7 @@ namespace HouseholdManager.Logic.Services
                   .Where(x => x.HouseholdId == householdId && x.IsPaid == isPaid && x.IsDeleted == false)
                   .Include(x => x.AssignedUser)
                   .Include(x => x.ExpenseCategory)
-                  .OrderBy(x => x.DueDate)
+                  .OrderByDescending(x => x.CreatedOn)
                   .Skip((page - 1) * CommonConstants.DefaultPageSize)
                   .Take(CommonConstants.DefaultPageSize)
                   .ToList();
