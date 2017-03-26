@@ -168,6 +168,7 @@ namespace HouseholdManager.Logic.Services
         {
             var expense = this.GetExpense(expenseId);
             expense.Pay(userId, DateTime.Now, cost);
+
             if (!String.IsNullOrEmpty(comment))
             {
                 expense.AddComment(this.commentFactory.CreateComment(userId, comment, DateTime.Now, expense.Id));
@@ -186,7 +187,7 @@ namespace HouseholdManager.Logic.Services
             this.unitOfWork.Commit();
         }
 
-        public void Delete(Guid expenseId, bool isDeleted)
+        public void DeleteExpense(Guid expenseId, bool isDeleted)
         {
             var expense = this.expenseRepositoryEF.GetById(expenseId);
             expense.Delete(isDeleted);

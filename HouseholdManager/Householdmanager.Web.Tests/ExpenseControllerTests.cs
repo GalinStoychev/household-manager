@@ -532,7 +532,7 @@ namespace Householdmanager.Web.Tests
             expenseController.Delete(new ExpenseViewModel());
 
             // Assert
-            this.expenseServiceMock.Verify(x => x.Delete(It.IsAny<Guid>(), It.IsAny<bool>()), Times.Once);
+            this.expenseServiceMock.Verify(x => x.DeleteExpense(It.IsAny<Guid>(), It.IsAny<bool>()), Times.Once);
         }
     }
 }

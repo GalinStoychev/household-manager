@@ -11,7 +11,7 @@ namespace HouseholdManager.Logic.Contracts
 
         void UpdateExpense(Guid expenseId, string name, Guid categoryId, decimal expectedCost, DateTime dueDate, string assignedUserId);
 
-        void Delete(Guid expenseId, bool isDeleted);
+        void DeleteExpense(Guid expenseId, bool isDeleted);
 
         IEnumerable<ExpenseCategory> GetExpenseCategories();
 

@@ -107,7 +107,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         [HttpPost]
         public ActionResult Delete([Bind(Include = "Id")] ExpenseViewModel model)
         {
-            this.expenseService.Delete(model.Id, true);
+            this.expenseService.DeleteExpense(model.Id, true);
             return RedirectToAction("Index", new { id = model.Id });
         }
 
