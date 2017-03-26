@@ -72,6 +72,7 @@
     <Compile Include="CommentServiceTests.cs" />
     <Compile Include="HouseholdServiceTests.cs" />
     <Compile Include="ImageServiceTests.cs" />
+    <Compile Include="InvitationServiceTests.cs" />
     <Compile Include="UserServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

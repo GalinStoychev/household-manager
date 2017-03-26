@@ -31,15 +31,15 @@ namespace HouseholdManager.Models
         }
 
         public User(string username, string email)
+            : this()
         {
             this.UserName = username;
             this.Email = email;
         }
 
         public User(string username, string email, string firstName, string lastName, string phoneNumber)
+            : this(username, email)
         {
-            this.UserName = username;
-            this.Email = email;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.PhoneNumber = phoneNumber;

@@ -25,7 +25,7 @@ namespace HouseholdManager.Models
         [ForeignKey("User")]
         public string UserId { get; protected set; }
 
-        public virtual User User { get; protected set; }
+        public virtual User User { get; set; }
 
         public Status Status { get; set; }
     }
