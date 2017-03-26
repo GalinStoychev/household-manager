@@ -17,7 +17,7 @@ namespace HouseholdManager.Logic.Services
         private readonly IRepository<User> userRepositoryEF;
         private readonly IInvitationFactory invitationFactory;
 
-        public InvitationService(IUnitOfWork unitOfWork, IRepository<Invitation> invitationRepositoryEF, IRepository<User> userRepositoryEF)
+        public InvitationService(IUnitOfWork unitOfWork, IRepository<Invitation> invitationRepositoryEF, IRepository<User> userRepositoryEF, IInvitationFactory invitationFactory)
         {
             if (unitOfWork == null)
             {
@@ -34,15 +34,15 @@ namespace HouseholdManager.Logic.Services
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "userRepositoryEF"));
             }
 
-            //if (invitationFactory == null)
-            //{
-            //    throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "invitationFactory"));
-            //}
+            if (invitationFactory == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "invitationFactory"));
+            }
 
             this.unitOfWork = unitOfWork;
             this.invitationRepositoryEF = invitationRepositoryEF;
             this.userRepositoryEF = userRepositoryEF;
-            //this.invitationFactory = invitationFactory;
+            this.invitationFactory = invitationFactory;
         }
 
         public void AcceptInvitation(Guid invitationId)
@@ -65,6 +65,11 @@ namespace HouseholdManager.Logic.Services
         public bool AddInvitation(string username, Guid householdId)
         {
             var user = this.userRepositoryEF.GetFirst(x => x.UserName == username);
+            var isUserInHousehold = user.Households.Any(x => x.Id == householdId);
+            if (isUserInHousehold)
+            {
+                return false;
+            }
 
             var doesExist = this.invitationRepositoryEF.GetAll<Invitation>(x => x.UserId == user.Id && x.HouseholdId == householdId, null);
             if (doesExist.Count() > 0)
@@ -72,8 +77,8 @@ namespace HouseholdManager.Logic.Services
                 return false;
             }
 
-            //var invitation = this.invitationFactory.CreateInvitation(householdId, user.Id, Status.Waiting);
-            var invitation = new Invitation(householdId, user.Id, Status.Waiting);
+
+            var invitation = this.invitationFactory.CreateInvitation(householdId, user.Id, Status.Waiting);
 
             this.invitationRepositoryEF.Add(invitation);
             this.unitOfWork.Commit();

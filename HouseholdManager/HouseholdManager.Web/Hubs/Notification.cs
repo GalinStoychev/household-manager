@@ -29,32 +29,29 @@ namespace HouseholdManager.Web.Hubs
 
         public void SendNotification(string username)
         {
+            var msg = string.Empty;
+
+            if (username == webHelper.GetUserName())
+            {
+                msg = "You cannot sent invitation to yourself!";
+            }
+            else
+            {
+                var isSucces = this.invitationService.AddInvitation(username, webHelper.GetHouseholdIdFromCookie());
+
+                if (isSucces)
+                {
+                    Clients.User(username).addNotification();
+                    msg = "Invitation was sent.";
+                }
+                else
+                {
+                    msg = "Invitation was previously sent or user is already in this household!";
+                }
+            }
+
             var connId = Context.ConnectionId;
-            Clients.User(username).addNotification();
-            Clients.Client(connId).addMessage("Invitation was sent");
-
-            //if (username == webHelper.GetUserName())
-            //{
-            //    Clients.Client(connId).reject("You cannot sent invitation to yourself!");
-            //}
-            //else
-            //{
-            //    var isSucces =  this.invitationService.AddInvitation(username, webHelper.GetHouseholdIdFromCookie());
-
-            //    if (isSucces)
-            //    {
-            //        Clients.User(username).addNotification();
-            //        Clients.Client(connId).addMessage("Invitation was sent");
-            //    }
-            //    else
-            //    {
-            //        Clients.Client(connId).addMessage("Invitation was previously sent!");
-            //    }
-            //}
-
-            //Clients.User(this.Context.User.Identity.GetUserId()).addNotification(connId);
-
-            //  Clients.Client(connId).addNotification(message + " " + connId);
+            Clients.Client(connId).addMessage(msg);
         }
     }
 }
