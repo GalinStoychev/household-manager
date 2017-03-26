@@ -26,8 +26,11 @@
             </div>
         }
     </div>
-    <div class="col-md-6 ">
-        @Html.Action("TotalMonthlyExpences", "Expenses", new { year = DateTime.Now.Year, month = DateTime.Now.Month })
+    <div class="col-md-6 text-center">
+        <div>
+            @Html.Action("TotalMonthlyExpences", "Expenses", new { year = DateTime.Now.Year, month = DateTime.Now.Month })
+        </div>
+        <br/>
         <div class="search-field">
             @Html.Action("LoadSearchForm", "Household", new { })
         </div>
@@ -37,5 +40,5 @@
 </div>
 
 @section scripts{
-   @Scripts.Render("~/bundles/invite-user")
+    @Scripts.Render("~/bundles/invite-user")
 }

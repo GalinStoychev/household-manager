@@ -436,5 +436,31 @@ namespace HouseholdManager.Logic.Tests
             // Assert
             Assert.IsInstanceOf<int>(result);
         }
+
+        [Test]
+        public void GetExpenses_ShouldReturnIEumerableOfExpense_WhenIsCalled()
+        {
+            // Arrange
+            var expenseService = new ExpenseService(unitOfWorkMock.Object, expenseRepoMock.Object, expenseCategoryRepoMock.Object, expenseFactoryMock.Object, commentFactoryMock.Object);
+
+            // Act
+            var result = expenseService.GetExpenses(new Guid(), 1, false, "_");
+
+            // Assert
+            Assert.IsInstanceOf<IEnumerable<Expense>>(result);
+        }
+
+        [Test]
+        public void ExpenseRepository_ShouldCallAllOnce_WhenGetExpensesIsCalled()
+        {
+            // Arrange
+            var expenseService = new ExpenseService(unitOfWorkMock.Object, expenseRepoMock.Object, expenseCategoryRepoMock.Object, expenseFactoryMock.Object, commentFactoryMock.Object);
+
+            // Act
+            expenseService.GetExpenses(new Guid(), 1, false, "_");
+
+            // Assert
+            this.expenseRepoMock.Verify(x => x.All, Times.Once);
+        }
     }
 }

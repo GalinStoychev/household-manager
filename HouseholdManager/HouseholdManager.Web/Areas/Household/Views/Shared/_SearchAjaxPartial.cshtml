@@ -11,8 +11,10 @@
 
 }, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.TextBox("value", null, new { @class = "form-control" })
-    <input type="submit" value="SEARCH" class="form-control" />
+    <div class="form-group">
+        @Html.TextBox("value", null, new { @class = "form-control input-search" })
+        <input type="submit" value="SEARCH" class="btn btn-search btn-default" />
+    </div>
 }
 
 <div id="search-result"></div>

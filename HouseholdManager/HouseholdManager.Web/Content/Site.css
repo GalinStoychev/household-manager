@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 75px;
+    padding-top: 55px;
     padding-bottom: 20px;
     font-family: Roboto;
     background-color: #F0F0F0;
@@ -185,4 +185,20 @@ textarea {
     margin-top: 1em;
     padding: 1em;
     box-shadow: 1px 1px 7px grey;
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+}
+
+#myCarousel {
+    box-shadow: 0px 1px 10px rgba(69, 58, 58, 0.37), 0px -1px 10px rgba(69, 58, 58, 0.37);
+}
+
+    #myCarousel h1 {
+        color: #B5516F;
+    }
+
+.glyphicon-chevron-left, .glyphicon-chevron-right {
+   color: #0EBFFF;
 }

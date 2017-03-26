@@ -297,7 +297,8 @@
     <Content Include="Content\Household.css" />
     <Content Include="Content\Images\1.png" />
     <Content Include="Content\Images\2.png" />
-    <Content Include="Content\Images\3.jpg" />
+    <Content Include="Content\Images\3.png" />
+    <Content Include="Content\Images\back.png" />
     <Content Include="Content\Images\circle-original.png" />
     <Content Include="Content\Images\defaultHousehold.png" />
     <Content Include="Content\Images\logo-original.png" />
