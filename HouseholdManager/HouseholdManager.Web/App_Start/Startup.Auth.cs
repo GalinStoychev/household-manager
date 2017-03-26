@@ -7,6 +7,8 @@ using Owin;
 using HouseholdManager.Data;
 using HouseholdManager.Identity;
 using HouseholdManager.Models;
+using HouseholdManager.Web.App_Start;
+using Microsoft.AspNet.SignalR;
 
 namespace HouseholdManager.Web
 {
@@ -64,6 +66,15 @@ namespace HouseholdManager.Web
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+        }
+
+        public void ConfigureSignalR(IAppBuilder app)
+        {
+            var resolver = new NinjectSignalRDependencyResolver();
+            var config = new HubConfiguration();
+            config.Resolver = resolver;
+
+            app.MapSignalR(config);
         }
     }
 }

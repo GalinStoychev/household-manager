@@ -47,6 +47,10 @@ namespace HouseholdManager.Web.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+
+                // Make IKernel instance available.
+                NinjectKernelInstanceProvider.Instance = kernel;
+
                 return kernel;
             }
             catch

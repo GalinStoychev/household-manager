@@ -35,11 +35,11 @@
             .ButtonCount(5)
         )
         .DataSource(dataSource => dataSource
-        .Server()
-        .Model(model => model.Id(p => p.Id))
-        .Read("Index", "Households")
-        .Update("Update", "Households")
-    )
+            .Server()
+            .Model(model => model.Id(p => p.Id))
+            .Read("Index", "Households")
+            .Update("Update", "Households")
+            )
         )
     </div>
 </div>
