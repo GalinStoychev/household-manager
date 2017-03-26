@@ -344,5 +344,58 @@ namespace HouseholdManager.Logic.Tests
             // Assert
             this.unitOfWorkMock.Verify(x => x.Commit(), Times.Once);
         }
+
+        [Test]
+        public void UserRepository_ShouldCallGetAllOnce_WhenGetUsersCountIsCalled()
+        {
+            // Arrange
+            var userService = new UserService(unitOfWorkMock.Object, userRepoMock.Object);
+
+            // Act
+            userService.GetUsersCount();
+
+            // Assert
+            this.userRepoMock.Verify(x => x.GetAll(), Times.Once);
+        }
+
+        [Test]
+        public void GetUsersCount_ShouldReturnInt_WhenItIsCalled()
+        {
+            // Arrange
+            var userService = new UserService(unitOfWorkMock.Object, userRepoMock.Object);
+
+            // Act
+            var result = userService.GetUsersCount();
+
+            // Assert
+            Assert.IsInstanceOf<int>(result);
+        }
+
+        [Test]
+        public void UserRepository_ShouldCallGetFirstOnce_WhenGetByUsernameIsCalled()
+        {
+            // Arrange
+            var userService = new UserService(unitOfWorkMock.Object, userRepoMock.Object);
+
+            // Act
+            userService.GetByUsername("_");
+
+            // Assert
+            this.userRepoMock.Verify(x => x.GetFirst(It.IsAny<Expression<Func<User, bool>>>(), null), Times.Once);
+        }
+
+        [Test]
+        public void GetByUsername_ShouldReturnUser_WhenItIsCalled()
+        {
+            // Arrange
+            var userService = new UserService(unitOfWorkMock.Object, userRepoMock.Object);
+            this.userRepoMock.Setup(x => x.GetFirst(It.IsAny<Expression<Func<User, bool>>>(), null)).Returns(new User());
+
+            // Act
+            var result = userService.GetByUsername("_");
+
+            // Assert
+            Assert.IsInstanceOf<User>(result);
+        }
     }
 }

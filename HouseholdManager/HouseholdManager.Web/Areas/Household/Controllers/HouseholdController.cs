@@ -90,7 +90,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
         public ActionResult LoadSearchForm()
         {
             var model = new SearchViewModel() { ActionName = "SearchUser", ControllerName = "Household" };
-            return View("_SearchAjaxPartial", model);
+            return PartialView("_SearchAjaxPartial", model);
         }
 
         [HttpGet]

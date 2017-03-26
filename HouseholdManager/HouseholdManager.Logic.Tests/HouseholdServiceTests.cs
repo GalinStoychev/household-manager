@@ -312,5 +312,31 @@ namespace HouseholdManager.Logic.Tests
             // Assert
             this.unitOfWorkMock.Verify(x => x.Commit(), Times.Once);
         }
+
+        [Test]
+        public void HouseholdRepository_ShouldCallGetAllOnce_WhenGetHouseholdsCountIsCalled()
+        {
+            // Arrange
+            var householdService = new HouseholdService(unitOfWorkMock.Object, householdRepoMock.Object, userRepoMock.Object, householdFactoryMock.Object);
+
+            // Act
+            householdService.GetHouseholdsCount();
+
+            // Assert
+            this.householdRepoMock.Verify(x => x.GetAll(), Times.Once);
+        }
+
+        [Test]
+        public void GetHouseholdsCount_ShouldReturnInt_WhenItIsCalled()
+        {
+            // Arrange
+            var householdService = new HouseholdService(unitOfWorkMock.Object, householdRepoMock.Object, userRepoMock.Object, householdFactoryMock.Object);
+
+            // Act
+            var result = householdService.GetHouseholdsCount();
+
+            // Assert
+            Assert.IsInstanceOf<int>(result);
+        }
     }
 }

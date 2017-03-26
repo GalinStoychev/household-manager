@@ -10,6 +10,7 @@ using HouseholdManager.Web.Areas.Household.Controllers;
 using HouseholdManager.Web.Areas.Household.Models;
 using System.Collections.Generic;
 using HouseholdManager.Models;
+using HouseholdManager.Logic.Dtos;
 
 namespace Householdmanager.Web.Tests
 {
@@ -185,6 +186,61 @@ namespace Householdmanager.Web.Tests
 
             // Assert
             webHelperMock.Verify(x => x.GetUserId(), Times.Once);
+        }
+
+        [Test]
+        public void ExpenseService_SholdCallGetTotalExpensesOnce_WhenTotalMonthlyExpencesIsCalled()
+        {
+            // Arrange
+            var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            this.expenseServiceMock.Setup(x => x.GetTotalExpenses(It.IsAny<Guid>(), It.IsAny<int>(), It.IsAny<int>())).Returns(new TotalMonthlyExpenses());
+
+            // Act
+            expensesController.TotalMonthlyExpences(1234, 12);
+
+            // Assert
+            this.expenseServiceMock.Verify(x => x.GetTotalExpenses(It.IsAny<Guid>(), It.IsAny<int>(), It.IsAny<int>()), Times.Once);
+        }
+
+        [Test]
+        public void WebHelper_SholdCallGetHouseholdIdFromCookieOnce_WhenTotalMonthlyExpencesIsCalled()
+        {
+            // Arrange
+            var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            this.expenseServiceMock.Setup(x => x.GetTotalExpenses(It.IsAny<Guid>(), It.IsAny<int>(), It.IsAny<int>())).Returns(new TotalMonthlyExpenses());
+
+            // Act
+            expensesController.TotalMonthlyExpences(1234, 12);
+
+            // Assert
+            this.webHelperMock.Verify(x => x.GetHouseholdIdFromCookie(), Times.Once);
+        }
+
+        [Test]
+        public void TotalMonthlyExpences_ShouldReturnDefaultView_WhenCalled()
+        {
+            // Arrange
+            var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            this.expenseServiceMock.Setup(x => x.GetTotalExpenses(It.IsAny<Guid>(), It.IsAny<int>(), It.IsAny<int>())).Returns(new TotalMonthlyExpenses());
+
+            // Act
+            // Assert
+            expensesController.WithCallTo(c => c.TotalMonthlyExpences(1234, 12))
+                .ShouldRenderDefaultView();
+        }
+
+        [Test]
+        public void TotalMonthlyExpences_ShouldReturnDefaultViewWithTotalMonthlyExpencesViewModel_WhenCalled()
+        {
+            // Arrange
+            var expensesController = new ExpensesController(expenseServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            this.expenseServiceMock.Setup(x => x.GetTotalExpenses(It.IsAny<Guid>(), It.IsAny<int>(), It.IsAny<int>())).Returns(new TotalMonthlyExpenses());
+
+            // Act
+            // Assert
+            expensesController.WithCallTo(c => c.TotalMonthlyExpences(1234, 12))
+                .ShouldRenderDefaultView()
+                .WithModel<TotalMonthlyExpencesViewModel>();
         }
     }
 }

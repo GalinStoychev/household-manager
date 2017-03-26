@@ -294,5 +294,67 @@ namespace Householdmanager.Web.Tests
             // Assert
             webHelperMock.Verify(x => x.SetHouseholdCookie(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
+
+        [Test]
+        public void LoadSearchForm_SholdReturn_SearchAjaxPartial_WhenCalled()
+        {
+            // Arrange
+            var householdController = new HouseholdController(userServiceMock.Object, householdServiceMock.Object, imageServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+
+            // Act
+            // Assert
+            householdController.WithCallTo(c => c.LoadSearchForm()).ShouldRenderPartialView("_SearchAjaxPartial");
+        }
+
+        [Test]
+        public void LoadSearchForm_SholdReturn_SearchAjaxPartialWithSearchViewModel_WhenCalled()
+        {
+            // Arrange
+            var householdController = new HouseholdController(userServiceMock.Object, householdServiceMock.Object, imageServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+
+            // Act
+            // Assert
+            householdController.WithCallTo(c => c.LoadSearchForm())
+                .ShouldRenderPartialView("_SearchAjaxPartial")
+                .WithModel<SearchViewModel>();
+        }
+
+        [Test]
+        public void UserService_SholdCallGetByUsernameOnce_WhenSearchUserIsCalled()
+        {
+            // Arrange
+            var householdController = new HouseholdController(userServiceMock.Object, householdServiceMock.Object, imageServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+
+            // Act
+            householdController.SearchUser("_");
+
+            // Assert
+            this.userServiceMock.Verify(x => x.GetByUsername(It.IsAny<string>()), Times.Once);
+        }
+
+        [Test]
+        public void SearchUser_SholdReturn_UserSearchPartial_WhenCalled()
+        {
+            // Arrange
+            var householdController = new HouseholdController(userServiceMock.Object, householdServiceMock.Object, imageServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+
+            // Act
+            // Assert
+            householdController.WithCallTo(c => c.SearchUser(It.IsAny<string>())).ShouldRenderPartialView("_UserSearchPartial");
+        }
+
+        [Test]
+        public void SearchUser_SholdReturn_UserSearchPartialWithStringModel_WhenCalled()
+        {
+            // Arrange
+            var householdController = new HouseholdController(userServiceMock.Object, householdServiceMock.Object, imageServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            this.userServiceMock.Setup(x => x.GetByUsername(It.IsAny<string>())).Returns(new User("_", "_"));
+
+            // Act
+            // Assert
+            householdController.WithCallTo(c => c.SearchUser(It.IsAny<string>()))
+                .ShouldRenderPartialView("_UserSearchPartial")
+                .WithModel<string>();
+        }
     }
 }

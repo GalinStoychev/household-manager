@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="BaseControllerTests.cs" />
     <Compile Include="CommentsControllerTests.cs" />
+    <Compile Include="ErrorControllerTests.cs" />
     <Compile Include="ExpenseControllerTests.cs" />
     <Compile Include="ExpensesControllerTests.cs" />
     <Compile Include="HouseholdControllerTests.cs" />
