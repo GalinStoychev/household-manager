@@ -1,4 +1,6 @@
 ﻿@using HouseholdManager.Common.Constants
+@using Microsoft.AspNet.Identity;
+
 @{
     var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
     var isAdmin = User.IsInRole("Admin");
@@ -13,6 +15,10 @@
     @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jquery-unobtrusive")
+
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalr/hubs" type="text/javascript"></script>
+
     @RenderSection("kendoScripts", required: false)
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
 </head>
@@ -35,19 +41,19 @@
                         <li class="nav-link">@Html.ActionLink("Expenses", "Index", "Expenses", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
                         <li class="nav-link">@Html.ActionLink("Add item", "Create", "Expense", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
                         <li class="nav-link">@Html.ActionLink("History", "History", "Expenses", new { area = "Household", name = householdName }, new { @class = "trigger-loading" })</li>
-                        if (@isAdmin)
-                        {
-                            <li class="dropdown nav-link">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    Admin
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Users", "Index", "Users", new { area = "Admin" }, new { @class = "trigger-loading" })</li>
-                                    <li>@Html.ActionLink("Households", "Index", "Households", new { area = "Admin" }, new { @class = "trigger-loading" })</li>
-                                </ul>
-                            </li>
-                        }
+                    }
+                    @if (@isAdmin)
+                    {
+                        <li class="dropdown nav-link">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Admin
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Users", "Index", "Users", new { area = "Admin" }, new { @class = "trigger-loading" })</li>
+                                <li>@Html.ActionLink("Households", "Index", "Households", new { area = "Admin" }, new { @class = "trigger-loading" })</li>
+                            </ul>
+                        </li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -57,6 +63,9 @@
     <div class="container body-content">
         <div class="loading-main hide">
             <img src="http://happywheelsez.com/themes/game_gamesgames/resources/css/images/loading.gif" alt="Loading" />
+        </div>
+        <div class="text-center">
+            <span id="received-notif" class="hide">Invitations HERE</span>
         </div>
         @RenderBody()
     </div>

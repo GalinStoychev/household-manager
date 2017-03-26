@@ -1,17 +1,15 @@
 ﻿@using HouseholdManager.Common.Constants
 @model HouseholdManager.Web.Areas.Household.Models.HouseholdViewModel
-
 @{
     var householdName = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdName];
+    var householdId = this.Request.Cookies[CommonConstants.CurrentHousehold]?[CommonConstants.CurrentHouseholdId];
     var image = "data: image/jpeg; base64," + Convert.ToBase64String(Model.Image);
 }
-
 <div class="row">
     <h1 class="header-page text-center">@householdName</h1>
     <div class="col-md-5 text-center hh-info-container">
         <img src="@image" alt="household image" class="hh-image" />
         <p>Address: <b>@Model.Address</b></p>
-
         <h3 class="color-purple">People in this household</h3>
         @foreach (var person in Model.Users)
         {
@@ -29,7 +27,15 @@
         }
     </div>
     <div class="col-md-6 ">
-        @Html.Action("TotalMonthlyExpences", "Expenses", new { year = DateTime.Now.Year, month = DateTime.Now.Month})
+        @Html.Action("TotalMonthlyExpences", "Expenses", new { year = DateTime.Now.Year, month = DateTime.Now.Month })
+        <div class="search-field">
+            @Html.Action("LoadSearchForm", "Household", new { })
+        </div>
+        <div id="messages">
+        </div>
     </div>
 </div>
 
+@section scripts{
+   @Scripts.Render("~/bundles/invite-user")
+}

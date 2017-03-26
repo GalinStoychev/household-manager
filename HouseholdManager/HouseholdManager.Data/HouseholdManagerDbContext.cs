@@ -22,6 +22,8 @@ namespace HouseholdManager.Data
                        
         public virtual IDbSet<Household> Household { get; set; }
 
+        public virtual IDbSet<Invitation> Invitation { get; set; }
+
         public static HouseholdManagerDbContext Create()
         {
             return new HouseholdManagerDbContext();

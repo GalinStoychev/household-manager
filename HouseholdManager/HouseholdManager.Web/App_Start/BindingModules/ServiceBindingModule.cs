@@ -35,6 +35,10 @@ namespace HouseholdManager.Web.App_Start.BindingModules
                .ToFactory()
                .InSingletonScope();
 
+            this.Bind<IInvitationFactory>()
+             .ToFactory()
+             .InSingletonScope();
+
             this.Bind<IUserService>()
                .To<UserService>()
                .WhenInjectedExactlyInto<HomeController>()

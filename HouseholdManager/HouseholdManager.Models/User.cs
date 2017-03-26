@@ -19,12 +19,15 @@ namespace HouseholdManager.Models
 
         private ICollection<Household> households;
 
+        private ICollection<Invitation> invitations;
+
         public User()
         {
             this.expensesWillPay = new HashSet<Expense>();
             this.expensesPaid = new HashSet<Expense>();
             this.comments = new HashSet<Comment>();
             this.households = new HashSet<Household>();
+            this.invitations = new HashSet<Invitation>();
         }
 
         public User(string username, string email)
@@ -75,6 +78,12 @@ namespace HouseholdManager.Models
         {
             get { return this.households; }
             protected set { this.households = value; }
+        }
+
+        public virtual ICollection<Invitation> Invitations
+        {
+            get { return this.invitations; }
+            protected set { this.invitations = value; }
         }
 
         public void Update(string firstName, string lastName, string phoneNumber)

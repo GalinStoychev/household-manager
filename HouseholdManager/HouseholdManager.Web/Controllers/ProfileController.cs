@@ -13,16 +13,23 @@ namespace HouseholdManager.Web.Controllers
     public class ProfileController : BaseController
     {
         private readonly IUserService userService;
+        private readonly IInvitationService invitationService;
 
-        public ProfileController(IUserService userService, IMapingService mappingService, IWebHelper webHelper)
+        public ProfileController(IUserService userService, IInvitationService invitationService, IMapingService mappingService, IWebHelper webHelper)
             : base(mappingService, webHelper)
         {
             if (userService == null)
             {
-                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "user service"));
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "userService"));
+            }
+
+            if (invitationService == null)
+            {
+                throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "invitationService"));
             }
 
             this.userService = userService;
+            this.invitationService = invitationService;
         }
 
         [HttpGet]
@@ -36,7 +43,26 @@ namespace HouseholdManager.Web.Controllers
                 profileUser.Households.Add(household.Name);
             }
 
+            var invitations = this.invitationService.GetUserInvitations(user.Id);
+            profileUser.Invitations= new Dictionary<string, Guid>();
+            foreach (var invitation in invitations)
+            {
+                profileUser.Invitations.Add(invitation.Household.Name, invitation.Id);
+            }
+
             return View(profileUser);
+        }
+
+        public ActionResult AcceptInvitation(Guid invitationId, string household)
+        {
+            var user = this.webHelper.GetUserName();
+            this.invitationService.AcceptInvitation(invitationId);
+
+            this.userService.SetCurrentHousehold(household, this.webHelper.GetUserId());
+            var currentHousehold = this.userService.GetCurrentHousehold(this.webHelper.GetUserName());
+            this.webHelper.SetHouseholdCookie(household, currentHousehold.Id.ToString());
+
+            return RedirectToAction("Index");
         }
     }
 }

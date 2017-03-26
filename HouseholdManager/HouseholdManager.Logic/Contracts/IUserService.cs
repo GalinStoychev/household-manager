@@ -8,6 +8,8 @@ namespace HouseholdManager.Logic.Contracts
     {
         IEnumerable<User> GetAll();
 
+        User GetByUsername(string username);
+
         User GetUserInfo(string id);
 
         int GetUsersCount();

@@ -21,10 +21,11 @@ namespace Householdmanager.Web.Tests
             // Arrange
             var mappingServiceMock = new Mock<IMapingService>();
             var webHelperMock = new Mock<IWebHelper>();
+            var invitationServiceMock = new Mock<IInvitationService>();
 
             // Act
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new ProfileController(null, mappingServiceMock.Object, webHelperMock.Object));
+            Assert.Throws<ArgumentNullException>(() => new ProfileController(null, invitationServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object));
         }
 
         [Test]
@@ -34,9 +35,10 @@ namespace Householdmanager.Web.Tests
             var userServiceMock = new Mock<IUserService>();
             var mappingServiceMock = new Mock<IMapingService>();
             var webHelperMock = new Mock<IWebHelper>();
+            var invitationServiceMock = new Mock<IInvitationService>();
 
             // Act
-            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            var profileController = new ProfileController(userServiceMock.Object, invitationServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Assert
             Assert.IsInstanceOf<ProfileController>(profileController);
@@ -49,10 +51,11 @@ namespace Householdmanager.Web.Tests
             var userServiceMock = new Mock<IUserService>();
             var mappingServiceMock = new Mock<IMapingService>();
             var webHelperMock = new Mock<IWebHelper>();
+            var invitationServiceMock = new Mock<IInvitationService>();
             userServiceMock.Setup(x => x.GetUserInfo(It.IsAny<string>())).Returns(new User());
             mappingServiceMock.Setup(x => x.Map<ProfileViewModel>(It.IsAny<object>())).Returns(new ProfileViewModel());
 
-            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            var profileController = new ProfileController(userServiceMock.Object, invitationServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
             // Assert
@@ -66,10 +69,11 @@ namespace Householdmanager.Web.Tests
             var userServiceMock = new Mock<IUserService>();
             var mappingServiceMock = new Mock<IMapingService>();
             var webHelperMock = new Mock<IWebHelper>();
+            var invitationServiceMock = new Mock<IInvitationService>();
             userServiceMock.Setup(x => x.GetUserInfo(It.IsAny<string>())).Returns(new User());
             mappingServiceMock.Setup(x => x.Map<ProfileViewModel>(It.IsAny<object>())).Returns(new ProfileViewModel());
 
-            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            var profileController = new ProfileController(userServiceMock.Object, invitationServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
             // Assert
@@ -85,11 +89,12 @@ namespace Householdmanager.Web.Tests
             var userServiceMock = new Mock<IUserService>();
             var mappingServiceMock = new Mock<IMapingService>();
             var webHelperMock = new Mock<IWebHelper>();
+            var invitationServiceMock = new Mock<IInvitationService>();
             userServiceMock.Setup(x => x.GetUserInfo(It.IsAny<string>())).Returns(new User());
             var expected = new ProfileViewModel();
             mappingServiceMock.Setup(x => x.Map<ProfileViewModel>(It.IsAny<object>())).Returns(expected);
 
-            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            var profileController = new ProfileController(userServiceMock.Object, invitationServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
             // Assert
@@ -105,10 +110,11 @@ namespace Householdmanager.Web.Tests
             var userServiceMock = new Mock<IUserService>();
             var mappingServiceMock = new Mock<IMapingService>();
             var webHelperMock = new Mock<IWebHelper>();
+            var invitationServiceMock = new Mock<IInvitationService>();
             userServiceMock.Setup(x => x.GetUserInfo(It.IsAny<string>())).Returns(new User());
             mappingServiceMock.Setup(x => x.Map<ProfileViewModel>(It.IsAny<object>())).Returns(new ProfileViewModel());
 
-            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            var profileController = new ProfileController(userServiceMock.Object, invitationServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
             profileController.Index();
@@ -124,10 +130,11 @@ namespace Householdmanager.Web.Tests
             var userServiceMock = new Mock<IUserService>();
             var mappingServiceMock = new Mock<IMapingService>();
             var webHelperMock = new Mock<IWebHelper>();
+            var invitationServiceMock = new Mock<IInvitationService>();
             userServiceMock.Setup(x => x.GetUserInfo(It.IsAny<string>())).Returns(new User());
             mappingServiceMock.Setup(x => x.Map<ProfileViewModel>(It.IsAny<object>())).Returns(new ProfileViewModel());
 
-            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            var profileController = new ProfileController(userServiceMock.Object, invitationServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
             profileController.Index();
@@ -145,6 +152,7 @@ namespace Householdmanager.Web.Tests
             var userServiceMock = new Mock<IUserService>();
             var mappingServiceMock = new Mock<IMapingService>();
             var webHelperMock = new Mock<IWebHelper>();
+            var invitationServiceMock = new Mock<IInvitationService>();
             var user = new User();
             for (int i = 0; i < households; i++)
             {
@@ -155,7 +163,7 @@ namespace Householdmanager.Web.Tests
             var profileUser = new ProfileViewModel();
             mappingServiceMock.Setup(x => x.Map<ProfileViewModel>(It.IsAny<object>())).Returns(profileUser);
 
-            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            var profileController = new ProfileController(userServiceMock.Object, invitationServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
             profileController.Index();
@@ -171,9 +179,10 @@ namespace Householdmanager.Web.Tests
             var userServiceMock = new Mock<IUserService>();
             var mappingServiceMock = new Mock<IMapingService>();
             var webHelperMock = new Mock<IWebHelper>();
+            var invitationServiceMock = new Mock<IInvitationService>();
 
-            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
-            
+            var profileController = new ProfileController(userServiceMock.Object, invitationServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+
             // Act
             var result = profileController.GetType().GetCustomAttributes(typeof(AuthorizeAttribute), false).Length;
 
@@ -188,8 +197,9 @@ namespace Householdmanager.Web.Tests
             var userServiceMock = new Mock<IUserService>();
             var mappingServiceMock = new Mock<IMapingService>();
             var webHelperMock = new Mock<IWebHelper>();
+            var invitationServiceMock = new Mock<IInvitationService>();
 
-            var profileController = new ProfileController(userServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
+            var profileController = new ProfileController(userServiceMock.Object, invitationServiceMock.Object, mappingServiceMock.Object, webHelperMock.Object);
 
             // Act
             var result = profileController.GetType().GetMethod("Index").GetCustomAttributes(typeof(HttpGetAttribute), false).Length;

@@ -13,6 +13,9 @@ namespace HouseholdManager.Web
             bundles.Add(new ScriptBundle("~/bundles/main").Include(
                        "~/Scripts/main.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/invite-user").Include(
+                      "~/Scripts/invite-user.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/expenses-page").Include(
                     "~/Scripts/expenses-page.js"));
 
@@ -54,7 +57,7 @@ namespace HouseholdManager.Web
             bundles.Add(new StyleBundle("~/Content/household-css").Include(
                      "~/Content/Household.css"));
 
-            //BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

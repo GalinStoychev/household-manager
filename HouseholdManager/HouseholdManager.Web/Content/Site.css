@@ -177,3 +177,12 @@ textarea {
         margin: 0 5em 1em 5em;
         box-shadow: 3px 2px 15px #888888;
     }
+
+#received-notif {
+    border: 2px solid #B5516F;
+    font-size: 1.2em;
+    display: inline-block;
+    margin-top: 1em;
+    padding: 1em;
+    box-shadow: 1px 1px 7px grey;
+}

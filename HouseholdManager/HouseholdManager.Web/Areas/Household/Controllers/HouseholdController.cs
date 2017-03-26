@@ -34,7 +34,7 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
             {
                 throw new ArgumentNullException(string.Format(ExceptionConstants.ArgumentCannotBeNull, "imageService"));
             }
-            
+
             this.userService = userService;
             this.householdService = householdService;
             this.imageService = imageService;
@@ -85,7 +85,23 @@ namespace HouseholdManager.Web.Areas.Household.Controllers
 
             return this.RedirectToHousehold(name);
         }
-        
+
+        [ChildActionOnly]
+        public ActionResult LoadSearchForm()
+        {
+            var model = new SearchViewModel() { ActionName = "SearchUser", ControllerName = "Household" };
+            return View("_SearchAjaxPartial", model);
+        }
+
+        [HttpGet]
+        public ActionResult SearchUser(string value)
+        {
+            var user = this.userService.GetByUsername(value);
+            var model = user != null ? user.UserName : null;
+
+            return PartialView("_UserSearchPartial", model);
+        }
+
         private ActionResult RedirectToHousehold(string name)
         {
             var currentHousehold = this.userService.GetCurrentHousehold(this.webHelper.GetUserName());

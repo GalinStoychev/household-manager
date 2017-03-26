@@ -20,73 +20,7 @@ namespace HouseholdManager.Data.Migrations
             {
                 AddExpenseCategories(context);
             }
-
-            //if (context.Expense.Count() == 0)
-            //{
-            //    AddExpenses(context);
-            //}
-
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
         }
-
-        //private void AddExpenses(HouseholdManagerDbContext context)
-        //{
-        //    var userOne = context.Users.FirstOrDefault(x => x.UserName == "fa@fa.com");
-        //    var userTwo = context.Users.FirstOrDefault(x => x.UserName == "da@da.com");
-        //    var expOne = new Expense()
-        //    {
-        //        Name = "buy a table",
-        //        ExpenseCategory = context.ExpenseCategory.First(x => x.Name == "Utilities"),
-        //        Comments = new List<Comment>() { new Comment() { User = userOne, CreatedOnDate = DateTime.Now, CommentContent = "Buy me" } },
-        //        Cost = 123M,
-        //        DueDate = DateTime.Now.AddDays(3),
-        //        CreatedOn = DateTime.Now,
-        //        ExpectedCost = 100M,
-        //        Household = new Household() { Name = "u mainatown", Address = "some address", Users = new List<User>() { userOne, userTwo } },
-        //        IsPaid = true,
-        //        PaidBy = userTwo,
-        //        AssignedUser = userTwo,
-        //        PaidOnDate = DateTime.Now.AddDays(2)
-        //    };
-
-        //    context.Expense.AddOrUpdate(expOne);
-        //    context.SaveChanges();
-
-        //    var expTwo = new Expense()
-        //    {
-        //        Name = "buy some toilet paper",
-        //        ExpenseCategory = context.ExpenseCategory.First(x => x.Name == "Utilities"),
-        //        Comments = new List<Comment>()
-        //        {
-        //            new Comment() { User = userTwo, CreatedOnDate = DateTime.Now, CommentContent = "Buy me again" },
-        //            new Comment() { User = userOne, CreatedOnDate = DateTime.Now.AddDays(1), CommentContent = "Buy me again again" }
-        //        },
-        //        Cost = 123M,
-        //        DueDate = DateTime.Now.AddDays(4),
-        //        CreatedOn = DateTime.Now,
-        //        ExpectedCost = 100M,
-        //        Household = context.Household.First(x => x.Address == "some address"),
-        //        IsPaid = true,
-        //        PaidBy = userOne,
-        //        AssignedUser = userOne,
-        //        PaidOnDate = DateTime.Now.AddDays(1)
-        //    };
-
-        //    context.Expense.AddOrUpdate(expTwo);
-
-        //    context.SaveChanges();
-        //}
 
         private void AddExpenseCategories(HouseholdManagerDbContext context)
         {
@@ -105,6 +39,7 @@ namespace HouseholdManager.Data.Migrations
             {
                 context.ExpenseCategory.AddOrUpdate(category);
             }
+
             context.SaveChanges();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HouseholdManager.Common.Contracts;
 using HouseholdManager.Models;
+using System;
 using System.Collections.Generic;
 
 namespace HouseholdManager.Web.Models
@@ -15,11 +16,14 @@ namespace HouseholdManager.Web.Models
 
         public IList<string> Households { get; set; }
 
+        public IDictionary<string, Guid> Invitations { get; set; }
+
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<User, ProfileViewModel>()
               .ForMember(d => d.FullName, opt => opt.MapFrom(s => s.FirstName + " " + s.LastName))
-              .ForMember(d => d.Households, opt => opt.Ignore());
+              .ForMember(d => d.Households, opt => opt.Ignore())
+              .ForMember(d => d.Invitations, opt => opt.Ignore());
         }
     }
 }

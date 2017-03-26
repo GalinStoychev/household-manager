@@ -1,0 +1,11 @@
+﻿@model string
+
+@{
+    string result = Model == null ? "User could not be found" : Model;
+}
+
+<span id="username">@result</span>
+@if (result != "User could not be found")
+{
+    <input type="button" name="invite" value="INVITE" id="send-notif" class="btn btn-success" />
+}

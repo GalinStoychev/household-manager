@@ -39,6 +39,9 @@ namespace HouseholdManager.Web.App_Start.BindingModules
 
             this.Bind<IRepository<Comment>>()
                 .To<GenericRepositoryEF<Comment>>();
+
+            this.Bind<IRepository<Invitation>>()
+                .To<GenericRepositoryEF<Invitation>>();
         }
     }
 }

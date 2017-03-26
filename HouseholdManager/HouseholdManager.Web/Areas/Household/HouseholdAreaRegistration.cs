@@ -50,6 +50,12 @@ namespace HouseholdManager.Web.Areas.Household
                 defaults: new { action = "Create", controller = "Household" }
             );
 
+           // context.MapRoute(
+           //    name: "Household_search",
+           //    url: "Household/SearchUser",
+           //    defaults: new { action = "SearchUser", controller = "Household" }
+           //);
+
             context.MapRoute(
                 name: "Household_single",
                 url: "Household/{name}",
